@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
-import Empty from "./empty";
 
 import axios from "axios";
 
@@ -27,22 +26,81 @@ class BootstrapModalComponent extends React.Component {
       [name]: value,
     });
   }
+
   submit(e) {
+    // e.preventDefault();
     let is_active_person = false;
     let is_shop = false;
     if (this.state.bookOrPerson === "person") {
       is_active_person = true;
     } else if (this.state.bookOrPerson === "library") is_shop = true;
-    axios.post("http://127.0.0.1:8000/api/register", {
-      Name: this.state.user,
-      Username: this.state.user_name,
-      email: this.state.email,
-      phone_number: this.state.phone,
-      address: this.state.address,
-      Password: this.state.password,
-      is_active_person: is_active_person,
-      is_shop: is_shop,
-    });
+
+    // fetch("http://127.0.0.1:8000/api/register", {
+    //   method: "post",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: {
+    //     Name: this.state.user,
+    //     Username: this.state.user_name,
+    //     email: this.state.email,
+    //     phone_number: this.state.phone,
+    //     address: this.state.address,
+    //     Password: this.state.password,
+    //     is_active_person: is_active_person,
+    //     is_shop: is_shop,
+    //   },
+    // });
+    // var myHeaders = new Headers();
+
+    // myHeaders.append("Content-Type", "application/json");
+    // myHeaders.append("Access-Control-Allow-Origin", "*");
+    // myHeaders.append("Access-Control-Allow-Headers", "*");
+    // myHeaders.append("Accept", "application/json");
+
+    var UserCourse = {};
+    UserCourse.name = this.state.user;
+    UserCourse.username = this.state.user_name;
+    UserCourse.email = this.state.email;
+    UserCourse.phone_number = this.state.phone;
+    UserCourse.address = this.state.address;
+    UserCourse.password = this.state.password;
+    UserCourse.is_active_person = is_active_person;
+    UserCourse.is_book_store = is_shop;
+
+    var raw = JSON.stringify(UserCourse);
+    console.log(raw);
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: raw,
+    };
+    fetch("https://jsonplaceholder.typicode.com/posts", requestOptions)
+      .then((response) => response.json())
+      .then((data) => this.setState({ postId: data.id }));
+    // fetch("http://127.0.0.1:8000/api/register", requestOptions);
+    // .then(
+    //   async (response) => {
+    //     console.log("status", response.status);
+
+    // if (response.status === 201) {
+    //   SetToastState(true);
+    //   await timeout(4000);
+    //   SetToastState(false);
+    //   history.push({
+    //     pathname: "/sign-in",
+    //     state: { from: ReturnWhereSignupIsCalledFrom() },
+    //   });
+    // }
+
+    //   return response.json();
+    // })
+    // .then((rep) => {
+    //   console.log(rep[key]);
+    // })
+    // .catch((error) => {
+    //   console.log("error", error);
+    // }
+    // );
     console.warn(this.state);
   }
 
@@ -134,25 +192,25 @@ class BootstrapModalComponent extends React.Component {
                 <input
                   type="radio"
                   name="bookOrPerson"
-                  id="inlineRadiom"
+                  id="inlineRadiom1"
                   className="form-control"
                   value="library"
                   checked={this.state.bookOrPerson === "library"}
                   onChange={this.handleInputChange}
                 />
-                <label class="form-check-label" for="inlineRadiom">
+                <label className="form-check-label" htmlFor="inlineRadiom">
                   کتابفروشی
                 </label>
                 <input
                   type="radio"
                   name="bookOrPerson"
-                  id="inlineRadiom"
+                  id="inlineRadiom2"
                   className="form-control"
                   value="person"
                   checked={this.state.bookOrPerson === "person"}
                   onChange={this.handleInputChange}
                 />
-                <label class="form-check-label" for="inlineRadiom">
+                <label className="form-check-label" htmlFor="inlineRadiom">
                   شخص حقیقی
                 </label>
               </div>
@@ -165,7 +223,7 @@ class BootstrapModalComponent extends React.Component {
           <Modal.Footer>
             <Button
               type="submit"
-              class="btn btn-primary"
+              className="btn btn-primary"
               onClick={() => {
                 this.submit();
                 this.handleModalShowHide();
