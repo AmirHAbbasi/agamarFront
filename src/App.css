@@ -1,0 +1,34 @@
+body {
+  background-color: orange;
+  color: white;
+  padding: 40px;
+  text-align: center;
+}
+
+html:lang(en) body {
+  font-family: "Calibri";
+}
+
+html:lang(fa) body {
+  font-family: "B Nazanin";
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: orange;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
