@@ -151,61 +151,73 @@ export default class profileDashboard extends Component {
                   <div class="card-body">
                     <div class="row mb-3">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Full Name</h6>
+                        <h6 class="mb-0">نام</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         <input
                           type="text"
                           class="form-control"
-                          value="John Doe"
+                          value="يه نفري"
                         ></input>
                       </div>
                     </div>
                     <div class="row mb-3">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Email</h6>
+                        <h6 class="mb-0">نام كاربري</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         <input
                           type="text"
                           class="form-control"
-                          value="john@example.com"
+                          value="aPerson"
                         ></input>
                       </div>
                     </div>
                     <div class="row mb-3">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Phone</h6>
+                        <h6 class="mb-0">پست الكترونيكي</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         <input
                           type="text"
                           class="form-control"
-                          value="(239) 816-9029"
+                          value="aPerson@agamar.ir"
                         ></input>
                       </div>
                     </div>
                     <div class="row mb-3">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Mobile</h6>
+                        <h6 class="mb-0">آدرس</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         <input
                           type="text"
                           class="form-control"
-                          value="(320) 380-4539"
+                          value="يه جايي تو ايران"
                         ></input>
                       </div>
                     </div>
                     <div class="row mb-3">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Address</h6>
+                        <h6 class="mb-0">تلفن همراه</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         <input
                           type="text"
                           class="form-control"
-                          value="Bay Area, San Francisco, CA"
+                          value="0123456789"
+                        ></input>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">رمز عبور</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <input
+                          type="password"
+                          class="form-control"
+                          value="aPassword"
                         ></input>
                       </div>
                     </div>
@@ -221,7 +233,7 @@ export default class profileDashboard extends Component {
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                {/* <div class="row">
                   <div class="col-sm-12">
                     <div class="card">
                       <div class="card-body">
@@ -286,7 +298,7 @@ export default class profileDashboard extends Component {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
