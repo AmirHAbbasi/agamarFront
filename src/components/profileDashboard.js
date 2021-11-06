@@ -8,20 +8,61 @@ export default class profileDashboard extends Component {
   constructor() {
     super();
     this.state = {
-      showHide1: false,
-      showHide2: false,
-      showHide3: false,
+      showHideAgahi: false,
+      showHideAlaghe: false,
+      showHideGozaresh: false,
+      showHideZakhire: false,
+      showHideExit: false,
+      showContent: <h5>موردی برای نمایش وجود ندارد</h5>,
+
+      first_name: "اکبر اکبری",
+      user_name: "Akbar123",
+      email: "AkbarAkbari@agamar.ir",
+      address: "تهران، اکبرآباد، پلاک 1، طبقه اول",
+      bookOrPerson: "person",
+      phone: "0987654321",
+      password: "Akbar12345567890",
     };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.submit = this.submit.bind(this);
   }
-  handleModalShowHide1() {
-    this.setState({ showHide1: !this.state.showHide1 });
+  handleInputChange(event) {
+    const target = event.target;
+    let value = target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value,
+    });
   }
-  handleModalShowHide2() {
-    this.setState({ showHide2: !this.state.showHide2 });
+  handlePartsShowHideAgahi() {
+    this.setState({ showHideAgahi: true });
+    this.setState({ showHideGozaresh: false });
+    this.setState({ showHideAlaghe: false });
+    this.setState({ showContent: <h5>محل نمایش لیست سفارشات اخیر</h5> });
   }
-  handleModalShowHide3() {
-    this.setState({ showHide3: !this.state.showHide3 });
+  handlePartsShowHideAlaghe() {
+    this.setState({ showHideAlaghe: true });
+    this.setState({ showHideGozaresh: false });
+    this.setState({ showHideAgahi: false });
+    this.setState({ showContent: <h5>محل نمایش لیست علاقه مندی ها</h5> });
   }
+  handlePartsShowHideGozaresh() {
+    this.setState({ showHideGozaresh: true });
+    this.setState({ showHideAgahi: false });
+    this.setState({ showHideAlaghe: false });
+    this.setState({ showContent: <h5>محل نمایش آگهی های اخیرا ثبت شده</h5> });
+  }
+  handleModalShowHideZakhire() {
+    this.setState({ showHideZakhire: !this.state.showHideZakhire });
+  }
+  handleModalShowHideExit() {
+    this.setState({ showHideExit: !this.state.showHideExit });
+  }
+  submit() {
+    this.handleModalShowHideZakhire();
+  }
+
   render() {
     return (
       <div>
@@ -32,88 +73,106 @@ export default class profileDashboard extends Component {
                 <div class="card">
                   <div class="card-body">
                     <div class="row mb-3">
+                      <div class="col-sm-9 text-secondary">
+                        <input
+                          type="text"
+                          onChange={this.handleInputChange}
+                          class="form-control text-right"
+                          placeholder={this.state.first_name}
+                        ></input>
+                      </div>
                       <div class="col-sm-3">
                         <h6 class="mb-0">نام</h6>
                       </div>
+                    </div>
+                    <div class="row mb-3">
                       <div class="col-sm-9 text-secondary">
                         <input
                           type="text"
-                          class="form-control"
-                          placeholder="يه نفري"
+                          class="form-control text-right"
+                          placeholder={this.state.user_name}
+                          onChange={this.handleInputChange}
                         ></input>
                       </div>
-                    </div>
-                    <div class="row mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">نام كاربري</h6>
                       </div>
+                    </div>
+                    <div class="row mb-3">
                       <div class="col-sm-9 text-secondary">
                         <input
                           type="text"
-                          class="form-control"
-                          placeholder="aPerson"
+                          onChange={this.handleInputChange}
+                          class="form-control text-right"
+                          placeholder={this.state.email}
                         ></input>
                       </div>
-                    </div>
-                    <div class="row mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">پست الكترونيكي</h6>
                       </div>
+                    </div>
+                    <div class="row mb-3">
                       <div class="col-sm-9 text-secondary">
                         <input
                           type="text"
-                          class="form-control"
-                          placeholder="aPerson@agamar.ir"
+                          onChange={this.handleInputChange}
+                          class="form-control text-right"
+                          placeholder={this.state.address}
                         ></input>
                       </div>
-                    </div>
-                    <div class="row mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">آدرس</h6>
                       </div>
+                    </div>
+                    <div class="row mb-3">
                       <div class="col-sm-9 text-secondary">
                         <input
                           type="text"
-                          class="form-control"
-                          placeholder="يه جايي تو ايران"
+                          onChange={this.handleInputChange}
+                          class="form-control text-right"
+                          placeholder={this.state.phone}
                         ></input>
                       </div>
-                    </div>
-                    <div class="row mb-3">
                       <div class="col-sm-3">
                         <h6 class="mb-0">تلفن همراه</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="0123456789"
-                        ></input>
-                      </div>
                     </div>
                     <div class="row mb-3">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">رمز عبور</h6>
-                      </div>
                       <div class="col-sm-9 text-secondary">
                         <input
                           type="password"
-                          class="form-control"
-                          placeholder="aPassword"
+                          onChange={this.handleInputChange}
+                          class="form-control text-right"
+                          placeholder={this.state.password}
                         ></input>
+                      </div>
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">رمز عبور</h6>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-3"></div>
                       <div class="col-sm-9 text-secondary">
-                        <button class="btn btn-primary px-4">
+                        <button
+                          type="submit"
+                          class="btn btn-primary px-4"
+                          onClick={() => this.submit()}
+                        >
                           ذخيره تغييرات
                         </button>
                       </div>
                     </div>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="card">
+                      <div class="card-body">{this.state.showContent}</div>
+                    </div>
+                  </div>
+                </div>
               </div>
+
               <div class="col-lg-4">
                 <div class="card">
                   <div class="card-body">
@@ -127,10 +186,14 @@ export default class profileDashboard extends Component {
                       <div class="mt-3">
                         <h4>نام كاربر</h4>
                         <button class="btn btn-primary">صفحه اصلي</button>
-                        <button class="btn btn-outline-primary">
-                          خروج از حساب كاربري
-                        </button>
                       </div>
+                      <h1></h1>
+                      <button
+                        class="btn btn-outline-primary"
+                        onClick={() => this.handleModalShowHideExit()}
+                      >
+                        خروج از حساب كاربري
+                      </button>
                     </div>
                     <hr class="my-4"></hr>
                     <ul class="list-group list-group-flush align-items-center">
@@ -139,7 +202,7 @@ export default class profileDashboard extends Component {
                           <button
                             type="button"
                             class="btn btn-secondary"
-                            onClick={() => this.handleModalShowHide1()}
+                            onClick={() => this.handlePartsShowHideAgahi()}
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +227,9 @@ export default class profileDashboard extends Component {
                           <button
                             type="button"
                             class="btn btn-secondary"
-                            onClick={() => this.handleModalShowHide2()}
+                            onClick={() => {
+                              this.handlePartsShowHideAlaghe();
+                            }}
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -190,7 +255,7 @@ export default class profileDashboard extends Component {
                           <button
                             type="button"
                             class="btn btn-secondary"
-                            onClick={() => this.handleModalShowHide3()}
+                            onClick={() => this.handlePartsShowHideGozaresh()}
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -216,291 +281,57 @@ export default class profileDashboard extends Component {
                 </div>
               </div>
             </div>
-
-            {/* <div class="row">
-              <div class="col-lg-12">
-                <div class="tab-block">
-                  <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                      <a
-                        href="#tab1"
-                        data-toggle="tab"
-                        class="nav-link active"
-                        id="first-tab"
-                        role="tab"
-                        aria-controls="activity"
-                        aria-selected="true"
-                      >
-                        Activity
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        href="#tab2"
-                        data-toggle="tab"
-                        class="nav-link active"
-                        id="second-tab"
-                        role="tab"
-                        aria-controls="Social"
-                        aria-selected="true"
-                      >
-                        Social
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        href="#tab3"
-                        data-toggle="tab"
-                        class="nav-link active"
-                        id="third-tab"
-                        role="tab"
-                        aria-controls="Media"
-                        aria-selected="true"
-                      >
-                        Media
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        href="#tab4"
-                        data-toggle="tab"
-                        class="nav-link active"
-                        id="forth-tab"
-                        role="tab"
-                        aria-controls="Media2"
-                        aria-selected="true"
-                      >
-                        Media2
-                      </a>
-                    </li>
-                  </ul>
-                  <div
-                    class="tab-content p30"
-                    style={{ height: "730px" }}
-                    id="myTabContent"
-                  >
-                    <div
-                      id="tab1"
-                      class="tab-pane fade show active"
-                      role="tabpanel"
-                      aria-labelledby="first-tab"
-                    >
-                      <h3>tab1</h3> */}
-            {/* <div class="media">
-                        <a class="pull-left" href="#">
-                          {" "}
-                          <img
-                            class="media-object mn thumbnail mw50"
-                            src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                            alt="..."
-                          />{" "}
-                        </a>
-                        <div class="media-body">
-                          <h5 class="media-heading mb20">
-                            Simon Rivers Posted
-                            <small> - 3 hours ago</small>
-                          </h5>
-                          <img
-                            src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                            class="mw140 mr25 mb20"
-                          />
-                          <img
-                            src="https://bootdey.com/img/Content/avatar/avatar8.png"
-                            class="mw140 mr25 mb20"
-                          />
-                          <img
-                            src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                            class="mw140 mb20"
-                          />
-                          <div class="media-links">
-                            <span class="text-light fs12 mr10">
-                              <span class="fa fa-thumbs-o-up text-primary mr5"></span>{" "}
-                              Like{" "}
-                            </span>
-                            <span class="text-light fs12 mr10">
-                              <span class="fa fa-share text-primary mr5"></span>{" "}
-                              Share{" "}
-                            </span>
-                            <span class="text-light fs12 mr10">
-                              <span class="fa fa-floppy-o text-primary mr5"></span>{" "}
-                              Save{" "}
-                            </span>
-                            <span class="text-light fs12 mr10">
-                              <span class="fa fa-comment text-primary mr5"></span>{" "}
-                              Comment{" "}
-                            </span>
-                          </div>
-                        </div>
-                      </div> */}
-            {/* <div class="media mt25">
-                        <a class="pull-left" href="#">
-                          {" "}
-                          <img
-                            class="media-object mn thumbnail thumbnail-sm rounded mw40"
-                            src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                            alt="..."
-                          />{" "}
-                        </a>
-                        <div class="media-body mb5">
-                          <h5 class="media-heading mbn">
-                            Simon Rivers Posted
-                            <small> - 3 hours ago</small>
-                          </h5>
-                          <p> Omg so freaking sweet dude.</p>
-                          <div class="media pb10">
-                            <a class="pull-left" href="#">
-                              {" "}
-                              <img
-                                class="media-object mn thumbnail thumbnail-sm rounded mw40"
-                                src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                alt="..."
-                              />{" "}
-                            </a>
-                            <div class="media-body mb5">
-                              <h5 class="media-heading mbn">
-                                Jessica Wong
-                                <small> - 3 hours ago</small>
-                              </h5>
-                              <p>Omgosh I'm in love</p>
-                            </div>
-                          </div>
-                          <div class="media mtn">
-                            <a class="pull-left" href="#">
-                              {" "}
-                              <img
-                                class="media-object mn thumbnail thumbnail-sm rounded mw40"
-                                src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                                alt="..."
-                              />{" "}
-                            </a>
-                            <div class="media-body mb5">
-                              <h5 class="media-heading mbn">
-                                Jessica Wong
-                                <small> - 3 hours ago</small>
-                              </h5>
-                              <p>Omgosh I'm in love</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div> */}
-            {/* <div class="media mt25">
-                        <a class="pull-left" href="#">
-                          {" "}
-                          <img
-                            class="media-object thumbnail mw50"
-                            src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                            alt="..."
-                          />{" "}
-                        </a>
-                        <div class="media-body">
-                          <h5 class="media-heading mb20">
-                            Simon Rivers Posted
-                            <small> - 3 hours ago</small>
-                          </h5>
-                          <img
-                            src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                            class="mw140 mr25 mb20"
-                          />
-                          <img
-                            src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                            class="mw140 mr25 mb20"
-                          />
-                          <img
-                            src="https://bootdey.com/img/Content/avatar/avatar4.png"
-                            class="mw140 mb20"
-                          />
-                          <div class="media-links">
-                            <span class="text-light fs12 mr10">
-                              <span class="fa fa-thumbs-o-up text-primary mr5"></span>{" "}
-                              Like{" "}
-                            </span>
-                            <span class="text-light fs12 mr10">
-                              <span class="fa fa-share text-primary mr5"></span>{" "}
-                              Share{" "}
-                            </span>
-                            <span class="text-light fs12 mr10">
-                              <span class="fa fa-floppy-o text-primary mr5"></span>{" "}
-                              Save{" "}
-                            </span>
-                            <span class="text-light fs12 mr10">
-                              <span class="fa fa-comment text-primary mr5"></span>{" "}
-                              Comment{" "}
-                            </span>
-                          </div>
-                        </div>
-                      </div> */}
-            {/* </div>
-                    <div
-                      id="tab2"
-                      class="tab-pane fade"
-                      role="tabpanel"
-                      aria-labelledby="second-tab"
-                    >
-                      <h3>tab2</h3>
-                    </div>
-                    <div
-                      id="tab3"
-                      class="tab-pane fade"
-                      role="tabpanel"
-                      aria-labelledby="third-tab"
-                    >
-                      <h3>tab3</h3>
-                    </div>
-                    <div
-                      id="tab4"
-                      class="tab-pane fade"
-                      role="tabpanel"
-                      aria-labelledby="forth-tab"
-                    >
-                      <h3>tab4</h3>
-                    </div>
-                  </div>
-                </div> */}
-            {/* </div> */}
-            {/* </div> */}
           </div>
         </div>
-        <Modal show={this.state.showHide1}>
-          <Modal.Header closeButton onClick={() => this.handleModalShowHide()}>
-            <Modal.Title>سفارشات اخیر</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Modal body</Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={() => this.handleModalShowHide()}
+        <Modal show={this.state.showHideZakhire}>
+          <div class="text-center">
+            <Modal.Header
+              closeButton
+              onClick={() => this.handleModalShowHideZakhire()}
             >
-              خروج
-            </Button>
-          </Modal.Footer>
+              <Modal.Title></Modal.Title>
+            </Modal.Header>
+            <Modal.Body>تغییرات ذخیره شد</Modal.Body>
+            <Modal.Footer>
+              <button
+                type="button"
+                class="btn btn-secondary btn-lg btn-block"
+                onClick={() => this.handleModalShowHideZakhire()}
+              >
+                تایید
+              </button>
+            </Modal.Footer>
+          </div>
         </Modal>
-        <Modal show={this.state.showHide2}>
-          <Modal.Header closeButton onClick={() => this.handleModalShowHide()}>
-            <Modal.Title>علاقه مندی ها</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Modal body</Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={() => this.handleModalShowHide()}
+        <Modal show={this.state.showHideExit}>
+          <div class="text-center">
+            <Modal.Header
+              closeButton
+              onClick={() => this.handleModalShowHideExit()}
             >
-              خروج
-            </Button>
-          </Modal.Footer>
-        </Modal>
-        <Modal show={this.state.showHide3}>
-          <Modal.Header closeButton onClick={() => this.handleModalShowHide()}>
-            <Modal.Title>گزارش سفارشات</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Modal body</Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={() => this.handleModalShowHide()}
-            >
-              خروج
-            </Button>
-          </Modal.Footer>
+              <Modal.Title></Modal.Title>
+            </Modal.Header>
+            <Modal.Body>آیا از خروج خود مطمئن هستید؟</Modal.Body>
+            <Modal.Footer>
+              {/* <div class="button-wrapper btn-container-left"> */}
+              <button
+                type="button"
+                class="btn btn-primary btn-lg btn-container-left"
+                onClick={() => this.handleModalShowHideExit()}
+              >
+                خروج
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary btn-lg btn-container-left"
+                onClick={() => this.handleModalShowHideExit()}
+              >
+                بازگشت
+              </button>
+
+              {/* </div> */}
+            </Modal.Footer>
+          </div>
         </Modal>
       </div>
     );

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
-import axios from "axios";
+// import axios from "axios";
 
 class signUp extends React.Component {
   constructor() {
@@ -66,30 +66,6 @@ class signUp extends React.Component {
       }
       return response.data;
     });
-
-    // var UserCourse = {};
-    // UserCourse.name = this.state.user;
-    // UserCourse.username = this.state.user_name;
-    // UserCourse.email = this.state.email;
-    // UserCourse.phone_number = this.state.phone;
-    // UserCourse.address = this.state.address;
-    // UserCourse.password = this.state.password;
-    // UserCourse.is_active_person = is_active_person;
-    // UserCourse.is_book_store = is_shop;
-
-    // var raw = JSON.stringify(UserCourse);
-    // console.log(raw);
-
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: raw,
-    // };
-    // fetch("http://127.0.0.1:8000/api/register", requestOptions)
-    //   .then((response) => response.json())
-    //   .then((data) => this.setState({ postId: data.id }));
-
-    // console.warn(this.state);
   }
 
   handleModalShowHide() {
