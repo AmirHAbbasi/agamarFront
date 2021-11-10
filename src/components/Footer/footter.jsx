@@ -18,18 +18,18 @@ class Footter extends React.Component {
           </link>
            
           <div className="socialmediacontainer ">
-                <a href="http://facebook.com" target="_blank" class="fa fa-facebook"></a>
-                <a href="http://twitter.com" target="_blank" class="fa fa-twitter"></a>
-                <a href="http://google.com" target="_blank" class="fa fa-google"></a>
-                <a href="http://linkedin.com" target="_blank" class="fa fa-linkedin"></a>
-                <a href="http://youtube.com" target="_blank" class="fa fa-youtube"></a>
-                <a href="http://instagram.com" target="_blank" class="fa fa-instagram"></a>
-                <a href="http://play.google.com" target="_blank" class="fa fa-android"></a>
-                <a href="#" target="_blank" class="fa fa-rss"></a>
+                <a href="http://facebook.com" target="_blank" className="fa fa-facebook"></a>
+                <a href="http://twitter.com" target="_blank" className="fa fa-twitter"></a>
+                <a href="http://google.com" target="_blank" className="fa fa-google"></a>
+                <a href="http://linkedin.com" target="_blank" className="fa fa-linkedin"></a>
+                <a href="http://youtube.com" target="_blank" className="fa fa-youtube"></a>
+                <a href="http://instagram.com" target="_blank" className="fa fa-instagram"></a>
+                <a href="http://play.google.com" target="_blank" className="fa fa-android"></a>
+                <a href="#" target="_blank" className="fa fa-rss"></a>
            </div> 
            <div className="active">
             <a  href="/about" target="_blank" className="footerlink" lang="fa">درباره ما </a><br />
-            <a  dir="rtl" lang="fa" className="active">تمامی حقوق متعلق به امیرحسین عباسی و حسین رحیمی می باشد. </a> 
+            <p dir="rtl" lang="fa" className="active">تمامی حقوق متعلق به گروه آگامار می باشد. </p> 
            </div>
 
         </div>
