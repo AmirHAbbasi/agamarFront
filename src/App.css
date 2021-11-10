@@ -1,0 +1,35 @@
+body {
+  background-color: orange;
+  padding: 2%;
+  text-align: center;
+}
+
+html:lang(en) body {
+  font-family: "B Nazanin";
+}
+
+html:lang(fa) body {
+  font-family: "B Nazanin";
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(67, 211, 38, 0.548);
+  border-radius: 50%;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 25px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(0, 255, 128);
+}
