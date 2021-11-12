@@ -12,7 +12,7 @@ const AppProvider = ({ children }) => {
   const fetchBooks = async() => {
     setLoading(true)
     try {
-      const response = await fetch(`${url}${searchTerm}`)
+      const response = await fetch(`${url}`)
       const data = await response.json()
       const {drinks} = data
       if(drinks){
@@ -27,7 +27,7 @@ const AppProvider = ({ children }) => {
             return{
               id: idDrink, 
               name: strDrink, 
-              imag: strDrinkThumb,
+              image: strDrinkThumb,
               info: strAlcoholic,
               glass: strGlass
             }

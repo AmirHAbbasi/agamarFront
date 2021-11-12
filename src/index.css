@@ -5,24 +5,24 @@ Variables
 */
 :root {
   --primaryLightColor: #d4e6a5;
-  --primaryColor: #476a2e;
+  --primaryColor: #4e51a5;
   --primaryDarkColor: #c02c03;
-  --mainWhite: #fff;
+  --mainWhite: rgb(231, 240, 255);
   --offWhite: #f7f7f7;
-  --mainBackground: #f1f5f8;
+  --mainBackground: #fff4cf;
   --mainOverlay: rgba(35, 10, 36, 0.4);
   --mainBlack: #222;
   --mainGrey: #ececec;
-  --darkGrey: #afafaf;
+  --darkGrey: #919191;
   --mainRed: #bd0303;
-  --mainTransition: all 0.3s linear;
-  --mainSpacing: 0.3rem;
+  --mainTransition: all 0.1s linear;
+  /*--mainSpacing: 0.3rem;*/
   --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
   --darkShadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
   --mainBorderRadius: 0.25rem;
   --smallWidth: 85vw;
   --maxWidth: 40rem;
-  --fullWidth: 1170px;
+  --fullWidth: 3000px;
 }
 /* 
 ====== 
@@ -44,13 +44,20 @@ body {
   font-size: 1rem;
   font-weight: 300;
 }
-h1,
+
+h1 {
+  font-family:  Arial, Helvetica, sans-serif;
+  margin-bottom: 1.25rem;
+  letter-spacing: var(--mainSpacing);
+  text-align: center;
+}
+
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: var(--slantedFont);
+  font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 1.25rem;
   letter-spacing: var(--mainSpacing);
 }
@@ -85,7 +92,7 @@ Buttons
   display: inline-block;
   transition: var(--mainTransition);
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 1rem;
   background: transparent;
   border-radius: var(--mainBorderRadius);
   display: inline-block;
@@ -126,63 +133,7 @@ Buttons
   background: var(--primaryLightColor);
   border-color: var(--primaryLightColor);
 }
-/* 
-====== 
-Navbar
-======
-*/
-.navbar {
-  background: var(--mainWhite);
-  height: 5rem;
-  display: flex;
-  align-items: center;
-  border-bottom: 2px solid var(--primaryColor);
-  box-shadow: var(--lightShadow);
-}
-.nav-center {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: var(--smallWidth);
-  margin: 0 auto;
-  max-width: var(--fullWidth);
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-}
-.nav-links a {
-  text-transform: capitalize;
-  display: inline-block;
-  font-weight: bold;
-  margin-right: 0.5rem;
-  font-weight: 400;
-  letter-spacing: 2px;
-  font-size: 1.2rem;
-  padding: 0.25rem 0.5rem;
-  transition: var(--mainTransition);
-}
-.nav-links a:hover {
-  color: var(--primaryColor);
-}
-.logo {
-  width: 12rem;
-}
-/* 
-====== 
-About
-======
-*/
-.about-section {
-  width: var(--smallWidth);
-  max-width: var(--maxWidth);
-  margin: 0 auto;
-}
-.about-section p {
-  line-height: 2rem;
-  font-weight: 400;
-  letter-spacing: 2px;
-}
+
 /* 
 ====== 
 Error
@@ -196,6 +147,8 @@ Error
   text-align: center;
   text-transform: capitalize;
 }
+
+
 /* 
 ====== 
 Cocktails List 
@@ -218,7 +171,7 @@ Cocktails List
   margin: 0 auto;
   max-width: var(--fullWidth);
   display: grid;
-  row-gap: 2rem;
+  row-gap: 1rem;
   column-gap: 2rem;
   /* align-items: start; */
 }
@@ -227,12 +180,14 @@ Cocktails List
     grid-template-columns: repeat(auto-fill, minmax(338.8px, 1fr));
   }
 }
+
+
+
 /* 
 ====== 
 Cocktail 
 ======
 */
-
 .cocktail {
   background: var(--mainWhite);
   margin-bottom: 2rem;
@@ -266,43 +221,8 @@ Cocktail
   color: var(--darkGrey);
   margin-bottom: 0.5rem;
 }
-/* 
-====== 
-Form
-======
-*/
-.search {
-  margin-top: 1rem;
-  padding-bottom: 0;
-}
 
-.search-form {
-  width: var(--smallWidth);
-  margin: 0 auto;
-  max-width: var(--maxWidth);
-  background: var(--mainWhite);
-  padding: 2rem 2.5rem;
-  text-transform: capitalize;
-  border-radius: var(--mainBorderRadius);
-  box-shadow: var(--lightShadow);
-}
 
-.form-control label {
-  display: block;
-  margin-bottom: 1.25rem;
-  font-weight: bold;
-  letter-spacing: 0.25rem;
-  color: var(--primaryColor);
-}
-.form-control input {
-  width: 100%;
-  border: none;
-  border-color: transparent;
-  background: var(--mainBackground);
-  border-radius: var(--mainBorderRadius);
-  padding: 0.5rem;
-  font-size: 1.2rem;
-}
 /* 
 ====== 
 Cocktail
@@ -349,6 +269,7 @@ Cocktail
     padding-top: 0;
   }
 }
+
 .loader,
 .loader:before,
 .loader:after {
@@ -385,6 +306,7 @@ Cocktail
 .loader:after {
   left: 1.5em;
 }
+
 @-webkit-keyframes load1 {
   0%,
   80%,

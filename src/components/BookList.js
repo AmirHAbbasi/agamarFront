@@ -1,7 +1,8 @@
 import React from 'react'
-import Book from './Book'
 import Loading from './Loading'
 import { useGlobalContext } from '../context'
+import { Divider, Pagination } from 'antd';
+import BookCard from './BookCard';
 
 const BookList = () => {
   const {books, loading} = useGlobalContext();
@@ -13,19 +14,20 @@ const BookList = () => {
   if(books.length < 1){
     return (
       <h2 className='section-title'>
-        Not exist!
+        کتابی یافت نشد..
       </h2>
     )
   }
   return (
     <section className="section"> 
-      <h2 className="section-title">
-        books
-      </h2>
+      <Divider >کتاب</Divider>
       <div className="cocktails-center">
-        {books.map((item)=>{
-          return <Book key={item.id}{...item}/>
+      {books.map((item)=>{
+          return <BookCard key={item.id}{...item}/>
         })}
+      </div>
+      <div className="cocktails-center">
+      <Pagination defaultCurrent={1} total={50} />
       </div>
     </section>
   )
