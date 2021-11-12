@@ -10,16 +10,18 @@ class App extends React.Component {
     
     constructor(props) {
         super(props);
+        this.serverAddress = 'http://127.0.0.1:8080/';  // Hossein Rahimi, Mehrabi : change all requests
         this.navbar = React.createRef();
         this.loginModal = React.createRef();    // Mehrabi
         this.regModal = React.createRef();     // Mehrabi
         this.bookCards = React.createRef();    // Hossein Rahimi
+        this.categories = ["علمی","داستانی","درسی","انگلیسی"]
       }
 
     
 
 
-    showResult = (results) =>{
+    showResult = (results) =>{        
         // Show Results : Hossein Rahimi
         // results : backend response
         
@@ -58,8 +60,8 @@ class App extends React.Component {
     render() { 
         return (
         <div>
-            <Navbarr ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin}/>
-            <Antdmodal onResult={(e) => {this.showResult(e)}}  vis={false} categories={["علمی","داستانی","درسی","جنایی"]}
+            <Navbarr serverAddress={this.serverAddress} ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin}/>
+            <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}
             /> 
 
             
