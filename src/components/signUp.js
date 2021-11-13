@@ -5,40 +5,16 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../App.css";
 import Empty from "./empty";
 import login from "./login";
-// import axios from "axios";
 
 const regExp = RegExp(
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 );
-// const formValid = ({ isError, ...rest }) => {
-//   let isValid = false;
-
-//   Object.values(isError).forEach((val) => {
-//     if (val.length > 0) {
-//       isValid = false;
-//     } else {
-//       isValid = true;
-//     }
-//   });
-
-//   Object.values(rest).forEach((val) => {
-//     if (val === null) {
-//       isValid = false;
-//     } else {
-//       isValid = true;
-//     }
-//   });
-
-//   return isValid;
-// };
 class signUp extends React.Component {
   constructor() {
     super();
     this.state = {
-      // isFormValid: true,
       showHide: true,
       showHideError: false,
-      // error: "",
       first_name: "",
       user_name: "",
       email: "",
@@ -46,6 +22,7 @@ class signUp extends React.Component {
       bookOrPerson: "",
       phone: "",
       password: "",
+      password2: "",
       isError: {
         showHide: "",
         first_name: "",
@@ -55,6 +32,8 @@ class signUp extends React.Component {
         bookOrPerson: "",
         phone: "",
         password: "",
+        password2: "",
+        bookOrPerson: "",
       },
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -62,12 +41,6 @@ class signUp extends React.Component {
   }
   handleInputChange = (e) => {
     e.preventDefault();
-    // const target = event.target;
-    // let value = target.value;
-    // const name = target.name;
-    // this.setState({
-    //   [name]: value,
-    // });
 
     const { name, value } = e.target;
     let isError = { ...this.state.isError };
@@ -101,6 +74,16 @@ class signUp extends React.Component {
         isError.password =
           value.length < 6 ? "!رمز عبور انتخابي خيلي كوتاه است" : "";
         break;
+      case "password2":
+        isError.password2 =
+          value === this.state.password
+            ? ""
+            : "!رمز عبور به درستي تكرار نشده است";
+        break;
+      case "bookOrPerson":
+        isError.bookOrPerson =
+          value.length < 1 ? "!مشخص كردن نوع حساب كاربري الزامي مي باشد" : "";
+        break;
       default:
         break;
     }
@@ -119,25 +102,38 @@ class signUp extends React.Component {
         isFormValid = false;
       }
     });
-    if (isFormValid === true) {
-      if (this.state.address.length < 1) {
-        isFormValid = false;
-      }
-      if (this.state.password.length < 1) {
-        isFormValid = false;
-      }
-      if (this.state.phone.length < 1) {
-        isFormValid = false;
-      }
-      if (this.state.email.length < 1) {
-        isFormValid = false;
-      }
-      if (this.state.user_name.length < 1) {
-        isFormValid = false;
-      }
-      if (this.state.first_name.length < 1) {
-        isFormValid = false;
-      }
+    if (this.state.address.length < 1) {
+      isFormValid = false;
+      this.state.isError.address = ".اين فيلد نمي تواند خالي باشد";
+    }
+    if (this.state.password.length < 1) {
+      isFormValid = false;
+      this.state.isError.password = ".اين فيلد نمي تواند خالي باشد";
+    }
+    if (this.state.phone.length < 1) {
+      isFormValid = false;
+      this.state.isError.phone = ".اين فيلد نمي تواند خالي باشد";
+    }
+    if (this.state.email.length < 1) {
+      isFormValid = false;
+      this.state.isError.email = ".اين فيلد نمي تواند خالي باشد";
+    }
+    if (this.state.user_name.length < 1) {
+      isFormValid = false;
+      this.state.isError.user_name = ".اين فيلد نمي تواند خالي باشد";
+    }
+    if (this.state.first_name.length < 1) {
+      isFormValid = false;
+      this.state.isError.first_name = ".اين فيلد نمي تواند خالي باشد";
+    }
+    if (this.state.bookOrPerson.length < 1) {
+      isFormValid = false;
+      this.state.isError.bookOrPerson =
+        "!مشخص كردن نوع حساب كاربري الزامي مي باشد";
+    }
+    if (this.state.password2.length < 1) {
+      isFormValid = false;
+      this.state.isError.password2 = ".اين فيلد نمي تواند خالي باشد";
     }
     if (isFormValid === true) {
       console.log(this.state);
@@ -200,9 +196,7 @@ class signUp extends React.Component {
                     onChange={this.handleInputChange}
                     placeholder="لطفا نام شخص و یا کتابفروشی را وارد کنید"
                   />
-                  <small className="text-danger">
-                    {isError.first_name.length > 0 ? isError.first_name : ""}
-                  </small>
+                  <small className="text-danger">{isError.first_name}</small>
                 </div>
 
                 <div className="form-group">
@@ -218,9 +212,7 @@ class signUp extends React.Component {
                     onChange={this.handleInputChange}
                     placeholder="لطفا یک نام کاربری برای خود انتخاب کنید"
                   />
-                  <small className="text-danger">
-                    {isError.user_name.length > 0 ? isError.user_name : ""}
-                  </small>
+                  <small className="text-danger">{isError.user_name}</small>
                 </div>
 
                 <div className="form-group">
@@ -236,9 +228,7 @@ class signUp extends React.Component {
                     onChange={this.handleInputChange}
                     placeholder="لطفا آدرس پست الکترونیکی خود را وارد کنید"
                   />
-                  <small className="text-danger">
-                    {isError.email.length > 0 ? isError.email : ""}
-                  </small>
+                  <small className="text-danger">{isError.email}</small>
                 </div>
 
                 <div className="form-group">
@@ -254,9 +244,7 @@ class signUp extends React.Component {
                     }
                     placeholder="لطفا آدرس شخص و یا کتابفروشی را وارد کنید"
                   />
-                  <small className="text-danger">
-                    {isError.address.length > 0 ? isError.address : ""}
-                  </small>
+                  <small className="text-danger">{isError.address}</small>
                 </div>
 
                 <div className="form-group">
@@ -272,9 +260,7 @@ class signUp extends React.Component {
                     onChange={this.handleInputChange}
                     placeholder="لطفا شماره تماس شخص و یا کتابفروشی را وارد کنید"
                   />
-                  <small className="text-danger">
-                    {isError.phone.length > 0 ? isError.phone : ""}
-                  </small>
+                  <small className="text-danger">{isError.phone}</small>
                 </div>
 
                 <div className="form-group">
@@ -290,9 +276,23 @@ class signUp extends React.Component {
                     }
                     placeholder="لطفا یک رمز عبور قوی برای حساب خود انتخاب کنید"
                   />
-                  <small className="text-danger">
-                    {isError.password.length > 0 ? isError.password : ""}
-                  </small>
+                  <small className="text-danger">{isError.password}</small>
+                </div>
+
+                <div className="form-group">
+                  <label>تكرار رمز عبور</label>
+                  <input
+                    type="password"
+                    name="password2"
+                    onChange={this.handleInputChange}
+                    className={
+                      isError.password2.length > 0
+                        ? "is-invalid form-control text-right"
+                        : "form-control text-right"
+                    }
+                    placeholder="لطفا رمز عبور انتخابي خود را دوباره تكرار كنيد"
+                  />
+                  <small className="text-danger">{isError.password2}</small>
                 </div>
 
                 <div className="form-group">
@@ -326,8 +326,9 @@ class signUp extends React.Component {
                     <label className="form-check-label" htmlFor="inlineRadio2">
                       شخص حقيقي
                     </label>
-                  </div>
+                  </div>{" "}
                 </div>
+                <small className="text-danger">{isError.bookOrPerson}</small>
 
                 <p className="forgot-password text-right">
                   قبلا ثبت نام کرده اید؟{" "}
@@ -369,9 +370,6 @@ class signUp extends React.Component {
           <Modal show={this.state.showHideError}>
             <div className="text-center">
               {/* <Modal.Header
-              closeButton
-              onClick={() => this.handleModalShowHideError()}
-            >
               <Modal.Title></Modal.Title>
             </Modal.Header> */}
               <Modal.Body>
@@ -399,7 +397,6 @@ class signUp extends React.Component {
                 </div>
                 <div className="text-center">
                   <h5>شما فرم را به درستی تکمیل نکرده اید</h5>
-                  <h5>پر کردن همه فیلد ها اجباری می باشد</h5>
                 </div>
               </Modal.Body>
               <Modal.Footer>
