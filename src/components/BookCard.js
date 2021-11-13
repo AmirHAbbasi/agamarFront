@@ -1,6 +1,6 @@
 import React from 'react'
 import 'antd/dist/antd.css'
-import { Card, Avatar, Tag } from 'antd';
+import { Card, /*Avatar*/ } from 'antd';
 
 const BookCard = ({image, name, id, info}) => {
     const { Meta } = Card;
@@ -11,7 +11,7 @@ const BookCard = ({image, name, id, info}) => {
           cover={<img alt={id} src={image} />}
           >
           <Meta
-            avatar={<Avatar src={image} />}
+            //avatar={<Avatar src={image} />}
             title={name}
             description={info}
           />

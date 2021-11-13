@@ -13,21 +13,23 @@ const BookList = () => {
   }
   if(books.length < 1){
     return (
-      <h2 className='section-title'>
-        کتابی یافت نشد..
-      </h2>
+      <div className="section"> 
+        <Divider>نتیجه ای یافت نشد.</Divider>
+      </div>
     )
   }
   return (
     <section className="section"> 
-      <Divider >کتاب</Divider>
-      <div className="cocktails-center">
-      {books.map((item)=>{
-          return <BookCard key={item.id}{...item}/>
-        })}
+      <div className="section"> 
+        <Divider>نتایج</Divider>
       </div>
       <div className="cocktails-center">
-      <Pagination defaultCurrent={1} total={50} />
+        {books.map((item)=>{
+            return <BookCard key={item.id}{...item}/>
+        })}
+      </div>
+      <div className='carousel'>
+        <Pagination defaultCurrent={1} total={50} />
       </div>
     </section>
   )

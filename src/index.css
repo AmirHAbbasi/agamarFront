@@ -16,9 +16,6 @@ Variables
   --darkGrey: #919191;
   --mainRed: #bd0303;
   --mainTransition: all 0.1s linear;
-  /*--mainSpacing: 0.3rem;*/
-  --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
-  --darkShadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
   --mainBorderRadius: 0.25rem;
   --smallWidth: 85vw;
   --maxWidth: 40rem;
@@ -78,64 +75,6 @@ img {
 
 /* 
 ====== 
-Buttons 
-======
-*/
-.btn,
-.btn-white,
-.btn-primary {
-  text-transform: uppercase;
-  letter-spacing: var(--mainSpacing);
-  color: var(--primaryColor);
-  border: 2px solid var(--primaryColor);
-  padding: 0.45rem 0.8rem;
-  display: inline-block;
-  transition: var(--mainTransition);
-  cursor: pointer;
-  font-size: 1rem;
-  background: transparent;
-  border-radius: var(--mainBorderRadius);
-  display: inline-block;
-}
-.btn:hover {
-  background: var(--primaryColor);
-  color: var(--mainWhite);
-}
-.btn-white {
-  background: transparent;
-  color: var(--mainWhite);
-  border-color: var(--mainWhite);
-}
-.btn-white:hover {
-  background: var(--mainWhite);
-  color: var(--primaryColor);
-}
-.btn-primary {
-  background: var(--primaryColor);
-  color: var(--mainWhite);
-  border-color: transparent;
-}
-.btn-primary:hover {
-  background: var(--primaryLightColor);
-  color: var(--primaryColor);
-}
-.btn-block {
-  width: 100%;
-  display: block;
-  margin: 0 auto;
-  box-shadow: var(--lightShadow);
-  text-align: center;
-}
-.btn-details {
-  padding: 0.25rem 0.4rem;
-}
-.btn-details:hover {
-  background: var(--primaryLightColor);
-  border-color: var(--primaryLightColor);
-}
-
-/* 
-====== 
 Error
 ======
 */
@@ -156,15 +95,9 @@ Cocktails List
 */
 
 .section {
-  padding: 5rem 0;
-}
-.section-title {
-  font-size: 2rem;
-  text-transform: capitalize;
-  letter-spacing: var(--mainSpacing);
-  text-align: center;
-  margin-bottom: 3.5rem;
-  margin-top: 1rem;
+  padding: 0rem;
+  margin-bottom: 3rem;
+  margin-top: 5rem;
 }
 .cocktails-center {
   width: var(--smallWidth);
@@ -180,96 +113,17 @@ Cocktails List
     grid-template-columns: repeat(auto-fill, minmax(338.8px, 1fr));
   }
 }
-
-
+.carousel {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
 
 /* 
 ====== 
-Cocktail 
+Loader
 ======
 */
-.cocktail {
-  background: var(--mainWhite);
-  margin-bottom: 2rem;
-  box-shadow: var(--lightShadow);
-  transition: var(--mainTransition);
-  display: grid;
-  grid-template-rows: auto 1fr;
-  border-radius: var(--mainBorderRadius);
-}
-.cocktail:hover {
-  box-shadow: var(--darkShadow);
-}
-.cocktail img {
-  height: 20rem;
-  object-fit: cover;
-  border-top-left-radius: var(--mainBorderRadius);
-  border-top-right-radius: var(--mainBorderRadius);
-}
-.cocktail-footer {
-  padding: 1.5rem;
-}
-.cocktail-footer h3,
-.cocktail-footer h4,
-.cocktail-footer p {
-  margin-bottom: 0.3rem;
-}
-.cocktail-footer h3 {
-  font-size: 2rem;
-}
-.cocktail-footer p {
-  color: var(--darkGrey);
-  margin-bottom: 0.5rem;
-}
-
-
-/* 
-====== 
-Cocktail
-======
-*/
-
-.cocktail-section {
-  text-align: center;
-}
-.drink {
-  width: var(--smallWidth);
-  max-width: var(--fullWidth);
-  margin: 0 auto;
-  text-align: left;
-}
-.drink img {
-  border-radius: var(--mainBorderRadius);
-}
-.drink p {
-  font-weight: bold;
-  text-transform: capitalize;
-  line-height: 1.8;
-}
-.drink span {
-  margin-right: 0.5rem;
-}
-.drink-data {
-  background: var(--primaryLightColor);
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--mainBorderRadius);
-  color: var(--primaryColor);
-}
-.drink-info {
-  padding-top: 2rem;
-}
-@media screen and (min-width: 992px) {
-  .drink {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    gap: 3rem;
-    align-items: center;
-  }
-  .drink-info {
-    padding-top: 0;
-  }
-}
-
 .loader,
 .loader:before,
 .loader:after {
