@@ -43,7 +43,8 @@ class App extends React.Component {
         user_info = {
            username : "Amir_abbasi_77",
            name : "Amirhossein",
-           lname :  "Abbasi",
+           prof_image : "/usr/456456",
+           token : "FLKDJFSL"
         }
         */
     }
@@ -52,7 +53,8 @@ class App extends React.Component {
         user_info = {
            username : "Amir_abbasi_77",
            name : "Amirhossein",
-           lname :  "Abbasi",
+           prof_image : "/usr/456456",
+           token : "FLKDJFSL"
         }
         */
         this.navbar.current.toggleNavBar(user_info);
@@ -66,7 +68,8 @@ class App extends React.Component {
             <Navbarr serverAddress={this.serverAddress} ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin}/>
             <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}
             /> 
-
+                
+            <signUp serverAddress={this.serverAddress} ref={this.regModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
             
 
 
