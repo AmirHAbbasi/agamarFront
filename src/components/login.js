@@ -4,7 +4,7 @@ import Empty from "./empty";
 import profile from "./profileDashboard";
 import signUp from "./signUp";
 import { Button, Modal } from "react-bootstrap";
-// import axios from "axios";
+import axios from "axios";
 
 class login extends React.Component {
   constructor() {
@@ -13,6 +13,8 @@ class login extends React.Component {
       showHide: true,
       user_name: null,
       password: null,
+      postId: null,
+      errorMessage: null,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     // this.submit = this.submit.bind(this);
@@ -29,6 +31,36 @@ class login extends React.Component {
   handleModalShowHide() {
     this.setState({ showHide: !this.state.showHide });
   }
+  submit = event=> {
+
+      const headers = {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin':'http://localhost:3000',
+      }
+      const data = {
+    "username": "expensive",
+    "password": "12345"
+}
+
+      axios.post('http://127.0.0.1:8000/api/token', data, {headers:headers, withCredentials:true}).then(
+      res => {
+          if(res.data != null){
+          console.log(res.data);
+    this.setState({
+        loggedIn: true,
+        returnedUsername: res.data.username
+    })
+
+}else{
+            console.log("failed to log in");
+}
+}
+      ).catch(error => {
+          console.error(error.response);
+
+})
+ 
+  };
 
   render() {
     return (
@@ -116,7 +148,7 @@ class login extends React.Component {
                 to={"/پروفايل_كاربري"}
                 href="#"
                 onClick={() => {
-                  // this.submit();
+                  this.submit();
                   this.handleModalShowHide();
                 }}
               >
