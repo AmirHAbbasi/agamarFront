@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Empty from "./empty";
 import signUp from "./signUp";
 // import login from "./login";
+import axios from "axios";
+
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal } from "react-bootstrap";
 
@@ -12,6 +14,7 @@ export default class profileDashboard extends Component {
     super();
     this.state = {
       showHide: true,
+      showHideImage: false,
       showHideAgahi: false,
       showHideAlaghe: false,
       showHideGozaresh: false,
@@ -19,13 +22,18 @@ export default class profileDashboard extends Component {
       showHideExit: false,
       showContent: <h5>موردی برای نمایش وجود ندارد</h5>,
 
+      totalReactPackages: null,
+      pImage: null,
+
       first_name: "اکبر اکبری",
       user_name: "Akbar123",
       email: "AkbarAkbari@agamar.ir",
       address: "تهران، اکبرآباد، پلاک 1، طبقه اول",
       bookOrPerson: "person",
       phone: "0987654321",
-      password: "Akbar12345567890",
+      oldPassword: "Akbar12345567890",
+      password: "",
+      password2: "",
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -38,7 +46,24 @@ export default class profileDashboard extends Component {
     this.setState({
       [name]: value,
     });
+    console.log(this.state);
   }
+
+  onFileChange = (e) => {
+    this.setState({ pImage: e.target.files[0] });
+  };
+  onFileUpload = () => {
+    if (this.state.pImage == !null) {
+      const formData = new FormData();
+
+      formData.append("myFile", this.state.pImage, this.state.pImage.name);
+      console.log(this.state.pImage);
+      console.log(this.state);
+    }
+
+    // axios.post("api/uploadfile", formData);
+  };
+
   handlePartsShowHideAgahi() {
     this.setState({ showHideAgahi: true });
     this.setState({ showHideGozaresh: false });
@@ -66,8 +91,15 @@ export default class profileDashboard extends Component {
   handleModalShowHideExit() {
     this.setState({ showHideExit: !this.state.showHideExit });
   }
+  handleModalShowHideImage() {
+    this.setState({ showHideImage: !this.state.showHideImage });
+  }
   submit() {
-    this.handleModalShowHideZakhire();
+    // this.handleModalShowHideZakhire();
+    const headers = { "Content-Type": "application/json", Token: "Access" };
+    fetch("http://127.0.0.1:8000/api/userInfo", { headers, mode: "no-cors" })
+      .then((response) => response.json())
+      .then((data) => this.setState({ totalReactPackages: data.total }));
   }
 
   render() {
@@ -84,6 +116,7 @@ export default class profileDashboard extends Component {
                         <div className="col-sm-9 text-secondary">
                           <input
                             type="text"
+                            name="first_name"
                             onChange={this.handleInputChange}
                             className="form-control text-right"
                             placeholder=".درصورت تمايل به تغيير نام، نام جديد را وارد كنيد"
@@ -98,6 +131,7 @@ export default class profileDashboard extends Component {
                         <div className="col-sm-9 text-secondary">
                           <input
                             type="text"
+                            name="user_name"
                             className="form-control text-right"
                             placeholder=".يك نام كاربري جديد براي خود انتخاب كنيد"
                             defaultValue={this.state.user_name}
@@ -112,9 +146,10 @@ export default class profileDashboard extends Component {
                         <div className="col-sm-9 text-secondary">
                           <input
                             type="text"
+                            name="email"
                             onChange={this.handleInputChange}
                             className="form-control text-right"
-                            placeholder=".يك ژست الكترونيك جديد براي خود انتخاب كنيد"
+                            placeholder=".يك پست الكترونيك جديد براي خود انتخاب كنيد"
                             defaultValue={this.state.email}
                           ></input>
                         </div>
@@ -126,6 +161,7 @@ export default class profileDashboard extends Component {
                         <div className="col-sm-9 text-secondary">
                           <input
                             type="text"
+                            name="address"
                             onChange={this.handleInputChange}
                             className="form-control text-right"
                             placeholder=".آدرس جديد را وارد كنيد"
@@ -140,6 +176,7 @@ export default class profileDashboard extends Component {
                         <div className="col-sm-9 text-secondary">
                           <input
                             type="text"
+                            name="phone"
                             onChange={this.handleInputChange}
                             className="form-control text-right"
                             placeholder=".شماره تلفن همراه جديد را وارد كنيد"
@@ -154,6 +191,7 @@ export default class profileDashboard extends Component {
                         <div className="col-sm-9 text-secondary">
                           <input
                             type="password"
+                            name="oldPassword"
                             onChange={this.handleInputChange}
                             className="form-control text-right"
                             placeholder=".به دليل مسائل امنيتي، رمز عبور قبلي خود را وارد كنيد"
@@ -167,6 +205,7 @@ export default class profileDashboard extends Component {
                         <div className="col-sm-9 text-secondary">
                           <input
                             type="password"
+                            name="password"
                             onChange={this.handleInputChange}
                             className="form-control text-right"
                             placeholder=".رمز عبور جديد خود را وارد نماييد"
@@ -174,6 +213,20 @@ export default class profileDashboard extends Component {
                         </div>
                         <div className="col-sm-3">
                           <h6 className="mb-0">رمز عبور جديد</h6>
+                        </div>
+                      </div>
+                      <div className="row mb-3">
+                        <div className="col-sm-9 text-secondary">
+                          <input
+                            type="password"
+                            name="password2"
+                            onChange={this.handleInputChange}
+                            className="form-control text-right"
+                            placeholder=".رمز عبور جديد خود را مجددا وارد نماييد"
+                          ></input>
+                        </div>
+                        <div className="col-sm-3">
+                          <h6 className="mb-0">تكرار رمز عبور جديد</h6>
                         </div>
                       </div>
                       <div className="row">
@@ -206,30 +259,24 @@ export default class profileDashboard extends Component {
                     <div className="card-body">
                       <div className="d-flex flex-column align-items-center text-center">
                         <img
-                          src="https://bootdey.com/img/Content/avatar/avatar6.png"
+                          src={
+                            this.state.pImage === null
+                              ? "https://bootdey.com/img/Content/avatar/avatar6.png"
+                              : this.state.pImage
+                          }
                           alt="Admin"
                           className="rounded-circle p-1 bg-primary"
                           width="110"
                         ></img>
                         <div className="mt-3">
                           <h4>نام كاربر</h4>
-                          <Link
-                            to={"/"}
-                            href="#"
-                            className="btn btn-primary"
-                            onClick={() => {
-                              this.handleshowHide();
-                            }}
-                          >
-                            صفحه اصلي
-                          </Link>
                         </div>
-                        <h1></h1>
+                        {/*  */}
                         <button
-                          className="btn btn-outline-primary"
-                          onClick={() => this.handleModalShowHideExit()}
+                          className="btn btn-primary px-4"
+                          onClick={() => this.handleModalShowHideImage()}
                         >
-                          خروج از حساب كاربري
+                          تغيير عكس پروفايل
                         </button>
                       </div>
                       <hr className="my-4"></hr>
@@ -413,6 +460,69 @@ export default class profileDashboard extends Component {
                   type="button"
                   className="btn btn-secondary btn-lg btn-container-left"
                   onClick={() => this.handleModalShowHideExit()}
+                >
+                  بازگشت
+                </button>
+
+                {/* </div> */}
+              </Modal.Footer>
+            </div>
+          </Modal>
+
+          <Modal show={this.state.showHideImage}>
+            <div className="text-center">
+              {/* <Modal.Header
+              closeButton
+              onClick={() => this.handleModalShowHideExit()}
+            >
+              <Modal.Title></Modal.Title>
+            </Modal.Header> */}
+              <Modal.Body>
+                <div className="align-items-right text-right">
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => this.handleModalShowHideImage()}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-arrow-right"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                      />
+                    </svg>
+                    <Modal.Title></Modal.Title>
+                  </button>
+                </div>
+                <div className="text-center">
+                  <h6>:عكس مورد نظر خود را آپلود كنيد</h6>
+                  <input type="file" onChange={this.onFileChange} />
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                {/* <div className="button-wrapper btn-container-left"> */}
+                <Link
+                  to={"/"}
+                  href="#"
+                  type="button"
+                  className="btn btn-primary btn-lg btn-container-left"
+                  onClick={() => {
+                    this.handleModalShowHideImage();
+                    this.onFileUpload();
+                  }}
+                >
+                  ذخيره عكس
+                </Link>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-lg btn-container-left"
+                  onClick={() => this.handleModalShowHideImage()}
                 >
                   بازگشت
                 </button>
