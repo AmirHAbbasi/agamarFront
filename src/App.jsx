@@ -17,7 +17,7 @@ class App extends React.Component {
         this.navbar = React.createRef();
         this.loginModal = React.createRef();    // Mehrabi
         this.regModal = React.createRef();     // Mehrabi
-        this.bookCards = React.createRef();    // Hossein Rahimi
+        this.bookCards = React.createRef();    
         this.categories = ["علمی","داستانی","درسی","انگلیسی"]
       }
 
@@ -93,7 +93,7 @@ class App extends React.Component {
                 
             <signUp serverAddress={this.serverAddress} ref={this.regModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
             
-
+            <BookList serverAddress={this.serverAddress} ref={this.bookCards} />
 
             <Footter hidden />
         </div>
