@@ -27,6 +27,28 @@ class App extends React.Component {
     showResult = (results) =>{        
         // Show Results : Hossein Rahimi
         // results : backend response
+        /*
+        results = {
+            {
+                title : "صدای سایه",
+                author : "محمد عبدی",
+                book_image : "/book/456456",
+                price : 2500
+           },
+           {
+                title : "نوروز",
+                author : "مسعود فیضی",
+                book_image : "/book/455488",
+                price : 30000
+           },
+           {
+                title : "فیزیک پایه 2",
+                author : "علیرضا جهانگیری",
+                book_image : "/book/456422",
+                price : 50000
+           },
+         }
+        */
         
     }
 
