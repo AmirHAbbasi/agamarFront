@@ -2,6 +2,9 @@ import React from "react";
 import Navbarr from "./components/Navbar/navbarr";
 import Footter from "./components/Footer/footter";
 import Antdmodal from "./components/AdvancedSearch/antdmodal";
+import login from "./components/login";
+import profileDashboard from "./components/profileDashboard";
+import signUp from "./components/signUp";
 import './App.css';
 
 
