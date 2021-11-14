@@ -32,7 +32,47 @@ class login extends React.Component {
   handleModalShowHide() {
     this.setState({ showHide: !this.state.showHide });
   }
+  getUserInfo(access) {
+    console.log(access);
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${access}`,
+    }
+    axios.get('http://127.0.0.1:8000/api/userInfo', { headers: headers, withCredentials: true }).then(
+      res => {
+        if (res.data != null) {
+          console.log(res.data);
+          this.setState({
+            loggedIn: true,
+            returnedUsername: res.data.username
+          })
+
+        } else {
+          console.log("failed to log in");
+        }
+      }
+    ).catch(error => {
+      console.error(error.response);
+
+    })
+  }
+
+
   submit = event => {
+    this.props.onSubmit(
+      {
+        username: "Amir_abbasi_77",
+        name: "اميرحسين",
+        prof_image: "/usr/456456",
+        access_token: res.data.access,
+        refresh_token: res.data.refresh,
+        email: "a@gmal.com",
+        phone_number: "22222222222",
+        address: "يه جايي",
+        isBookStore: true,
+        isPrivatePerson: false
+      }
+    );
     console.log(this.state);
     const headers = {
       'Content-Type': 'application/json',
@@ -45,49 +85,12 @@ class login extends React.Component {
       res => {
         if (res.data != null) {
           console.log(res.data);
-          console.log(res);
+          // console.log(res.data.access);
           this.setState({
             loggedIn: true,
             returnedUsername: res.data.username
           })
-          const headers2 = {
-            'Content-Type': 'application/json',
-            access: res.data.access,
-          }
 
-          console.log("start GET");
-          axios.get('http://127.0.0.1:8000/api/userInfo', { headers: headers2, withCredentials: true }).then(
-            res => {
-              if (res.data != null) {
-                console.log("res.data");
-                console.log(res.data);
-                // this.setState({
-                //   loggedIn: true,
-                //   returnedUsername: res.data.username
-                // })
-
-              } else {
-                console.log("failed to log in");
-              }
-            }
-          ).catch(error => {
-            console.error(error.response);
-
-          })
-          this.props.onSubmit(
-            {
-              username: "Amir_abbasi_77",
-              name: "اميرحسين",
-              prof_image: "/usr/456456",
-              access_token: "FLKDJFSL",
-              refresh_token: "FLKDJFSL",
-              email: "",
-              phone_number: "",
-              address: "",
-              isBookStore: true,
-              isPrivatePerson: false
-            }
-          );
         } else {
           console.log("failed to log in");
         }
