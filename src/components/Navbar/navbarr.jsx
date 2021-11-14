@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import ReactTooltip from 'react-tooltip';
+import axios from 'axios';
 import './navbarr.css';
 
 
@@ -13,9 +13,10 @@ class Navbarr extends React.Component {
       name : "مهمان",
       username : "Guest",
       darkmode:0,
-      //prof_img_src:"https://www.w3schools.com/howto/img_avatar.png",
       guest:1,
-      lang:"fa"
+      lang:"fa",
+      token : "g",
+      prof_image : "/default_user_image.png"
     };
 
     /*               - Page Language 
@@ -34,12 +35,30 @@ class Navbarr extends React.Component {
 
 
     handleLogout = () => {
-      this.setState({guest : 1});
-      console.log("handleLogout");
-      /*
-      /api/logout
-      Header => Method: post , Token: Refresh
-      */
+      this.setState({guest : 1, token : "Guest", prof_image : "/default_user_image.png"});
+
+      const ref = this;
+      
+      axios.post(this.props.serverAddress+"/api/logout", {
+        headers:{
+                'Access-Control-Allow-Origin':'http://127.0.0.1:3000',
+                'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept',
+                'Access-Control-Allow-Methods' : 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+                },
+        data:{
+                Token: ref.state.token
+              }
+      })
+      .then(function (response) {
+        console.log(response.headers);
+      })
+
+      .catch(function (error) {
+        console.log("error:"+error);
+      });
+
+
+
     }
 
 
@@ -54,7 +73,7 @@ class Navbarr extends React.Component {
 
     
     toggleNavBar = (data)=> {
-      this.setState({guest:0, name:data.name+" "+data.lname});
+      this.setState({guest:0, name:data.name, token:data.token, prof_image:data.prof_image});
     }
     
 
@@ -95,8 +114,8 @@ class Navbarr extends React.Component {
           } id="navbarScrollingDropdown" >
           
           
-          <NavDropdown.Item className="navdropdown" href="/viewprofile">مشاهده پروفایل</NavDropdown.Item>
-          <NavDropdown.Item className="navdropdown" href="/inbox">پیام ها</NavDropdown.Item>
+          <NavDropdown.Item className="navdropdown" href={"/viewprofile?usr="+this.state.token}>مشاهده پروفایل</NavDropdown.Item>
+          <NavDropdown.Item className="navdropdown" href={"/inbox?usr="+this.state.token}>پیام ها</NavDropdown.Item>
           <NavDropdown.Divider />
           <NavDropdown.Item onClick={this.handleLogout} className="navdropdown">
           <a>خروج</a>
