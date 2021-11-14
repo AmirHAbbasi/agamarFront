@@ -1,0 +1,12 @@
+.navdropdown {
+  text-align: right;
+}
+
+.logout-sign {
+  text-align: left;
+  justify-content: "flex-end";
+}
+
+.NavDropdownProf {
+  cursor: pointer;
+}
