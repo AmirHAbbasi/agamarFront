@@ -7,6 +7,7 @@ import Antdmodal from "./components/AdvancedSearch/antdmodal";
 import Login from "./components/login";
 import Profile from "./components/profileDashboard";
 import SignUp from "./components/signUp";
+import BookList from "./components/BookList";
 import './App.css';
 
 
