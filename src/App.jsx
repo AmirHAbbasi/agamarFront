@@ -39,29 +39,57 @@ class App extends React.Component {
         // Show Results : Hossein Rahimi
         // results : backend response
         /*
-        results = {
-            {
-                title : "صدای سایه",
-                author : "محمد عبدی",
-                book_image : "/book/456456",
-                price : 2500
-           },
-           {
-                title : "نوروز",
-                author : "مسعود فیضی",
-                book_image : "/book/455488",
-                price : 30000
-           },
-           {
-                title : "فیزیک پایه 2",
-                author : "علیرضا جهانگیری",
-                book_image : "/book/456422",
-                price : 50000
-           },
-         }
-        */
-        
+        results = [
+    {
+        "id": 3,
+        "title": "زنده باد کارخانه (جستار عکس مستند اجتماعی 1)",
+        "profile_image": "/profiles/zendebad.jpg",
+        "author": "آیدین باقری محمد مالجو",
+        "publisher": "اختران",
+        "descripsion": "گروه کارخانجات نسترن چینی مصور کارخانه ها ایران قم",
+        "created": "2021-11-13T12:16:04.740435Z",
+        "buy": "2",
+        "owner": 2,
+        "price": null
+    },
+    {
+        "id": 6,
+        "title": "خودم با دیگران",
+        "profile_image": "/profiles/khodam.webp",
+        "author": "کارلوس فوئنتس",
+        "publisher": "نشر ماهی",
+        "descripsion": "داستان جهان",
+        "created": "2021-11-13T12:21:11.466423Z",
+        "buy": "0",
+        "owner": 3,
+        "price": "85000"
+    },
+    {
+        "id": 8,
+        "title": "زندگی اسرارآمیز شاهزاده خانم ها (تصویرگر ربه کا داترمر)",
+        "profile_image": "/profiles/shahzadde.webp",
+        "author": "فیلیپ لچرمایر",
+        "publisher": "مبتکران",
+        "descripsion": "شاهدخت ها",
+        "created": "2021-11-13T12:23:58.757900Z",
+        "buy": "2",
+        "owner": 2,
+        "price": null
+    },
+    {
+        "id": 9,
+        "title": "ستارگان بر مسیر خویش",
+        "profile_image": "/profiles/setaregan.jpg",
+        "author": "ایزاک آسیموف",
+        "publisher": "علم",
+        "descripsion": "علوم",
+        "created": "2021-11-13T12:25:14.556827Z",
+        "buy": "2",
+        "owner": 3,
+        "price": null
     }
+]
+
 
     handleRegister = () =>{
         // Show sign up modal   :   Mehrabi
