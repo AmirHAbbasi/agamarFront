@@ -2,9 +2,9 @@ import React from "react";
 import Navbarr from "./components/Navbar/navbarr";
 import Footter from "./components/Footer/footter";
 import Antdmodal from "./components/AdvancedSearch/antdmodal";
-import login from "./components/login";
-import profileDashboard from "./components/profileDashboard";
-import signUp from "./components/signUp";
+import Login from "./components/login";
+import Profile from "./components/profileDashboard";
+import SignUp from "./components/signUp";
 import './App.css';
 
 
@@ -74,7 +74,7 @@ class App extends React.Component {
         /*
         user_info = {
            username : "Amir_abbasi_77",
-           name : "Amirhossein",
+           name : "اميرحسين",
            prof_image : "/usr/456456",
            token : "FLKDJFSL"
         }
@@ -91,8 +91,8 @@ class App extends React.Component {
             <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}
             /> 
                 
-            <signUp serverAddress={this.serverAddress} ref={this.regModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
-            
+            <SignUp serverAddress={this.serverAddress} ref={this.regModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
+            <Login serverAddress={this.serverAdress} ref={this.LoginModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
             <BookList serverAddress={this.serverAddress} ref={this.bookCards} />
 
             <Footter hidden />
