@@ -91,6 +91,7 @@ class App extends React.Component {
 ]
 
 */
+    }
     handleRegister = () =>{
         // Show sign up modal   :   Mehrabi
         // this.setState({username: []  });       change this.state.username
