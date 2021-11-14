@@ -23,22 +23,32 @@ export default class profileDashboard extends Component {
       showContent: <h5>موردی برای نمایش وجود ندارد</h5>,
 
       totalReactPackages: null,
-      pImage: null,
+      // this.props.state.user_info
+      pImage: "https://bootdey.com/img/Content/avatar/avatar6.png",
 
-      first_name: "اکبر اکبری",
+      first_name: "اكبر اكبري",
       user_name: "Akbar123",
-      email: "AkbarAkbari@agamar.ir",
-      address: "تهران، اکبرآباد، پلاک 1، طبقه اول",
-      bookOrPerson: "person",
-      phone: "0987654321",
-      oldPassword: "Akbar12345567890",
+      email: "Akbar@gamil.com",
+      address: "يه جايي تو ايران",
+      isBookStore: false,
+      isPrivatePerson: true,
+      phone: "03214569878",
+      oldPassword: "",
       password: "",
       password2: "",
+      access: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjM2OTAwMjAxLCJpYXQiOjE2MzY4OTk5MDEsImp0aSI6IjJhYzhmMjM4ODIyZjQ5ZWE5NTQ4YjRlOTBkYWEwYjllIiwidXNlcl9pZCI6MTJ9.OOo2-BP29qOK0LVyOPhJJUczFIqUVDBMN2CdJF5z2f0",
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.submit = this.submit.bind(this);
   }
+
+  componentDidMount() {
+    console.log("mounted");
+    // console.log(this.props.user_info.name);
+  }
+
+
   handleInputChange(event) {
     const target = event.target;
     let value = target.value;
@@ -46,7 +56,6 @@ export default class profileDashboard extends Component {
     this.setState({
       [name]: value,
     });
-    console.log(this.state);
   }
 
   onFileChange = (e) => {
@@ -60,7 +69,7 @@ export default class profileDashboard extends Component {
       console.log(this.state.pImage);
       console.log(this.state);
     }
-
+    this.submitGeneral();
     // axios.post("api/uploadfile", formData);
   };
 
@@ -94,18 +103,56 @@ export default class profileDashboard extends Component {
   handleModalShowHideImage() {
     this.setState({ showHideImage: !this.state.showHideImage });
   }
-  submit() {
-    // this.handleModalShowHideZakhire();
-    const headers = { "Content-Type": "application/json", Token: "Access" };
-    fetch("http://127.0.0.1:8000/api/userInfo", { headers, mode: "no-cors" })
-      .then((response) => response.json())
-      .then((data) => this.setState({ totalReactPackages: data.total }));
+  submit = event => {
+
+    this.submitGeneral();
+  }
+
+
+  submitGeneral() {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.state.access}`,
+    }
+
+    const data = {
+      username: this.state.user_name,
+      name: this.state.first_name,
+      email: this.state.email,
+      phone_number: this.state.phone,
+      address: this.state.address,
+      is_book_store: this.state.isBookStore,
+      is_private_person: this.state.isPrivatePerson,
+      profile_image: this.state.pImage,
+    }
+    console.log(data);
+    axios.patch('http://127.0.0.1:8000/api/update-userInfo', data, { headers: headers, withCredentials: true }).then(
+      res => {
+        if (res.data != null) {
+          console.log(res.data);
+          // console.log(res.data.access);
+          this.setState({
+            loggedIn: true,
+            returnedUsername: res.data.username
+          })
+          this.handleModalShowHideZakhire();
+          this.getUserInfo(res.data.access, res.data.refresh);
+
+        } else {
+          console.log("failed to update");
+        }
+      }
+    ).catch(error => {
+      console.log("error is here");
+      console.error(error.response);
+
+    })
   }
 
   render() {
     return (
       <Router>
-        <div show={this.state.showHide}>
+        <div>
           <div className="container">
             <div className="main-body">
               <div className="row">
@@ -175,7 +222,7 @@ export default class profileDashboard extends Component {
                       <div className="row mb-3">
                         <div className="col-sm-9 text-secondary">
                           <input
-                            type="text"
+                            type="phone"
                             name="phone"
                             onChange={this.handleInputChange}
                             className="form-control text-right"
@@ -260,9 +307,10 @@ export default class profileDashboard extends Component {
                       <div className="d-flex flex-column align-items-center text-center">
                         <img
                           src={
-                            this.state.pImage === null
-                              ? "https://bootdey.com/img/Content/avatar/avatar6.png"
-                              : this.state.pImage
+                            // this.state.pImage === null
+                            //   ? "https://bootdey.com/img/Content/avatar/avatar6.png"
+                            //   :
+                            this.state.pImage
                           }
                           alt="Admin"
                           className="rounded-circle p-1 bg-primary"
@@ -295,9 +343,9 @@ export default class profileDashboard extends Component {
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
-                                stroke-width="1"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeWidth="1"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 className="bi bi-cart me-2 icon-inline"
                               >
                                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
@@ -322,9 +370,9 @@ export default class profileDashboard extends Component {
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
-                                stroke-width="1"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeWidth="1"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 color="red"
                                 className="bi bi-heart me-2 icon-inline"
                               >
@@ -348,9 +396,9 @@ export default class profileDashboard extends Component {
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
-                                stroke-width="1"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeWidth="1"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 className="bi bi-journals me-2 icon-inline"
                               >
                                 <path d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z" />
