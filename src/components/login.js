@@ -6,6 +6,7 @@ import signUp from "./signUp";
 import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
 
+
 class login extends React.Component {
   constructor() {
     super();
@@ -31,35 +32,71 @@ class login extends React.Component {
   handleModalShowHide() {
     this.setState({ showHide: !this.state.showHide });
   }
-  submit = event=> {
-
-      const headers = {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin':'http://localhost:3000',
-      }
-      const data = {
-    "username": "expensive",
-    "password": "12345"
-}
-
-      axios.post('http://127.0.0.1:8000/api/token', data, {headers:headers, withCredentials:true}).then(
+  submit = event => {
+    console.log(this.state);
+    const headers = {
+      'Content-Type': 'application/json',
+    }
+    const data = {
+      "username": this.state.user_name,
+      "password": this.state.password,
+    }
+    axios.post('http://127.0.0.1:8000/api/token', data, { headers: headers, withCredentials: true }).then(
       res => {
-          if(res.data != null){
+        if (res.data != null) {
           console.log(res.data);
-    this.setState({
-        loggedIn: true,
-        returnedUsername: res.data.username
+          console.log(res);
+          this.setState({
+            loggedIn: true,
+            returnedUsername: res.data.username
+          })
+          const headers2 = {
+            'Content-Type': 'application/json',
+            access: res.data.access,
+          }
+
+          console.log("start GET");
+          axios.get('http://127.0.0.1:8000/api/userInfo', { headers: headers2, withCredentials: true }).then(
+            res => {
+              if (res.data != null) {
+                console.log("res.data");
+                console.log(res.data);
+                // this.setState({
+                //   loggedIn: true,
+                //   returnedUsername: res.data.username
+                // })
+
+              } else {
+                console.log("failed to log in");
+              }
+            }
+          ).catch(error => {
+            console.error(error.response);
+
+          })
+          this.props.onSubmit(
+            {
+              username: "Amir_abbasi_77",
+              name: "اميرحسين",
+              prof_image: "/usr/456456",
+              access_token: "FLKDJFSL",
+              refresh_token: "FLKDJFSL",
+              email: "",
+              phone_number: "",
+              address: "",
+              isBookStore: true,
+              isPrivatePerson: false
+            }
+          );
+        } else {
+          console.log("failed to log in");
+        }
+      }
+    ).catch(error => {
+      console.error(error.response);
+
     })
 
-}else{
-            console.log("failed to log in");
-}
-}
-      ).catch(error => {
-          console.error(error.response);
-
-})
- 
   };
 
   render() {
