@@ -17,7 +17,8 @@ class App extends React.Component {
         this.navbar = React.createRef();
         this.loginModal = React.createRef();    // Mehrabi
         this.regModal = React.createRef();     // Mehrabi
-        this.bookCards = React.createRef();    
+        this.bookCards = React.createRef();  
+        this.profile = React.createRef();  
         this.categories = ["علمی","داستانی","درسی","انگلیسی"]
       }
     user_info = { 
@@ -33,10 +34,7 @@ class App extends React.Component {
            isPrivatePerson : false
           };
 
-
     
-
-
     showResult = (results) =>{        
         // Show Results : Hossein Rahimi
         // results : backend response
@@ -104,7 +102,9 @@ class App extends React.Component {
             <Navbarr serverAddress={this.serverAddress} ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin}/>
             <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}
             /> 
-                
+
+            <Profile onEdit={(new_info)=>{submitLoginRegister(new_info)}} user_info={this.user_info} ref={this.profile}/>    
+            
             <SignUp serverAddress={this.serverAddress} ref={this.regModal} />
             <Login serverAddress={this.serverAdress} ref={this.LoginModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
             <BookList serverAddress={this.serverAddress} ref={this.bookCards} />
