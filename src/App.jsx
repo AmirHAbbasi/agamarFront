@@ -92,7 +92,8 @@ class App extends React.Component {
            token : "FLKDJFSL"
         }
         */
-        this.navbar.current.toggleNavBar(user_info);
+        this.user_info = user_info;
+        this.navbar.current.toggleNavBar(this.user_info);
     }
 
     
@@ -104,7 +105,7 @@ class App extends React.Component {
             <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}
             /> 
                 
-            <SignUp serverAddress={this.serverAddress} ref={this.regModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
+            <SignUp serverAddress={this.serverAddress} ref={this.regModal} />
             <Login serverAddress={this.serverAdress} ref={this.LoginModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
             <BookList serverAddress={this.serverAddress} ref={this.bookCards} />
 
