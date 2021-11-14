@@ -12,6 +12,8 @@ class login extends React.Component {
     super();
     this.state = {
       showHide: true,
+      // showHideError: false,
+      errorLogin: "jj",
       user_name: null,
       password: null,
       postId: null,
@@ -32,7 +34,19 @@ class login extends React.Component {
   handleModalShowHide() {
     this.setState({ showHide: !this.state.showHide });
   }
-  getUserInfo(access) {
+  getUserInfo(access, refresh) {
+    let info = {
+      username: "",
+      name: "",
+      prof_image: "",
+      access_token: access,
+      refresh_token: refresh,
+      email: "",
+      phone_number: "",
+      address: "",
+      isBookStore: "",
+      isPrivatePerson: ""
+    }
     console.log(access);
     const headers = {
       'Content-Type': 'application/json',
@@ -41,7 +55,15 @@ class login extends React.Component {
     axios.get('http://127.0.0.1:8000/api/userInfo', { headers: headers, withCredentials: true }).then(
       res => {
         if (res.data != null) {
-          console.log(res.data);
+          console.log(res.data.message);
+          info.username = res.data.message.username;
+          info.name = res.data.message.name;
+          info.prof_image = res.data.message.profile_image;
+          info.email = res.data.message.email;
+          info.phone_number = res.data.message.phone_number;
+          info.address = res.data.message.address;
+          info.isBookStore = res.data.message.is_book_store;
+          info.isPrivatePerson = res.data.message.is_private_person;
           this.setState({
             loggedIn: true,
             returnedUsername: res.data.username
@@ -55,24 +77,12 @@ class login extends React.Component {
       console.error(error.response);
 
     })
+    this.props.onSubmit(info);
   }
 
 
   submit = event => {
-    this.props.onSubmit(
-      {
-        username: "Amir_abbasi_77",
-        name: "اميرحسين",
-        prof_image: "/usr/456456",
-        access_token: res.data.access,
-        refresh_token: res.data.refresh,
-        email: "a@gmal.com",
-        phone_number: "22222222222",
-        address: "يه جايي",
-        isBookStore: true,
-        isPrivatePerson: false
-      }
-    );
+
     console.log(this.state);
     const headers = {
       'Content-Type': 'application/json',
@@ -90,12 +100,16 @@ class login extends React.Component {
             loggedIn: true,
             returnedUsername: res.data.username
           })
+          this.getUserInfo(res.data.access, res.data.refresh);
+          this.handleModalShowHide();
 
         } else {
           console.log("failed to log in");
         }
       }
     ).catch(error => {
+      console.log("error is here");
+      this.setState({ errorLogin: "!نام كاربري يا رمز عبور اشتباه است" });
       console.error(error.response);
 
     })
@@ -103,6 +117,7 @@ class login extends React.Component {
   };
 
   render() {
+    const { errorLogin } = this.state;
     return (
       <Router>
         <div>
@@ -143,6 +158,7 @@ class login extends React.Component {
                 </Link>
               </div>
               <h4 className="text-center">ورود</h4>
+
               <form className="text-right">
                 <div className="form-group">
                   <label>نام کاربری</label>
@@ -178,6 +194,8 @@ class login extends React.Component {
                   >
                     ثبت نام
                   </Link>
+
+                  <small className="text-danger text-center">{errorLogin}</small>
                 </p>
               </form>
             </Modal.Body>
@@ -189,7 +207,6 @@ class login extends React.Component {
                 href="#"
                 onClick={() => {
                   this.submit();
-                  this.handleModalShowHide();
                 }}
               >
                 ورود به سایت
