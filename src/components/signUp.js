@@ -15,7 +15,7 @@ class signUp extends React.Component {
   constructor() {
     super();
     this.state = {
-      showHide: true,
+      showHide: false,
       showHideError: false,
       first_name: "",
       user_name: "",
