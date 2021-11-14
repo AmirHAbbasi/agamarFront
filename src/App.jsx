@@ -136,7 +136,6 @@ class App extends React.Component {
                         <SearchForm/>
                         <Switch>
                             <Route exact path = "/">
-                                <Home />
                                 <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}/>
                                 <BookList serverAddress={this.serverAddress} ref={this.bookCards} />
                             <Route exact path = "/Viewprofile">
