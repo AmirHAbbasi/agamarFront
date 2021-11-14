@@ -103,7 +103,7 @@ class App extends React.Component {
             <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}
             /> 
 
-            <Profile onEdit={(new_info)=>{submitLoginRegister(new_info)}} user_info={this.user_info} ref={this.profile}/>    
+            <Profile onEdit={(new_info)=>{this.submitLoginRegister(new_info)}} user_info={this.user_info} ref={this.profile}/>    
             
             <SignUp serverAddress={this.serverAddress} ref={this.regModal} />
             <Login serverAddress={this.serverAdress} ref={this.LoginModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
