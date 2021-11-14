@@ -4,6 +4,8 @@ import { Button, Modal } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../App.css";
 import Empty from "./empty";
+import axios from "axios";
+
 import login from "./login";
 
 const regExp = RegExp(
@@ -95,7 +97,7 @@ class signUp extends React.Component {
     console.log(this.state);
   };
 
-  submit() {
+  submit = event => {
     let isFormValid = true;
     Object.values(this.state.isError).forEach((element) => {
       if (element.length > 0) {
@@ -136,12 +138,61 @@ class signUp extends React.Component {
       this.state.isError.password2 = ".اين فيلد نمي تواند خالي باشد";
     }
     if (isFormValid === true) {
+
+      let is_active_person = false;
+      let is_shop = false;
+      if (this.state.bookOrPerson === "person") {
+        is_active_person = true;
+      } else if (this.state.bookOrPerson === "library") is_shop = true;
+
+      const headers = {
+        'Content-Type': 'application/json',
+      }
+      console.log(this.state);
+      const data = {
+        username: this.state.user_name,
+        name: this.state.first_name,
+        password: this.state.password,
+        email: this.state.email,
+        phone_number: this.state.phone,
+        address: this.state.address,
+        is_book_store: is_shop,
+        is_private_person: is_active_person,
+      }
+
+      axios.post('http://127.0.0.1:8000/api/register', data, { headers: headers, withCredentials: true }).then(
+        res => {
+          if (res.data != null) {
+            console.log(res.data);
+            this.setState({
+              loggedIn: true,
+              returnedUsername: res.data.username
+            })
+
+          } else {
+            console.log("failed to log in");
+          }
+        }
+      ).catch(error => {
+        console.error(error.response);
+
+      })
+
+
+
       console.log(this.state);
       this.handleModalShowHide();
     } else {
       this.handleModalShowHideError();
       console.log(this.state);
     }
+
+
+
+
+
+
+
   }
   handleModalShowHide() {
     this.setState({ showHide: !this.state.showHide });
@@ -349,13 +400,13 @@ class signUp extends React.Component {
               <Link
                 type="submit"
                 className="btn btn-primary"
-                to={"/"}
+                to={"/ورود"}
                 href="#"
                 onClick={() => {
                   this.submit();
                 }}
               >
-                ذخیره تغییرات
+                ثبت نام
               </Link>
               <Link
                 to={"/"}
