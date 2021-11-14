@@ -20,6 +20,19 @@ class App extends React.Component {
         this.bookCards = React.createRef();    
         this.categories = ["علمی","داستانی","درسی","انگلیسی"]
       }
+    user_info = { 
+           username : "Amir_abbasi_77",
+           name : "اميرحسين",
+           prof_image : "/usr/456456",
+           access_token : "FLKDJFSL",
+           refresh_token : "FLKDJFSL",
+           email : "",
+           phone_number : "",
+           address : "",
+           isBookStore : true,
+           isPrivatePerson : false
+          };
+
 
     
 
@@ -99,6 +112,6 @@ class App extends React.Component {
         </div>
         );
     }
-}
+}  
  
 export default App;
