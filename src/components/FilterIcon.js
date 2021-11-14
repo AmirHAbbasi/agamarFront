@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Image } from 'antd';
+import React from 'react';
 import 'antd/dist/antd.css'
 
 const FilterIcon = () => {

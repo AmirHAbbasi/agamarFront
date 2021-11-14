@@ -1,12 +1,12 @@
 import React from 'react'
 import Loading from './Loading'
 import { useGlobalContext } from '../context'
-import { Divider, Pagination } from 'antd';
+import { Divider, /*Pagination*/ } from 'antd';
 import BookCard from './BookCard';
 
 const BookList = () => {
   const {books, loading} = useGlobalContext();
-  //console.log(books)
+  console.log(books)
   
   if(loading){
     return <Loading />
@@ -27,9 +27,6 @@ const BookList = () => {
         {books.map((item)=>{
             return <BookCard key={item.id}{...item}/>
         })}
-      </div>
-      <div className='carousel'>
-        <Pagination defaultCurrent={1} total={50} />
       </div>
     </section>
   )
