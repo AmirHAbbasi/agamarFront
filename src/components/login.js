@@ -11,7 +11,7 @@ class login extends React.Component {
   constructor() {
     super();
     this.state = {
-      showHide: true,
+      showHide: false,
       // showHideError: false,
       errorLogin: "jj",
       user_name: null,
