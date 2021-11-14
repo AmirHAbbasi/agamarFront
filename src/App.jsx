@@ -131,13 +131,13 @@ class App extends React.Component {
         return (
                   <Router>
                         <Navbarr serverAddress={this.serverAddress} ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin}/>
-                        <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}/> 
                         <SignUp serverAddress={this.serverAddress} ref={this.regModal} />
                         <Login serverAddress={this.serverAdress} ref={this.LoginModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
                         <SearchForm/>
                         <Switch>
                             <Route exact path = "/">
                                 <Home />
+                                <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}/>
                                 <BookList serverAddress={this.serverAddress} ref={this.bookCards} />
                             <Route exact path = "/Viewprofile">
                                 <Profile onEdit={(new_info)=>{this.submitLoginRegister(new_info)}} user_info={this.user_info} ref={this.profile}/>
