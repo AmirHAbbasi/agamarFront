@@ -4,15 +4,21 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Empty from "./empty";
 import signUp from "./signUp";
 // import login from "./login";
+import ImageUpload from "./ImageUpload";
 import axios from "axios";
 
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal } from "react-bootstrap";
-
+const regExp = RegExp(
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+);
 export default class profileDashboard extends Component {
   constructor() {
     super();
     this.state = {
+
+
+      showHideError: false,
       showHide: true,
       showHideImage: false,
       showHideAgahi: false,
@@ -22,17 +28,32 @@ export default class profileDashboard extends Component {
       showHideExit: false,
       showContent: <h5>موردی برای نمایش وجود ندارد</h5>,
 
+      isError: {
+        showHide: "",
+        first_name: "",
+        user_name: "",
+        email: "",
+        address: "",
+        bookOrPerson: "",
+        phone: "",
+        password: "",
+        password2: "",
+        bookOrPerson: "",
+      },
+
       totalReactPackages: null,
       // this.props.state.user_info
       pImage: "https://bootdey.com/img/Content/avatar/avatar6.png",
 
-      first_name: "اكبر اكبري",
-      user_name: "Akbar123",
-      email: "Akbar@gamil.com",
-      address: "يه جايي تو ايران",
+
+
+      first_name: null,
+      user_name: null,
+      email: null,
+      address: null,
       isBookStore: false,
       isPrivatePerson: true,
-      phone: "03214569878",
+      phone: null,
       oldPassword: "",
       password: "",
       password2: "",
@@ -40,22 +61,78 @@ export default class profileDashboard extends Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.submit = this.submit.bind(this);
+    // this.submit = this.submit.bind(this);
   }
-
+  handleModalShowHideError() {
+    this.setState({ showHideError: !this.state.showHideError });
+  }
   componentDidMount() {
+    let item = JSON.parse(localStorage.getItem("info"));
     console.log("mounted");
-    // console.log(this.props.user_info.name);
+
+    this.setState({ first_name: item.name });
+    this.setState({ user_name: item.username });
+    this.setState({ email: item.email });
+    this.setState({ address: item.address });
+    this.setState({ phone: item.phone_number });
+    this.setState({ pImage: item.prof_image });
+    this.setState({ access: item.access_token });
+    this.setState({ isBookStore: item.isBookStore });
+    this.setState({ isPrivatePerson: item.isPrivatePerson });
+
   }
 
 
-  handleInputChange(event) {
-    const target = event.target;
-    let value = target.value;
-    const name = target.name;
+  handleInputChange(e) {
+    e.preventDefault();
+
+    const { name, value } = e.target;
+    let isError = { ...this.state.isError };
+
+    switch (name) {
+      case "first_name":
+        isError.first_name =
+          value.length < 1 ? "!اين فيلد نمي تواند خالي باشد" : "";
+        break;
+      case "user_name":
+        isError.user_name =
+          value.length < 1 ? "!اين فيلد نمي تواند خالي باشد" : "";
+        break;
+      case "address":
+        isError.address =
+          value.length < 1 ? "!اين فيلد نمي تواند خالي باشد" : "";
+        break;
+      case "phone":
+        isError.phone =
+          value.length < 11 || value.length > 11
+            ? "!تلفن همراه معتبر نيست"
+            : "";
+        break;
+      case "email":
+        isError.email = !regExp.test(value) ? "!آدرس ايميل معتبر نيست" : "";
+        if (value.length < 1) {
+          isError.email = "!اين فيلد نمي تواند خالي باشد";
+        }
+        break;
+      case "password":
+        isError.password =
+          value.length < 6 ? "!رمز عبور انتخابي خيلي كوتاه است" : "";
+        break;
+      case "password2":
+        isError.password2 =
+          value === this.state.password
+            ? ""
+            : "!رمز عبور به درستي تكرار نشده است";
+        break;
+      default:
+        break;
+    }
+
     this.setState({
+      isError,
       [name]: value,
     });
+    console.log(this.state);
   }
 
   onFileChange = (e) => {
@@ -103,53 +180,149 @@ export default class profileDashboard extends Component {
   handleModalShowHideImage() {
     this.setState({ showHideImage: !this.state.showHideImage });
   }
-  submit = event => {
 
-    this.submitGeneral();
+
+
+  submitPassword() {
+    console.log("submitPassword function");
+    let item = JSON.parse(localStorage.getItem("info"))
+    let access = item.access_token;
+    let isFormValid = true;
+
+    if (this.state.isError.password.length > 0) {
+      isFormValid = false;
+    }
+    if (this.state.isError.password2.length > 0) {
+      isFormValid = false;
+    }
+    if (this.state.password.length < 1) {
+      isFormValid = false;
+      this.state.isError.password = ".اين فيلد نمي تواند خالي باشد";
+    }
+    if (this.state.password2.length < 1) {
+      isFormValid = false;
+      this.state.isError.password2 = ".اين فيلد نمي تواند خالي باشد";
+    }
+    console.log("isFormValid", isFormValid);
+    if (isFormValid === true) {
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access}`,
+      }
+      console.log("start request");
+      const data = {
+        oldPassword: this.state.oldPassword,
+        password: this.state.password,
+        password2: this.state.password2,
+      }
+      // console.log(data);
+      axios.patch('http://127.0.0.1:8000/api/change_password', data, { headers: headers, withCredentials: true }).then(
+        res => {
+          console.log("just after axios");
+          if (res.data != null) {
+            console.log(res.data);
+            console.log("ok!!");
+            console.log("res:", res);
+            this.handleModalShowHideZakhire();
+
+          } else {
+            console.log("failed to update");
+          }
+        }
+      ).catch(error => {
+        console.log("error is here");
+        this.handleModalShowHideError();
+        console.error(error.response);
+
+      })
+    }
+    else {
+      console.log("handleModalShowHideError");
+      this.handleModalShowHideError();
+    }
   }
 
-
   submitGeneral() {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.state.access}`,
-    }
+    let item = JSON.parse(localStorage.getItem("info"))
+    let access = item.access_token;
+    let isFormValid = true;
 
-    const data = {
-      username: this.state.user_name,
-      name: this.state.first_name,
-      email: this.state.email,
-      phone_number: this.state.phone,
-      address: this.state.address,
-      is_book_store: this.state.isBookStore,
-      is_private_person: this.state.isPrivatePerson,
-      profile_image: this.state.pImage,
+    if (this.state.isError.first_name.length > 0) {
+      isFormValid = false;
     }
-    console.log(data);
-    axios.patch('http://127.0.0.1:8000/api/update-userInfo', data, { headers: headers, withCredentials: true }).then(
-      res => {
-        if (res.data != null) {
-          console.log(res.data);
-          // console.log(res.data.access);
-          this.setState({
-            loggedIn: true,
-            returnedUsername: res.data.username
-          })
-          this.handleModalShowHideZakhire();
-          this.getUserInfo(res.data.access, res.data.refresh);
-
-        } else {
-          console.log("failed to update");
-        }
+    if (this.state.isError.user_name.length > 0) {
+      isFormValid = false;
+    }
+    if (this.state.isError.phone.length > 0) {
+      isFormValid = false;
+    }
+    if (this.state.isError.address.length > 0) {
+      isFormValid = false;
+    }
+    if (this.state.isError.email.length > 0) {
+      isFormValid = false;
+    }
+    if (this.state.first_name.length < 1) {
+      isFormValid = false;
+      this.state.isError.password = ".اين فيلد نمي تواند خالي باشد";
+    }
+    if (this.state.user_name.length < 1) {
+      isFormValid = false;
+      this.state.isError.password2 = ".اين فيلد نمي تواند خالي باشد";
+    }
+    if (this.state.phone.length < 1) {
+      isFormValid = false;
+      this.state.isError.password = ".اين فيلد نمي تواند خالي باشد";
+    }
+    if (this.state.address.length < 1) {
+      isFormValid = false;
+      this.state.isError.password2 = ".اين فيلد نمي تواند خالي باشد";
+    }
+    if (this.state.email.length < 1) {
+      isFormValid = false;
+      this.state.isError.password = ".اين فيلد نمي تواند خالي باشد";
+    }
+    if (isFormValid === true) {
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access}`,
       }
-    ).catch(error => {
-      console.log("error is here");
-      console.error(error.response);
 
-    })
+      const data = {
+        username: this.state.user_name,
+        name: this.state.first_name,
+        email: this.state.email,
+        phone_number: this.state.phone,
+        address: this.state.address,
+        is_book_store: this.state.isBookStore,
+        is_private_person: this.state.isPrivatePerson,
+      }
+      console.log(data);
+      axios.patch('http://127.0.0.1:8000/api/update-userInfo', data, { headers: headers, withCredentials: true }).then(
+        res => {
+          if (res.data != null) {
+            console.log(res.data);
+            // console.log(res.data.access);
+            this.handleModalShowHideZakhire();
+
+          } else {
+            console.log("failed to update");
+          }
+        }
+      ).catch(error => {
+        console.log("error is here");
+        console.error(error.response);
+
+      })
+    }
+    else {
+      console.log("erorrrrrrrrrrrrrrrrrrrrrrrr");
+    }
+
   }
 
   render() {
+    const { isError } = this.state;
     return (
       <Router>
         <div>
@@ -167,7 +340,7 @@ export default class profileDashboard extends Component {
                             onChange={this.handleInputChange}
                             className="form-control text-right"
                             placeholder=".درصورت تمايل به تغيير نام، نام جديد را وارد كنيد"
-                            defaultValue={this.state.first_name}
+                            value={this.state.first_name}
                           ></input>
                         </div>
                         <div className="col-sm-3">
@@ -181,7 +354,8 @@ export default class profileDashboard extends Component {
                             name="user_name"
                             className="form-control text-right"
                             placeholder=".يك نام كاربري جديد براي خود انتخاب كنيد"
-                            defaultValue={this.state.user_name}
+                            value={this.state.user_name}
+                            // Value={this.state.user_name}
                             onChange={this.handleInputChange}
                           ></input>
                         </div>
@@ -197,7 +371,7 @@ export default class profileDashboard extends Component {
                             onChange={this.handleInputChange}
                             className="form-control text-right"
                             placeholder=".يك پست الكترونيك جديد براي خود انتخاب كنيد"
-                            defaultValue={this.state.email}
+                            value={this.state.email}
                           ></input>
                         </div>
                         <div className="col-sm-3">
@@ -212,7 +386,7 @@ export default class profileDashboard extends Component {
                             onChange={this.handleInputChange}
                             className="form-control text-right"
                             placeholder=".آدرس جديد را وارد كنيد"
-                            defaultValue={this.state.address}
+                            value={this.state.address}
                           ></input>
                         </div>
                         <div className="col-sm-3">
@@ -227,13 +401,26 @@ export default class profileDashboard extends Component {
                             onChange={this.handleInputChange}
                             className="form-control text-right"
                             placeholder=".شماره تلفن همراه جديد را وارد كنيد"
-                            defaultValue={this.state.phone}
+                            value={this.state.phone}
                           ></input>
                         </div>
                         <div className="col-sm-3">
                           <h6 className="mb-0">تلفن همراه</h6>
                         </div>
                       </div>
+                      <div className="row">
+                        <div className="col-sm-3"></div>
+                        <div className="col-sm-9 text-secondary">
+                          <button
+                            type="submit"
+                            className="btn btn-primary px-4"
+                            onClick={() => this.submitGeneral()}
+                          >
+                            ذخيره تغييرات
+                          </button>
+                        </div>
+                      </div>
+                      <div className="row mb-3"></div>
                       <div className="row mb-3">
                         <div className="col-sm-9 text-secondary">
                           <input
@@ -247,6 +434,7 @@ export default class profileDashboard extends Component {
                         <div className="col-sm-3">
                           <h6 className="mb-0">رمز عبور قبلي</h6>
                         </div>
+                        <small className="text-danger">{isError.oldPassword}</small>
                       </div>
                       <div className="row mb-3">
                         <div className="col-sm-9 text-secondary">
@@ -261,6 +449,7 @@ export default class profileDashboard extends Component {
                         <div className="col-sm-3">
                           <h6 className="mb-0">رمز عبور جديد</h6>
                         </div>
+                        <small className="text-danger text-right">{isError.password}</small>
                       </div>
                       <div className="row mb-3">
                         <div className="col-sm-9 text-secondary">
@@ -275,6 +464,7 @@ export default class profileDashboard extends Component {
                         <div className="col-sm-3">
                           <h6 className="mb-0">تكرار رمز عبور جديد</h6>
                         </div>
+                        <small className="text-danger text-right">{isError.password2}</small>
                       </div>
                       <div className="row">
                         <div className="col-sm-3"></div>
@@ -282,9 +472,9 @@ export default class profileDashboard extends Component {
                           <button
                             type="submit"
                             className="btn btn-primary px-4"
-                            onClick={() => this.submit()}
+                            onClick={() => this.submitPassword()}
                           >
-                            ذخيره تغييرات
+                            تغيير رمز عبور
                           </button>
                         </div>
                       </div>
@@ -307,9 +497,6 @@ export default class profileDashboard extends Component {
                       <div className="d-flex flex-column align-items-center text-center">
                         <img
                           src={
-                            // this.state.pImage === null
-                            //   ? "https://bootdey.com/img/Content/avatar/avatar6.png"
-                            //   :
                             this.state.pImage
                           }
                           alt="Admin"
@@ -550,12 +737,12 @@ export default class profileDashboard extends Component {
                 </div>
                 <div className="text-center">
                   <h6>:عكس مورد نظر خود را آپلود كنيد</h6>
-                  <input type="file" onChange={this.onFileChange} />
+                  <ImageUpload />
                 </div>
               </Modal.Body>
               <Modal.Footer>
                 {/* <div className="button-wrapper btn-container-left"> */}
-                <Link
+                {/* <Link
                   to={"/"}
                   href="#"
                   type="button"
@@ -566,7 +753,7 @@ export default class profileDashboard extends Component {
                   }}
                 >
                   ذخيره عكس
-                </Link>
+                </Link> */}
                 <button
                   type="button"
                   className="btn btn-secondary btn-lg btn-container-left"
@@ -576,6 +763,52 @@ export default class profileDashboard extends Component {
                 </button>
 
                 {/* </div> */}
+              </Modal.Footer>
+            </div>
+          </Modal>
+          <Modal show={this.state.showHideError}>
+            <div className="text-center">
+              {/* <Modal.Header
+              <Modal.Title></Modal.Title>
+            </Modal.Header> */}
+              <Modal.Body>
+                <div className="align-items-right text-right">
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => this.handleModalShowHideError()}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-arrow-right"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                      />
+                    </svg>
+                    <Modal.Title></Modal.Title>
+                  </button>
+                </div>
+                <div className="text-center">
+                  <h5>پر كردن هر سه فيلد الزامي ست</h5>
+                  <h5>همچنين دقت كنيد كه رمز عبور قبلي را به درستي وارد كرده باشيد</h5>
+                  <h5>{this.state.isError.password}</h5>
+                  <h5>{this.state.isError.password2}</h5>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-lg btn-container-left btn-block"
+                  onClick={() => this.handleModalShowHideError()}
+                >
+                  فهمیدم
+                </button>
               </Modal.Footer>
             </div>
           </Modal>
@@ -592,3 +825,7 @@ export default class profileDashboard extends Component {
     );
   }
 }
+
+
+
+
