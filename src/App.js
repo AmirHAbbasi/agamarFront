@@ -1,21 +1,15 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import SearchForm from './components/SearchForm'
-// import pages
-import Home from './pages/Home'
+import BookList from './components/Carusel'
+import Carusel from './components/BookList'
+import 'antd/dist/antd.css'
+import { AppProvider } from './context'
 
 function App() {
   return (
-    <Router>
-      <Navbar/>
-      <SearchForm/>
-      <Switch>
-        <Route exact path = "/">
-          <Home/>
-        </Route>
-      </Switch>
-    </Router>
+    <AppProvider>
+      <BookList/>
+      <Carusel/>
+    </AppProvider>
   )
 }
 
