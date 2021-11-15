@@ -35,7 +35,8 @@ class App extends React.Component {
           };
 
     
-    showResult = (results) =>{        
+    showResult = (results) =>{      
+        this.bookCards.current.showResults(results);
         // Show Results : Hossein Rahimi
         // results : backend response
         /*
