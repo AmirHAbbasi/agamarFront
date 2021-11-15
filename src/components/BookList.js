@@ -3,6 +3,7 @@ import Loading from './Loading'
 import { useGlobalContext } from '../context'
 import { Divider, /*Pagination*/ } from 'antd';
 import BookCard from './BookCard';
+import 'Home.css'
 
 const BookList = () => {
   const {books, loading} = useGlobalContext();
