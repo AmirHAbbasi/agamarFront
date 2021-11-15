@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
 //import { useCallback } from 'react'
 
-const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
+const url = 'http://127.0.0.1:8000/api/book-list'
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
-  const [searchTerm, setSearchTerm] = useState('a')
+  const [searchTerm, setSearchTerm] = useState()
   const [books, setBooks] = useState([])
 
   const fetchBooks = async() => {
@@ -14,22 +14,22 @@ const AppProvider = ({ children }) => {
     try {
       const response = await fetch(`${url}`)
       const data = await response.json()
-      const {drinks} = data
-      if(drinks){
-        const newBooks = drinks.map((item)=>{
+      const {bookList} = data
+      if(bookList){
+        const newBooks = bookList.map((item)=>{
             const {
-              idDrink, 
-              strDrink, 
-              strDrinkThumb,
-              strAlcoholic,
-              strGlass
+              id, 
+              title, 
+              profile_image,
+              descripsion,
+              author
             } = item;
             return{
-              id: idDrink, 
-              name: strDrink, 
-              image: strDrinkThumb,
-              info: strAlcoholic,
-              glass: strGlass
+              id: id, 
+              name: title, 
+              image: profile_image,
+              info: descripsion,
+              author: author
             }
         })
         setBooks(newBooks)
