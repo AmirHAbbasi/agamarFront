@@ -6,6 +6,7 @@ import Login from "./components/login";
 import Profile from "./components/profileDashboard";
 import SignUp from "./components/signUp";
 import BookList from "./components/BookList";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css';
 
 
@@ -102,19 +103,26 @@ class App extends React.Component {
 
     render() { 
         return (
-        <div>
-            <Navbarr serverAddress={this.serverAddress} ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin}/>
-            <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}
-            /> 
+                    <Router>
+                      <Navbarr serverAddress={this.serverAddress} ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin}/>
+                      <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}/> 
+                      <SignUp serverAddress={this.serverAddress} ref={this.regModal} />
+                      <Login serverAddress={this.serverAdress} ref={this.LoginModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
+                      <Switch>
+                        <Route exact path = "/">
+                          <BookList serverAddress={this.serverAddress} ref={this.bookCards} />
+                        <Route exact path = "/Viewprofile">
+                          <Profile onEdit={(new_info)=>{this.submitLoginRegister(new_info)}} user_info={this.user_info} ref={this.profile}/>  
+                        <Route exact path = "/Inbox">
 
-            <Profile onEdit={(new_info)=>{this.submitLoginRegister(new_info)}} user_info={this.user_info} ref={this.profile}/>    
-            
-            <SignUp serverAddress={this.serverAddress} ref={this.regModal} />
-            <Login serverAddress={this.serverAdress} ref={this.LoginModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
-            <BookList serverAddress={this.serverAddress} ref={this.bookCards} />
+                        <Route exact path = "/About">
 
-            <Footter hidden />
-        </div>
+                        </Route>
+                      </Switch>
+                    <Footter hidden />
+                    </Router>
+
+
         );
     }
 }  
