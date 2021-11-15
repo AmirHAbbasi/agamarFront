@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../ProfileDashboard.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Empty from "./empty";
+// import Empty from "./empty";
 import signUp from "./signUp";
 // import login from "./login";
 import ImageUpload from "./ImageUpload";
@@ -141,20 +141,7 @@ export default class profileDashboard extends Component {
     console.log(this.state);
   }
 
-  onFileChange = (e) => {
-    this.setState({ pImage: e.target.files[0] });
-  };
-  onFileUpload = () => {
-    if (this.state.pImage == !null) {
-      const formData = new FormData();
 
-      formData.append("myFile", this.state.pImage, this.state.pImage.name);
-      console.log(this.state.pImage);
-      console.log(this.state);
-    }
-    this.submitGeneral();
-    // axios.post("api/uploadfile", formData);
-  };
 
   handlePartsShowHideAgahi() {
     this.setState({ showHideAgahi: true });
@@ -223,7 +210,7 @@ export default class profileDashboard extends Component {
         password: this.state.password,
         password2: this.state.password2,
       }
-      // console.log(data);
+      console.log(data);
       axios.patch('http://127.0.0.1:8000/api/change_password', data, { headers: headers, withCredentials: true }).then(
         res => {
           console.log("just after axios");
@@ -840,7 +827,7 @@ export default class profileDashboard extends Component {
           <div className="auth-wrapper">
             <div className="auth-inner">
               <Switch>
-                <Route exact path="/" component={Empty} />
+                {/* <Route exact path="/" component={Empty} /> */}
                 <Route path="/ثبت_نام" component={signUp} />
               </Switch>
             </div>

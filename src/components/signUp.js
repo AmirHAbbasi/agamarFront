@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 // import { MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../App.css";
-import Empty from "./empty";
+// import Empty from "./empty";
 import axios from "axios";
 
 import login from "./login";
@@ -482,7 +482,7 @@ class signUp extends React.Component {
           <div className="auth-wrapper">
             <div className="auth-inner">
               <Switch>
-                <Route exact path="/" component={Empty} />
+                {/* <Route exact path="/" component={Empty} /> */}
                 <Route path="/ورود" component={login} />
               </Switch>
             </div>

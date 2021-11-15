@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Empty from "./empty";
+// import Empty from "./empty";
 import profile from "./profileDashboard";
 import signUp from "./signUp";
 import { Button, Modal } from "react-bootstrap";
@@ -234,7 +234,7 @@ class login extends React.Component {
           <div className="auth-wrapper">
             <div className="auth-inner">
               <Switch>
-                <Route exact path="/" component={Empty} />
+                {/* <Route exact path="/" component={Empty} /> */}
                 <Route path="/ثبت_نام" component={signUp} />
                 <Route path="/پروفايل_كاربري" component={profile} />
               </Switch>
