@@ -11,9 +11,9 @@ class login extends React.Component {
   constructor() {
     super();
     this.state = {
-      showHide: false,
+      showHide: true,
       // showHideError: false,
-      errorLogin: "jj",
+      errorLogin: "",
       user_name: null,
       password: null,
       postId: null,
@@ -35,6 +35,7 @@ class login extends React.Component {
     this.setState({ showHide: !this.state.showHide });
   }
   getUserInfo(access, refresh) {
+    console.log("getting user info");
     let info = {
       username: "",
       name: "",
@@ -47,15 +48,16 @@ class login extends React.Component {
       isBookStore: "",
       isPrivatePerson: ""
     }
-    console.log(access);
+    // console.log(access);
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${access}`,
     }
     axios.get('http://127.0.0.1:8000/api/userInfo', { headers: headers, withCredentials: true }).then(
       res => {
+        console.log("start getting user info");
         if (res.data != null) {
-          console.log(res.data.message);
+          // console.log(res.data.message);
           info.username = res.data.message.username;
           info.name = res.data.message.name;
           info.prof_image = res.data.message.profile_image;
@@ -64,16 +66,22 @@ class login extends React.Component {
           info.address = res.data.message.address;
           info.isBookStore = res.data.message.is_book_store;
           info.isPrivatePerson = res.data.message.is_private_person;
+          console.log("info:", info);
           this.setState({
             loggedIn: true,
             returnedUsername: res.data.username
           })
+          localStorage.setItem("info", JSON.stringify(info));
+          // let item = JSON.parse(localStorage.getItem("info"));
+          // console.log("item:");
+          // console.log(item);
 
         } else {
           console.log("failed to log in");
         }
       }
     ).catch(error => {
+      console.log("error in get info loop", error);
       console.error(error.response);
 
     })
@@ -81,9 +89,10 @@ class login extends React.Component {
   }
 
 
+
   submit = event => {
 
-    console.log(this.state);
+    console.log("اينجا");
     const headers = {
       'Content-Type': 'application/json',
     }
@@ -94,7 +103,8 @@ class login extends React.Component {
     axios.post('http://127.0.0.1:8000/api/token', data, { headers: headers, withCredentials: true }).then(
       res => {
         if (res.data != null) {
-          console.log(res.data);
+
+          console.log("res.data:", res.data);
           // console.log(res.data.access);
           this.setState({
             loggedIn: true,
@@ -108,7 +118,7 @@ class login extends React.Component {
         }
       }
     ).catch(error => {
-      console.log("error is here");
+      console.log("error is here", error);
       this.setState({ errorLogin: "!نام كاربري يا رمز عبور اشتباه است" });
       console.error(error.response);
 
@@ -237,3 +247,4 @@ class login extends React.Component {
 }
 
 export default login;
+

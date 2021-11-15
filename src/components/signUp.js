@@ -15,7 +15,8 @@ class signUp extends React.Component {
   constructor() {
     super();
     this.state = {
-      showHide: false,
+      showHide: true,
+      errorLogin: "",
       showHideError: false,
       first_name: "",
       user_name: "",
@@ -169,19 +170,33 @@ class signUp extends React.Component {
               returnedUsername: res.data.username
             })
 
+            this.handleModalShowHide();
           } else {
             console.log("failed to log in");
           }
         }
+
       ).catch(error => {
+        // console.log(error.response.data.username);
+        console.log("error id=s here");
         console.error(error.response);
+        if (error.response.data.username.length > 0) {
+
+          this.setState({ errorLogin: ".نام كاربري وارد شده از قبل در سايت ثبت نام شده است" });
+        }
+        if (error.response.data.email.length > 0) {
+
+          this.setState({ errorLogin: ".ايميل وارد شده از قبل در سايت ثبت نام شده است" });
+        }
+        else {
+          this.setState({ errorLogin: ".شماره تلفن وارد شده از قبل در سايت ثبت نام شده است" });
+        }
 
       })
 
 
 
       console.log(this.state);
-      this.handleModalShowHide();
     } else {
       this.handleModalShowHideError();
       console.log(this.state);
@@ -203,6 +218,7 @@ class signUp extends React.Component {
 
   render() {
     const { isError } = this.state;
+    const { errorLogin } = this.state;
     return (
       <Router>
         <div>
@@ -393,6 +409,7 @@ class signUp extends React.Component {
                   >
                     ورود
                   </Link>
+                  <small className="text-danger text-center">{errorLogin}</small>
                 </p>
               </form>
             </Modal.Body>
