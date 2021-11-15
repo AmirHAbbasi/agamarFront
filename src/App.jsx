@@ -1,13 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Navbarr from "./components/Navbar/navbarr";
 import Footter from "./components/Footer/footter";
-import SearchForm from './components/SearchForm'
 import Antdmodal from "./components/AdvancedSearch/antdmodal";
 import Login from "./components/login";
 import Profile from "./components/profileDashboard";
 import SignUp from "./components/signUp";
-import BookList from "./components/BookList";
 import './App.css';
 
 
@@ -42,65 +39,38 @@ class App extends React.Component {
         // Show Results : Hossein Rahimi
         // results : backend response
         /*
-        results = [
-    {
-        "id": 3,
-        "title": "زنده باد کارخانه (جستار عکس مستند اجتماعی 1)",
-        "profile_image": "/profiles/zendebad.jpg",
-        "author": "آیدین باقری محمد مالجو",
-        "publisher": "اختران",
-        "descripsion": "گروه کارخانجات نسترن چینی مصور کارخانه ها ایران قم",
-        "created": "2021-11-13T12:16:04.740435Z",
-        "buy": "2",
-        "owner": 2,
-        "price": null
-    },
-    {
-        "id": 6,
-        "title": "خودم با دیگران",
-        "profile_image": "/profiles/khodam.webp",
-        "author": "کارلوس فوئنتس",
-        "publisher": "نشر ماهی",
-        "descripsion": "داستان جهان",
-        "created": "2021-11-13T12:21:11.466423Z",
-        "buy": "0",
-        "owner": 3,
-        "price": "85000"
-    },
-    {
-        "id": 8,
-        "title": "زندگی اسرارآمیز شاهزاده خانم ها (تصویرگر ربه کا داترمر)",
-        "profile_image": "/profiles/shahzadde.webp",
-        "author": "فیلیپ لچرمایر",
-        "publisher": "مبتکران",
-        "descripsion": "شاهدخت ها",
-        "created": "2021-11-13T12:23:58.757900Z",
-        "buy": "2",
-        "owner": 2,
-        "price": null
-    },
-    {
-        "id": 9,
-        "title": "ستارگان بر مسیر خویش",
-        "profile_image": "/profiles/setaregan.jpg",
-        "author": "ایزاک آسیموف",
-        "publisher": "علم",
-        "descripsion": "علوم",
-        "created": "2021-11-13T12:25:14.556827Z",
-        "buy": "2",
-        "owner": 3,
-        "price": null
+        results = {
+            {
+                title : "صدای سایه",
+                author : "محمد عبدی",
+                book_image : "/book/456456",
+                price : 2500
+           },
+           {
+                title : "نوروز",
+                author : "مسعود فیضی",
+                book_image : "/book/455488",
+                price : 30000
+           },
+           {
+                title : "فیزیک پایه 2",
+                author : "علیرضا جهانگیری",
+                book_image : "/book/456422",
+                price : 50000
+           },
+         }
+        */
+        
     }
-]
 
-*/
-    }
     handleRegister = () =>{
+        this.regModal.current.handleModalShowHide();
         // Show sign up modal   :   Mehrabi
         // this.setState({username: []  });       change this.state.username
         // this.submitLoginRegister(); at the end if login submitted, call this.submitLoginRegister function
     }
     handleLogin = () =>{
+        this.loginModal.current.handleModalShowHide();
         // Show login modal     :   Mehrabi  
         // this.submitLoginRegister(data); at the end if login submitted, call this.submitLoginRegister function
         //your data must be like this :
@@ -130,26 +100,19 @@ class App extends React.Component {
 
     render() { 
         return (
-                  <Router>
-                        <Navbarr serverAddress={this.serverAddress} ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin}/>
-                        <SignUp serverAddress={this.serverAddress} ref={this.regModal} />
-                        <Login serverAddress={this.serverAdress} ref={this.LoginModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
-                        <SearchForm/>
-                        <Switch>
-                            <Route exact path = "/">
-                                <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}/>
-                                <BookList serverAddress={this.serverAddress} ref={this.bookCards} />
-                            <Route exact path = "/Viewprofile">
-                                <Profile onEdit={(new_info)=>{this.submitLoginRegister(new_info)}} user_info={this.user_info} ref={this.profile}/>
-                            <Route exact path = "/Inbox">
+        <div>
+            <Navbarr serverAddress={this.serverAddress} ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin}/>
+            <Antdmodal serverAddress={this.serverAddress} onResult={(e) => {this.showResult(e)}}  vis={false} categories={this.categories}
+            /> 
 
-                            <Route exact path = "/About">
+            <Profile onEdit={(new_info)=>{this.submitLoginRegister(new_info)}} user_info={this.user_info} ref={this.profile}/>    
+            
+            <SignUp serverAddress={this.serverAddress} ref={this.regModal} />
+            <Login serverAddress={this.serverAdress} ref={this.LoginModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}}/>
+            <BookList serverAddress={this.serverAddress} ref={this.bookCards} />
 
-                            </Route>
-                        </Switch>
-                        <Footter hidden />
-                  </Router>    
-      
+            <Footter hidden />
+        </div>
         );
     }
 }  
