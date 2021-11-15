@@ -75,7 +75,7 @@ class signUp extends React.Component {
         break;
       case "password":
         isError.password =
-          value.length < 6 ? "!رمز عبور انتخابي خيلي كوتاه است" : "";
+          value.length < 8 ? "!رمز عبور انتخابي خيلي كوتاه است" : "";
         break;
       case "password2":
         isError.password2 =
@@ -178,7 +178,7 @@ class signUp extends React.Component {
 
       ).catch(error => {
         // console.log(error.response.data.username);
-        console.log("error id=s here");
+        console.log("error is here");
         console.error(error.response);
         if (error.response.data.username.length > 0) {
 

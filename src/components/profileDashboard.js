@@ -34,6 +34,7 @@ export default class profileDashboard extends Component {
         user_name: "",
         email: "",
         address: "",
+        bPassword: [],
         bookOrPerson: "",
         phone: "",
         password: "",
@@ -114,10 +115,15 @@ export default class profileDashboard extends Component {
           isError.email = "!اين فيلد نمي تواند خالي باشد";
         }
         break;
-      case "password":
-        isError.password =
-          value.length < 6 ? "!رمز عبور انتخابي خيلي كوتاه است" : "";
-        break;
+      // case "password":
+      //   isError.password =
+      //     value.length < 8 ? "!رمز عبور انتخابي خيلي كوتاه است" : "";
+      //   break;
+      // case "oldPassword":
+      //   isError.password =
+      //     value.length < 6 ? "!رمز عبور انتخابي خيلي كوتاه است" : "";
+      //   break;
+
       case "password2":
         isError.password2 =
           value === this.state.password
@@ -181,7 +187,9 @@ export default class profileDashboard extends Component {
     this.setState({ showHideImage: !this.state.showHideImage });
   }
 
+  // bErrors(){
 
+  // }
 
   submitPassword() {
     console.log("submitPassword function");
@@ -231,6 +239,17 @@ export default class profileDashboard extends Component {
         }
       ).catch(error => {
         console.log("error is here");
+        console.log("error.response.data.password", error.response.data.password);
+        error.response.data.password.forEach(element => {
+          if (element === "This password is too short. It must contain at least 8 characters.")
+            this.state.isError.bPassword.push(<h5>.رمز عبور انتخابي بسيار كوتاه است، رمز عبور بايد حداقل 8 كاراكتر باشد</h5>);
+          if (element === "This password is too common.")
+            this.state.isError.bPassword.push(<h5>.رمز عبور ساده و قابل حدس است</h5>);
+          if (element === "This password is entirely numeric.")
+            this.state.isError.bPassword.push(<h5>.رمز عبور نبايد تماما عدد باشد</h5>);
+
+
+        });
         this.handleModalShowHideError();
         console.error(error.response);
 
@@ -294,14 +313,12 @@ export default class profileDashboard extends Component {
         email: this.state.email,
         phone_number: this.state.phone,
         address: this.state.address,
-        is_book_store: this.state.isBookStore,
-        is_private_person: this.state.isPrivatePerson,
       }
-      console.log(data);
+      // console.log(data);
       axios.patch('http://127.0.0.1:8000/api/update-userInfo', data, { headers: headers, withCredentials: true }).then(
         res => {
           if (res.data != null) {
-            console.log(res.data);
+            console.log(res);
             // console.log(res.data.access);
             this.handleModalShowHideZakhire();
 
@@ -313,6 +330,7 @@ export default class profileDashboard extends Component {
         console.log("error is here");
         console.error(error.response);
 
+
       })
     }
     else {
@@ -322,6 +340,7 @@ export default class profileDashboard extends Component {
   }
 
   render() {
+    let item = JSON.parse(localStorage.getItem("info"));
     const { isError } = this.state;
     return (
       <Router>
@@ -333,7 +352,7 @@ export default class profileDashboard extends Component {
                   <div className="card">
                     <div className="card-body">
                       <div className="row mb-3">
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 text-secondary text-right">
                           <input
                             type="text"
                             name="first_name"
@@ -342,13 +361,14 @@ export default class profileDashboard extends Component {
                             placeholder=".درصورت تمايل به تغيير نام، نام جديد را وارد كنيد"
                             value={this.state.first_name}
                           ></input>
+                          <small className="text-danger text-right">{isError.first_name}</small>
                         </div>
                         <div className="col-sm-3">
                           <h6 className="mb-0">نام</h6>
                         </div>
                       </div>
                       <div className="row mb-3">
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 text-secondary text-right text-right">
                           <input
                             type="text"
                             name="user_name"
@@ -358,13 +378,14 @@ export default class profileDashboard extends Component {
                             // Value={this.state.user_name}
                             onChange={this.handleInputChange}
                           ></input>
+                          <small className="text-danger text-right">{isError.user_name}</small>
                         </div>
                         <div className="col-sm-3">
                           <h6 className="mb-0">نام كاربري</h6>
                         </div>
                       </div>
                       <div className="row mb-3">
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 text-secondary text-right">
                           <input
                             type="text"
                             name="email"
@@ -373,13 +394,14 @@ export default class profileDashboard extends Component {
                             placeholder=".يك پست الكترونيك جديد براي خود انتخاب كنيد"
                             value={this.state.email}
                           ></input>
+                          <small className="text-danger text-right">{isError.email}</small>
                         </div>
                         <div className="col-sm-3">
                           <h6 className="mb-0">پست الكترونيكي</h6>
                         </div>
                       </div>
                       <div className="row mb-3">
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 text-secondary text-right">
                           <input
                             type="text"
                             name="address"
@@ -388,13 +410,14 @@ export default class profileDashboard extends Component {
                             placeholder=".آدرس جديد را وارد كنيد"
                             value={this.state.address}
                           ></input>
+                          <small className="text-danger text-right">{isError.address}</small>
                         </div>
                         <div className="col-sm-3">
                           <h6 className="mb-0">آدرس</h6>
                         </div>
                       </div>
                       <div className="row mb-3">
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 text-secondary text-right">
                           <input
                             type="phone"
                             name="phone"
@@ -403,6 +426,7 @@ export default class profileDashboard extends Component {
                             placeholder=".شماره تلفن همراه جديد را وارد كنيد"
                             value={this.state.phone}
                           ></input>
+                          <small className="text-danger text-right">{isError.phone}</small>
                         </div>
                         <div className="col-sm-3">
                           <h6 className="mb-0">تلفن همراه</h6>
@@ -422,7 +446,7 @@ export default class profileDashboard extends Component {
                       </div>
                       <div className="row mb-3"></div>
                       <div className="row mb-3">
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 text-secondary text-right text-right">
                           <input
                             type="password"
                             name="oldPassword"
@@ -430,14 +454,15 @@ export default class profileDashboard extends Component {
                             className="form-control text-right"
                             placeholder=".به دليل مسائل امنيتي، رمز عبور قبلي خود را وارد كنيد"
                           ></input>
+                          <small className="text-danger">{isError.oldPassword}</small>
                         </div>
                         <div className="col-sm-3">
                           <h6 className="mb-0">رمز عبور قبلي</h6>
                         </div>
-                        <small className="text-danger">{isError.oldPassword}</small>
+
                       </div>
                       <div className="row mb-3">
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 text-secondary text-right">
                           <input
                             type="password"
                             name="password"
@@ -445,14 +470,15 @@ export default class profileDashboard extends Component {
                             className="form-control text-right"
                             placeholder=".رمز عبور جديد خود را وارد نماييد"
                           ></input>
+                          <small className="text-danger text-right">{isError.password}</small>
                         </div>
                         <div className="col-sm-3">
                           <h6 className="mb-0">رمز عبور جديد</h6>
                         </div>
-                        <small className="text-danger text-right">{isError.password}</small>
+
                       </div>
                       <div className="row mb-3">
-                        <div className="col-sm-9 text-secondary">
+                        <div className="col-sm-9 text-secondary text-right">
                           <input
                             type="password"
                             name="password2"
@@ -460,11 +486,13 @@ export default class profileDashboard extends Component {
                             className="form-control text-right"
                             placeholder=".رمز عبور جديد خود را مجددا وارد نماييد"
                           ></input>
+                          <small className="text-danger text-right">{isError.password2}</small>
                         </div>
+
                         <div className="col-sm-3">
                           <h6 className="mb-0">تكرار رمز عبور جديد</h6>
                         </div>
-                        <small className="text-danger text-right">{isError.password2}</small>
+
                       </div>
                       <div className="row">
                         <div className="col-sm-3"></div>
@@ -496,15 +524,13 @@ export default class profileDashboard extends Component {
                     <div className="card-body">
                       <div className="d-flex flex-column align-items-center text-center">
                         <img
-                          src={
-                            this.state.pImage
-                          }
+                          src={"http://127.0.0.1:8000" + item.prof_image}
                           alt="Admin"
                           className="rounded-circle p-1 bg-primary"
                           width="110"
                         ></img>
                         <div className="mt-3">
-                          <h4>نام كاربر</h4>
+                          <h4>{this.state.first_name}</h4>
                         </div>
                         {/*  */}
                         <button
@@ -795,10 +821,9 @@ export default class profileDashboard extends Component {
                   </button>
                 </div>
                 <div className="text-center">
-                  <h5>پر كردن هر سه فيلد الزامي ست</h5>
-                  <h5>همچنين دقت كنيد كه رمز عبور قبلي را به درستي وارد كرده باشيد</h5>
                   <h5>{this.state.isError.password}</h5>
                   <h5>{this.state.isError.password2}</h5>
+                  <h5>{this.state.isError.bPassword}</h5>
                 </div>
               </Modal.Body>
               <Modal.Footer>
