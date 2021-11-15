@@ -1,52 +1,41 @@
 import React, { useState, useContext, useEffect } from 'react'
 //import { useCallback } from 'react'
 
-const {url} = 'http://127.0.0.1:8000/api/book-list/'
+const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
-  const [searchTerm, setSearchTerm] = useState()
+  const [searchTerm, setSearchTerm] = useState('a')
   const [books, setBooks] = useState([])
-  const [results, setResults] = useState([]);
 
   const fetchBooks = async() => {
-    setResults(results);
     setLoading(true)
     try {
       const response = await fetch(`${url}`)
       const data = await response.json()
-      const {books} = []
-
-      if(results)
-        books = results;
-      else
-        books =  data;
-
-      if(books){
-        const newBooks = books.map((item)=>{
+      const {drinks} = data
+      if(drinks){
+        const newBooks = drinks.map((item)=>{
             const {
-              id, 
-              title, 
-              profile_image,
-              author,
-              descripsion,
-              buy
+              idDrink, 
+              strDrink, 
+              strDrinkThumb,
+              strAlcoholic,
+              strGlass
             } = item;
             return{
-              id: id, 
-              name: title, 
-              image: profile_image,
-              author: author,
-              info: descripsion,
-              type: buy
+              id: idDrink, 
+              name: strDrink, 
+              image: strDrinkThumb,
+              info: strAlcoholic,
+              glass: strGlass
             }
         })
         setBooks(newBooks)
       }else{
       setBooks([])
     }
-    setResults([]);
     setLoading(false)
     } catch (error) {
       console.log(error)

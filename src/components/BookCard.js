@@ -1,6 +1,7 @@
 import React from 'react'
 import 'antd/dist/antd.css'
 import { Card, /*Avatar*/ } from 'antd';
+import 'Home.css'
 
 const BookCard = ({image, name, id, info}) => {
     const { Meta } = Card;
