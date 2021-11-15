@@ -1,7 +1,7 @@
 import React from 'react'
 import Loading from './Loading'
 import { useGlobalContext } from '../context'
-import { Divider, /*Pagination*/ } from 'antd';
+import { Divider /*Pagination*/ } from 'antd';
 import BookCard from './BookCard';
 import 'Home.css'
 
