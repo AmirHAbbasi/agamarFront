@@ -5,12 +5,14 @@ Frontend project agamar online book store
 ## Required React.js Libraries
 React Bootstrap
 ### Search Modal
-DatePicker, Modal, Input & Checkbox from antd\n
+DatePicker, Modal, Input & Checkbox from antd
+
 axios 
 
 ### Search autocomplete
 
-AutoComplete from antd\n
+AutoComplete from antd
+
 axios
 
 
