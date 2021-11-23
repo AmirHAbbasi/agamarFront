@@ -8,7 +8,7 @@ const BookList = () => {
   const {books, loading} = useGlobalContext();
   console.log(books)
   
-  const showResults = (results) => {
+  /*const showResults = (results) => {
     
     return (
       <section className="section"> 
@@ -22,7 +22,7 @@ const BookList = () => {
         </div>
       </section>
     )
-  }
+  }*/
   
   if(loading){
     return <Loading />
