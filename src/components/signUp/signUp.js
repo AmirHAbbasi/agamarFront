@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Modal } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 import "./signUp.css";
 
@@ -216,7 +216,9 @@ class signUp extends React.Component {
         const { errorLogin } = this.state;
         return (
             <div>
-                <Modal show={this.state.showHide}>
+
+
+                <Modal dialogClassName="modal-90w" backdrop="static" centered className="my-modal" show={this.state.showHide}>
                     <Modal.Body>
                         <div className="align-items-right text-right">
                             <button
@@ -241,129 +243,190 @@ class signUp extends React.Component {
                                 <Modal.Title></Modal.Title>
                             </button>
                         </div>
-                        <form calssName="form-tag" onSubmit={() => { this.submit(); this.handleModalShowHide(); }}>
-
-                            <div class="form-group">
-                                <input
-                                    type="text"
-                                    id="lastname"
-                                    name="first_name"
-                                    onChange={this.handleInputChange}
-                                />
-                                <label for="lastname">لطفا نام شخص و یا کتابفروشی را وارد کنید</label>
-                            </div>
-                            <small className="text-danger">{isError.first_name}</small>
-
-
-
-                            <div className="form-group">
-                                <input
-                                    id="username"
-                                    type="text"
-                                    name="user_name"
-                                    onChange={this.handleInputChange}
-                                />
-                                <label for="username">لطفا یک نام کاربری برای خود انتخاب کنید</label>
-                            </div>
-                            <small className="text-danger">{isError.user_name}</small>
-
-                            <div className="form-group">
-                                <label>پست الکترونیکی</label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    onChange={this.handleInputChange}
-                                    placeholder="لطفا آدرس پست الکترونیکی خود را وارد کنید"
-                                />
-                                <small className="text-danger">{isError.email}</small>
-                            </div>
-
-                            <div className="form-group">
-                                <label>آدرس</label>
-                                <input
-                                    type="text"
-                                    name="address"
-                                    onChange={this.handleInputChange}
-                                    placeholder="لطفا آدرس شخص و یا کتابفروشی را وارد کنید"
-                                />
-                                <small className="text-danger">{isError.address}</small>
-                            </div>
-
-                            <div className="form-group">
-                                <label>تلفن همراه</label>
-                                <input
-                                    type="phone"
-                                    name="phone"
-                                    onChange={this.handleInputChange}
-                                    placeholder="لطفا شماره تماس شخص و یا کتابفروشی را وارد کنید"
-                                />
-                                <small className="text-danger">{isError.phone}</small>
-                            </div>
-
-                            <div className="form-group">
-                                <label>رمز عبور</label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    onChange={this.handleInputChange}
-                                    placeholder="لطفا یک رمز عبور قوی برای حساب خود انتخاب کنید"
-                                />
-                                <small className="text-danger">{isError.password}</small>
-                            </div>
-
-                            <div className="form-group">
-                                <label>تكرار رمز عبور</label>
-                                <input
-                                    type="password"
-                                    name="password2"
-                                    onChange={this.handleInputChange}
-                                    placeholder="لطفا رمز عبور انتخابي خود را دوباره تكرار كنيد"
-                                />
-                                <small className="text-danger">{isError.password2}</small>
-                            </div>
-
-                            <div className="form-group">
-                                <div>
-                                    <label>:نوع حساب كاربري خود را انتخاب كنيد</label>
+                        {/* <div className="container">
+                            <div className="main-body"> */}
+                        <div className="row">
+                            <div className="col-lg-6">
+                                <div className="card border-0">
+                                    <div className="card-body">
+                                        <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQivwiFuFgpsWBk2PELDp-dMYlF0ORWqpIA3A&usqp=CAU"} />
+                                        {/* <p>اینجا یک عکس قرار میگیرد</p> */}
+                                    </div>
                                 </div>
-                                <div className="form-check form-check-inline">
-                                    <input
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="bookOrPerson"
-                                        id="inlineRadio1"
-                                        value="library"
-                                        checked={this.state.bookOrPerson === "library"}
-                                        onChange={this.handleInputChange}
-                                    />
-                                    <label className="form-check-label" htmlFor="inlineRadio1">
-                                        كتابفروشي
-                                    </label>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <input
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="bookOrPerson"
-                                        id="inlineRadio2"
-                                        value="person"
-                                        checked={this.state.bookOrPerson === "person"}
-                                        onChange={this.handleInputChange}
-                                    />
-                                    <label className="form-check-label" htmlFor="inlineRadio2">
-                                        شخص حقيقي
-                                    </label>
-                                </div>{" "}
                             </div>
-                            <small className="text-danger">{isError.bookOrPerson}</small>
+
+                            <div className="col-lg-6">
+                                <div className="card border-0">
+                                    <div className="card-body">
+                                        <form calssName="form-tag" onSubmit={() => { this.submit(); this.handleModalShowHide(); }}>
+
+                                            <div class="form-group">
+                                                <input
+                                                    type="text"
+                                                    id="lastname"
+                                                    name="first_name"
+                                                    onChange={this.handleInputChange}
+                                                />
+                                                <label for="lastname">لطفا نام شخص و یا کتابفروشی را وارد کنید</label>
+                                            </div>
+                                            <small className="text-danger">{isError.first_name}</small>
 
 
-                        </form>
 
+                                            <div className="form-group">
+                                                <input
+                                                    id="username"
+                                                    type="text"
+                                                    name="user_name"
+                                                    onChange={this.handleInputChange}
+                                                />
+                                                <label for="username">لطفا یک نام کاربری برای خود انتخاب کنید</label>
+                                            </div>
+                                            <small className="text-danger">{isError.user_name}</small>
+
+                                            <div className="form-group">
+                                                <label>پست الکترونیکی</label>
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    onChange={this.handleInputChange}
+                                                    placeholder="لطفا آدرس پست الکترونیکی خود را وارد کنید"
+                                                />
+                                                <small className="text-danger">{isError.email}</small>
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label>آدرس</label>
+                                                <input
+                                                    type="text"
+                                                    name="address"
+                                                    onChange={this.handleInputChange}
+                                                    placeholder="لطفا آدرس شخص و یا کتابفروشی را وارد کنید"
+                                                />
+                                                <small className="text-danger">{isError.address}</small>
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label>تلفن همراه</label>
+                                                <input
+                                                    type="phone"
+                                                    name="phone"
+                                                    onChange={this.handleInputChange}
+                                                    placeholder="لطفا شماره تماس شخص و یا کتابفروشی را وارد کنید"
+                                                />
+                                                <small className="text-danger">{isError.phone}</small>
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label>رمز عبور</label>
+                                                <input
+                                                    type="password"
+                                                    name="password"
+                                                    onChange={this.handleInputChange}
+                                                    placeholder="لطفا یک رمز عبور قوی برای حساب خود انتخاب کنید"
+                                                />
+                                                <small className="text-danger">{isError.password}</small>
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label>تكرار رمز عبور</label>
+                                                <input
+                                                    type="password"
+                                                    name="password2"
+                                                    onChange={this.handleInputChange}
+                                                    placeholder="لطفا رمز عبور انتخابي خود را دوباره تكرار كنيد"
+                                                />
+                                                <small className="text-danger">{isError.password2}</small>
+                                            </div>
+
+                                            {/* <div className="form-group">
+                                                        <div>
+                                                            <label>:نوع حساب كاربري خود را انتخاب كنيد</label>
+                                                        </div>
+                                                        <div className="form-check form-check-inline">
+                                                            <input
+                                                                className="form-check-input"
+                                                                type="radio"
+                                                                name="bookOrPerson"
+                                                                id="inlineRadio1"
+                                                                value="library"
+                                                                checked={this.state.bookOrPerson === "library"}
+                                                                onChange={this.handleInputChange}
+                                                            />
+                                                            <label className="form-check-label" htmlFor="inlineRadio1">
+                                                                كتابفروشي
+            </label>
+                                                        </div>
+                                                        <div className="form-check form-check-inline">
+                                                            <input
+                                                                className="form-check-input"
+                                                                type="radio"
+                                                                name="bookOrPerson"
+                                                                id="inlineRadio2"
+                                                                value="person"
+                                                                checked={this.state.bookOrPerson === "person"}
+                                                                onChange={this.handleInputChange}
+                                                            />
+                                                            <label className="form-check-label" htmlFor="inlineRadio2">
+                                                                شخص حقيقي
+            </label>
+                                                        </div>{" "}
+                                                    </div>
+                                                    <small className="text-danger">{isError.bookOrPerson}</small> */}
+                                            <p className="forgot-password text-right">
+                                                قبلا ثبت نام کرده اید؟{" "}
+                                                <a
+                                                    className="nav-link"
+                                                    to={"/ورود"}
+                                                    href="#"
+                                                    onClick={() => {
+                                                        this.handleModalShowHide();
+                                                    }}
+                                                >
+                                                    ورود
+                                                </a>
+                                                <small className="text-danger text-center">{errorLogin}</small>
+                                            </p>
+                                            <div class="text-right">
+                                                <Button
+                                                    type="submit"
+                                                    className="btn btn-primary"
+                                                    to={"/ورود"}
+                                                    href="#"
+                                                    onClick={() => {
+                                                        this.submit();
+                                                    }}
+                                                >
+                                                    ثبت نام
+                                                </Button>
+                                                {' '}
+                                                <Button
+                                                    to={"/"}
+                                                    href="#"
+                                                    className="btn btn-secondary"
+                                                    onClick={() => this.handleModalShowHide()}
+                                                >
+                                                    خروج
+                                                </Button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* </div>
+                        </div> */}
+                        {/* <div class="column">
+                            <p>column</p>
+                        </div>
+                        <div class="column">
+                            
+                        </div> */}
                     </Modal.Body>
-                    <Modal.Footer>
-
-                    </Modal.Footer>
+                    {/* <Modal.Footer>
+                        
+                    </Modal.Footer> */}
                 </Modal>
 
 
@@ -410,7 +473,7 @@ class signUp extends React.Component {
                         </Modal.Footer>
                     </div>
                 </Modal>
-            </div>
+            </div >
         );
     }
 }
