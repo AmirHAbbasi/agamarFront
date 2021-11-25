@@ -25,7 +25,7 @@ body {
 
 .form-group input {
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   background: rgb(213, 213, 230);
   height: 60px;
   padding: 20px 20px 0;
@@ -66,9 +66,21 @@ body {
 } */
 .card{
   background-color: azure;
-  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQivwiFuFgpsWBk2PELDp-dMYlF0ORWqpIA3A&usqp=CAU");
-  background-repeat: repeat-x; */
 }
 .card-body{
   background-color: azure;
+}
+div.radio{
+  border: none;
+  border-radius: 4px;
+  height: 60px;
+  padding: 20px 20px 0;
+  outline: none;
+  text-align: right;
+}
+p.labels{
+  font-size: 1.1em;
+  font-weight: 400;
+  /* width: 100%; */
+  text-align: center;
 }

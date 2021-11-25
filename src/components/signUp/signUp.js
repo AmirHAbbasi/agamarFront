@@ -50,41 +50,41 @@ class signUp extends React.Component {
         switch (name) {
             case "first_name":
                 isError.first_name =
-                    value.length < 1 ? "!اين فيلد نمي تواند خالي باشد" : "";
+                    value.length < 1 ? "!این فیلد نمی تواند خالی باشد" : "";
                 break;
             case "user_name":
                 isError.user_name =
-                    value.length < 1 ? "!اين فيلد نمي تواند خالي باشد" : "";
+                    value.length < 1 ? "!این فیلد نمی تواند خالی باشد" : "";
                 break;
             case "address":
                 isError.address =
-                    value.length < 1 ? "!اين فيلد نمي تواند خالي باشد" : "";
+                    value.length < 1 ? "!این فیلد نمی تواند خالی باشد" : "";
                 break;
             case "phone":
                 isError.phone =
                     value.length < 11 || value.length > 11
-                        ? "!تلفن همراه معتبر نيست"
+                        ? "!تلفن همراه معتبر نیست"
                         : "";
                 break;
             case "email":
-                isError.email = !regExp.test(value) ? "!آدرس ايميل معتبر نيست" : "";
+                isError.email = !regExp.test(value) ? "!آدرس ایمیل معتبر نیست" : "";
                 if (value.length < 1) {
-                    isError.email = "!اين فيلد نمي تواند خالي باشد";
+                    isError.email = "!این فیلد نمی تواند خالی باشد";
                 }
                 break;
             case "password":
                 isError.password =
-                    value.length < 8 ? "!رمز عبور انتخابي خيلي كوتاه است" : "";
+                    value.length < 8 ? "!رمز عبور انتخابی خیلی كوتاه است" : "";
                 break;
             case "password2":
                 isError.password2 =
                     value === this.state.password
                         ? ""
-                        : "!رمز عبور به درستي تكرار نشده است";
+                        : "!رمز عبور به درستی تكرار نشده است";
                 break;
             case "bookOrPerson":
                 isError.bookOrPerson =
-                    value.length < 1 ? "!مشخص كردن نوع حساب كاربري الزامي مي باشد" : "";
+                    value.length < 1 ? "!مشخص كردن نوع حساب كاربری الزامی می باشد" : "";
                 break;
             default:
                 break;
@@ -106,36 +106,36 @@ class signUp extends React.Component {
         });
         if (this.state.address.length < 1) {
             isFormValid = false;
-            this.state.isError.address = ".اين فيلد نمي تواند خالي باشد";
+            this.state.isError.address = ".این فیلد نمی تواند خالی باشد";
         }
         if (this.state.password.length < 1) {
             isFormValid = false;
-            this.state.isError.password = ".اين فيلد نمي تواند خالي باشد";
+            this.state.isError.password = ".این فیلد نمی تواند خالی باشد";
         }
         if (this.state.phone.length < 1) {
             isFormValid = false;
-            this.state.isError.phone = ".اين فيلد نمي تواند خالي باشد";
+            this.state.isError.phone = ".این فیلد نمی تواند خالی باشد";
         }
         if (this.state.email.length < 1) {
             isFormValid = false;
-            this.state.isError.email = ".اين فيلد نمي تواند خالي باشد";
+            this.state.isError.email = ".این فیلد نمی تواند خالی باشد";
         }
         if (this.state.user_name.length < 1) {
             isFormValid = false;
-            this.state.isError.user_name = ".اين فيلد نمي تواند خالي باشد";
+            this.state.isError.user_name = ".این فیلد نمی تواند خالی باشد";
         }
         if (this.state.first_name.length < 1) {
             isFormValid = false;
-            this.state.isError.first_name = ".اين فيلد نمي تواند خالي باشد";
+            this.state.isError.first_name = ".این فیلد نمی تواند خالی باشد";
         }
         if (this.state.bookOrPerson.length < 1) {
             isFormValid = false;
             this.state.isError.bookOrPerson =
-                "!مشخص كردن نوع حساب كاربري الزامي مي باشد";
+                "!مشخص كردن نوع حساب كاربری الزامی می باشد";
         }
         if (this.state.password2.length < 1) {
             isFormValid = false;
-            this.state.isError.password2 = ".اين فيلد نمي تواند خالي باشد";
+            this.state.isError.password2 = ".این فیلد نمی تواند خالی باشد";
         }
         if (isFormValid === true) {
 
@@ -181,14 +181,14 @@ class signUp extends React.Component {
                 console.error(error.response);
                 if (error.response.data.username.length > 0) {
 
-                    this.setState({ errorLogin: ".نام كاربري وارد شده از قبل در سايت ثبت نام شده است" });
+                    this.setState({ errorLogin: ".نام كاربری وارد شده از قبل در سایت ثبت نام شده است" });
                 }
                 if (error.response.data.email.length > 0) {
 
-                    this.setState({ errorLogin: ".ايميل وارد شده از قبل در سايت ثبت نام شده است" });
+                    this.setState({ errorLogin: ".ایمیل وارد شده از قبل در سایت ثبت نام شده است" });
                 }
                 else {
-                    this.setState({ errorLogin: ".شماره تلفن وارد شده از قبل در سايت ثبت نام شده است" });
+                    this.setState({ errorLogin: ".شماره تلفن وارد شده از قبل در سایت ثبت نام شده است" });
                 }
 
             })
@@ -220,7 +220,7 @@ class signUp extends React.Component {
 
                 <Modal dialogClassName="modal-90w" backdrop="static" centered className="my-modal" show={this.state.showHide}>
                     <Modal.Body>
-                        <div className="align-items-right text-right">
+                        <div className="align-items-right text-right header">
                             <button
                                 to={"/"}
                                 href="#"
@@ -249,7 +249,7 @@ class signUp extends React.Component {
                             <div className="col-lg-6">
                                 <div className="card border-0">
                                     <div className="card-body">
-                                        <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQivwiFuFgpsWBk2PELDp-dMYlF0ORWqpIA3A&usqp=CAU"} />
+                                        <img src="https://www.prattlibrary.org/assets/card/bookshelves-bright-colors.jpg" width="450px" height="1000px" />
                                         {/* <p>اینجا یک عکس قرار میگیرد</p> */}
                                     </div>
                                 </div>
@@ -259,7 +259,10 @@ class signUp extends React.Component {
                                 <div className="card border-0">
                                     <div className="card-body">
                                         <form calssName="form-tag" onSubmit={() => { this.submit(); this.handleModalShowHide(); }}>
-
+                                            <div className="form-group text-center" id="title">
+                                                <h4>ثبت نام</h4>
+                                            </div>
+                                            <p className="labels">نام</p>
                                             <div class="form-group">
                                                 <input
                                                     type="text"
@@ -269,9 +272,9 @@ class signUp extends React.Component {
                                                 />
                                                 <label for="lastname">لطفا نام شخص و یا کتابفروشی را وارد کنید</label>
                                             </div>
-                                            <small className="text-danger">{isError.first_name}</small>
+                                            <small className="text-danger text-right">{isError.first_name}</small>
 
-
+                                            <p className="labels">نام كاربری</p>
 
                                             <div className="form-group">
                                                 <input
@@ -282,66 +285,102 @@ class signUp extends React.Component {
                                                 />
                                                 <label for="username">لطفا یک نام کاربری برای خود انتخاب کنید</label>
                                             </div>
-                                            <small className="text-danger">{isError.user_name}</small>
+                                            <small className="text-danger text-right">{isError.user_name}</small>
 
+                                            <p className="labels">ایمیل</p>
                                             <div className="form-group">
-                                                <label>پست الکترونیکی</label>
                                                 <input
+                                                    id="email"
                                                     type="email"
                                                     name="email"
                                                     onChange={this.handleInputChange}
-                                                    placeholder="لطفا آدرس پست الکترونیکی خود را وارد کنید"
                                                 />
-                                                <small className="text-danger">{isError.email}</small>
+                                                <label for="email">لطفا آدرس پست الکترونیکی خود را وارد کنید</label>
                                             </div>
+                                            <small className="text-danger text-right">{isError.email}</small>
 
+                                            <p className="labels">آدرس</p>
                                             <div className="form-group">
-                                                <label>آدرس</label>
                                                 <input
+                                                    id="address"
                                                     type="text"
                                                     name="address"
                                                     onChange={this.handleInputChange}
-                                                    placeholder="لطفا آدرس شخص و یا کتابفروشی را وارد کنید"
                                                 />
-                                                <small className="text-danger">{isError.address}</small>
+                                                <label for="address">لطفا آدرس شخص و یا کتابفروشی را وارد کنید</label>
                                             </div>
+                                            <small className="text-danger text-right">{isError.address}</small>
 
+                                            <p className="labels">شماره تماس</p>
                                             <div className="form-group">
-                                                <label>تلفن همراه</label>
                                                 <input
-                                                    type="phone"
+                                                    id="phone"
+                                                    type="text"
                                                     name="phone"
                                                     onChange={this.handleInputChange}
-                                                    placeholder="لطفا شماره تماس شخص و یا کتابفروشی را وارد کنید"
                                                 />
-                                                <small className="text-danger">{isError.phone}</small>
+                                                <label for="phone">لطفا شماره تماس شخص و یا کتابفروشی را وارد کنید</label>
                                             </div>
+                                            <small className="text-danger text-right">{isError.phone}</small>
 
+                                            <p className="labels">رمز عبور</p>
                                             <div className="form-group">
-                                                <label>رمز عبور</label>
                                                 <input
+                                                    id="password"
                                                     type="password"
                                                     name="password"
                                                     onChange={this.handleInputChange}
-                                                    placeholder="لطفا یک رمز عبور قوی برای حساب خود انتخاب کنید"
                                                 />
-                                                <small className="text-danger">{isError.password}</small>
+                                                <label for="password">لطفا یک رمز عبور قوی برای حساب خود انتخاب کنید</label>
                                             </div>
+                                            <small className="text-danger text-right">{isError.password}</small>
 
                                             <div className="form-group">
-                                                <label>تكرار رمز عبور</label>
                                                 <input
+                                                    id="password2"
                                                     type="password"
                                                     name="password2"
                                                     onChange={this.handleInputChange}
-                                                    placeholder="لطفا رمز عبور انتخابي خود را دوباره تكرار كنيد"
                                                 />
-                                                <small className="text-danger">{isError.password2}</small>
+                                                <label for="password2">لطفا رمز عبور انتخابی خود را دوباره تكرار كنید</label>
                                             </div>
+                                            <small className="text-danger text-right">{isError.password2}</small>
+
+
+
+                                            <div className="radio text-right">
+                                                <div>
+                                                    <label>:نوع حساب كاربری خود را انتخاب كنید</label>
+                                                </div>
+                                                <label for="inlineRadio1">كتابفروشی</label>
+                                                {' '}
+                                                <input
+                                                    type="radio"
+                                                    name="bookOrPerson"
+                                                    id="inlineRadio1"
+                                                    value="library"
+                                                    checked={this.state.bookOrPerson === "library"}
+                                                    onChange={this.handleInputChange}
+                                                />
+                                                {'     '}
+                                                <label for="inlineRadio1">شخص حقیقی</label>
+                                                {' '}
+                                                <input
+                                                    type="radio"
+                                                    name="bookOrPerson"
+                                                    id="inlineRadio1"
+                                                    value="person"
+                                                    checked={this.state.bookOrPerson === "person"}
+                                                    onChange={this.handleInputChange}
+                                                />
+                                            </div>
+                                            <small className="text-danger text-right">{isError.bookOrPerson}</small>
+
+
 
                                             {/* <div className="form-group">
                                                         <div>
-                                                            <label>:نوع حساب كاربري خود را انتخاب كنيد</label>
+                                                            <label>:نوع حساب كاربری خود را انتخاب كنید</label>
                                                         </div>
                                                         <div className="form-check form-check-inline">
                                                             <input
@@ -354,7 +393,7 @@ class signUp extends React.Component {
                                                                 onChange={this.handleInputChange}
                                                             />
                                                             <label className="form-check-label" htmlFor="inlineRadio1">
-                                                                كتابفروشي
+                                                                كتابفروشی
             </label>
                                                         </div>
                                                         <div className="form-check form-check-inline">
@@ -368,11 +407,12 @@ class signUp extends React.Component {
                                                                 onChange={this.handleInputChange}
                                                             />
                                                             <label className="form-check-label" htmlFor="inlineRadio2">
-                                                                شخص حقيقي
+                                                                شخص حقیقی
             </label>
                                                         </div>{" "}
                                                     </div>
                                                     <small className="text-danger">{isError.bookOrPerson}</small> */}
+                                            <br></br>
                                             <p className="forgot-password text-right">
                                                 قبلا ثبت نام کرده اید؟{" "}
                                                 <a
