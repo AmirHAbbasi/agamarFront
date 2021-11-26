@@ -6,7 +6,6 @@ const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
-  const [searchTerm, setSearchTerm] = useState()
   const [books, setBooks] = useState([])
 
   const fetchBooks = async() => {
@@ -14,21 +13,20 @@ const AppProvider = ({ children }) => {
     try {
       const response = await fetch(`${url}`)
       const data = await response.json()
-      const {bookList} = data
-      if(bookList){
-        const newBooks = bookList.map((item)=>{
+      if(data){
+        const newBooks = data.map((item)=>{
             const {
               id, 
               title, 
               profile_image,
-              description,
+              publisher,
               author
             } = item;
             return{
               id: id, 
               name: title, 
               image: profile_image,
-              info: description,
+              publisher: publisher,
               author: author
             }
         })
@@ -44,13 +42,11 @@ const AppProvider = ({ children }) => {
   }
   useEffect(()=>{
     fetchBooks()
-  },  [searchTerm])
+  }, [])
 
   return <AppContext.Provider value={{
     loading,
-    searchTerm,
-    books, 
-    setSearchTerm,
+    books
   }}
   >{children}</AppContext.Provider>
 }
