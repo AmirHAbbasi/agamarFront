@@ -21,14 +21,14 @@ const AppProvider = ({ children }) => {
               id, 
               title, 
               profile_image,
-              descripsion,
+              description,
               author
             } = item;
             return{
               id: id, 
               name: title, 
               image: profile_image,
-              info: descripsion,
+              info: description,
               author: author
             }
         })
@@ -42,9 +42,9 @@ const AppProvider = ({ children }) => {
       setLoading(false)
     }
   }
-useEffect(()=>{
-  fetchBooks()
-},  [searchTerm])
+  useEffect(()=>{
+    fetchBooks()
+  },  [searchTerm])
 
   return <AppContext.Provider value={{
     loading,
