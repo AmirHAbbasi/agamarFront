@@ -6,7 +6,7 @@ body {
 }
 
 .form-group {
-  height: 3em;
+  height: 3.7em;
   margin: 1em 0;
   position: relative;
   width: 100%;
@@ -83,4 +83,8 @@ p.labels{
   font-weight: 400;
   /* width: 100%; */
   text-align: center;
+}
+.in50 input,
+.in50 label{
+  width: 100%;
 }

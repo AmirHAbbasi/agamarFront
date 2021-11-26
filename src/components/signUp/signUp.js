@@ -50,26 +50,26 @@ class signUp extends React.Component {
         switch (name) {
             case "first_name":
                 isError.first_name =
-                    value.length < 1 ? "!این فیلد نمی تواند خالی باشد" : "";
+                    value.length < 1 ? "!فیلد ضروری*" : "";
                 break;
             case "user_name":
                 isError.user_name =
-                    value.length < 1 ? "!این فیلد نمی تواند خالی باشد" : "";
+                    value.length < 1 ? "!فیلد ضروری*" : "";
                 break;
             case "address":
                 isError.address =
-                    value.length < 1 ? "!این فیلد نمی تواند خالی باشد" : "";
+                    value.length < 1 ? "!فیلد ضروری*" : "";
                 break;
             case "phone":
                 isError.phone =
                     value.length < 11 || value.length > 11
-                        ? "!تلفن همراه معتبر نیست"
+                        ? "!تلفن همراه نامعتبر"
                         : "";
                 break;
             case "email":
-                isError.email = !regExp.test(value) ? "!آدرس ایمیل معتبر نیست" : "";
+                isError.email = !regExp.test(value) ? "!آدرس ایمیل نامعتبر" : "";
                 if (value.length < 1) {
-                    isError.email = "!این فیلد نمی تواند خالی باشد";
+                    isError.email = "!فیلد ضروری*";
                 }
                 break;
             case "password":
@@ -106,27 +106,27 @@ class signUp extends React.Component {
         });
         if (this.state.address.length < 1) {
             isFormValid = false;
-            this.state.isError.address = ".این فیلد نمی تواند خالی باشد";
+            this.state.isError.address = "فیلد ضروری*";
         }
         if (this.state.password.length < 1) {
             isFormValid = false;
-            this.state.isError.password = ".این فیلد نمی تواند خالی باشد";
+            this.state.isError.password = ".فیلد ضروری*";
         }
         if (this.state.phone.length < 1) {
             isFormValid = false;
-            this.state.isError.phone = ".این فیلد نمی تواند خالی باشد";
+            this.state.isError.phone = ".فیلد ضروری*";
         }
         if (this.state.email.length < 1) {
             isFormValid = false;
-            this.state.isError.email = ".این فیلد نمی تواند خالی باشد";
+            this.state.isError.email = ".فیلد ضروری*";
         }
         if (this.state.user_name.length < 1) {
             isFormValid = false;
-            this.state.isError.user_name = ".این فیلد نمی تواند خالی باشد";
+            this.state.isError.user_name = ".فیلد ضروری*";
         }
         if (this.state.first_name.length < 1) {
             isFormValid = false;
-            this.state.isError.first_name = ".این فیلد نمی تواند خالی باشد";
+            this.state.isError.first_name = ".فیلد ضروری*";
         }
         if (this.state.bookOrPerson.length < 1) {
             isFormValid = false;
@@ -135,7 +135,7 @@ class signUp extends React.Component {
         }
         if (this.state.password2.length < 1) {
             isFormValid = false;
-            this.state.isError.password2 = ".این فیلد نمی تواند خالی باشد";
+            this.state.isError.password2 = ".فیلد ضروری*";
         }
         if (isFormValid === true) {
 
@@ -245,7 +245,11 @@ class signUp extends React.Component {
                         </div>
                         {/* <div className="container">
                             <div className="main-body"> */}
+                        <div className="text-center" id="title">
+                            <h4>ثبت نام</h4>
+                        </div>
                         <div className="row">
+
                             <div className="col-lg-6">
                                 <div className="card border-0">
                                     <div className="card-body">
@@ -259,34 +263,35 @@ class signUp extends React.Component {
                                 <div className="card border-0">
                                     <div className="card-body">
                                         <form calssName="form-tag" onSubmit={() => { this.submit(); this.handleModalShowHide(); }}>
-                                            <div className="form-group text-center" id="title">
-                                                <h4>ثبت نام</h4>
-                                            </div>
-                                            <p className="labels">نام</p>
-                                            <div class="form-group">
-                                                <input
-                                                    type="text"
-                                                    id="lastname"
-                                                    name="first_name"
-                                                    onChange={this.handleInputChange}
-                                                />
-                                                <label for="lastname">لطفا نام شخص و یا کتابفروشی را وارد کنید</label>
-                                            </div>
-                                            <small className="text-danger text-right">{isError.first_name}</small>
+                                            <div className="row">
+                                                <div className="col">
+                                                    <p className="labels">نام كاربری</p>
 
-                                            <p className="labels">نام كاربری</p>
+                                                    <div className="form-group in50 col">
 
-                                            <div className="form-group">
-                                                <input
-                                                    id="username"
-                                                    type="text"
-                                                    name="user_name"
-                                                    onChange={this.handleInputChange}
-                                                />
-                                                <label for="username">لطفا یک نام کاربری برای خود انتخاب کنید</label>
+                                                        <input
+                                                            id="username"
+                                                            type="text"
+                                                            name="user_name"
+                                                            onChange={this.handleInputChange}
+                                                        />
+                                                        <label for="username" className="text-danger">{isError.user_name}</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col">
+                                                    <p className="labels">نام</p>
+                                                    <div class="form-group in50">
+                                                        <input
+                                                            type="text"
+                                                            id="lastname"
+                                                            name="first_name"
+                                                            onChange={this.handleInputChange}
+                                                        />
+                                                        <label for="lastname" className="text-danger">{isError.first_name}</label>
+                                                    </div>
+                                                </div>
+                                                {/* <small className="text-danger text-right">{isError.user_name}</small> */}
                                             </div>
-                                            <small className="text-danger text-right">{isError.user_name}</small>
-
                                             <p className="labels">ایمیل</p>
                                             <div className="form-group">
                                                 <input
@@ -295,9 +300,9 @@ class signUp extends React.Component {
                                                     name="email"
                                                     onChange={this.handleInputChange}
                                                 />
-                                                <label for="email">لطفا آدرس پست الکترونیکی خود را وارد کنید</label>
+                                                <label for="email" className="text-danger">{isError.email}</label>
                                             </div>
-                                            <small className="text-danger text-right">{isError.email}</small>
+                                            {/* <small className="text-danger text-right">{isError.email}</small> */}
 
                                             <p className="labels">آدرس</p>
                                             <div className="form-group">
@@ -307,9 +312,9 @@ class signUp extends React.Component {
                                                     name="address"
                                                     onChange={this.handleInputChange}
                                                 />
-                                                <label for="address">لطفا آدرس شخص و یا کتابفروشی را وارد کنید</label>
+                                                <label for="address" className="text-danger">{isError.address}</label>
                                             </div>
-                                            <small className="text-danger text-right">{isError.address}</small>
+                                            {/* <small className="text-danger text-right">{isError.address}</small> */}
 
                                             <p className="labels">شماره تماس</p>
                                             <div className="form-group">
@@ -319,11 +324,11 @@ class signUp extends React.Component {
                                                     name="phone"
                                                     onChange={this.handleInputChange}
                                                 />
-                                                <label for="phone">لطفا شماره تماس شخص و یا کتابفروشی را وارد کنید</label>
+                                                <label for="phone" className="text-danger">{isError.phone}</label>
                                             </div>
-                                            <small className="text-danger text-right">{isError.phone}</small>
+                                            {/* <small className="text-danger text-right">{isError.phone}</small> */}
 
-                                            <p className="labels">رمز عبور</p>
+                                            <p className="labels"><small className="text-danger text-right">{isError.password.length > 0 ? '(' + isError.password + ')' : ""}</small>رمز عبور</p>
                                             <div className="form-group">
                                                 <input
                                                     id="password"
@@ -331,10 +336,10 @@ class signUp extends React.Component {
                                                     name="password"
                                                     onChange={this.handleInputChange}
                                                 />
-                                                <label for="password">لطفا یک رمز عبور قوی برای حساب خود انتخاب کنید</label>
+                                                <label for="password"></label>
                                             </div>
-                                            <small className="text-danger text-right">{isError.password}</small>
-
+                                            {/* <small className="text-danger text-right">{isError.password}</small> */}
+                                            <p className="labels"><small className="text-danger text-right">{isError.password2}</small></p>
                                             <div className="form-group">
                                                 <input
                                                     id="password2"
@@ -342,9 +347,9 @@ class signUp extends React.Component {
                                                     name="password2"
                                                     onChange={this.handleInputChange}
                                                 />
-                                                <label for="password2">لطفا رمز عبور انتخابی خود را دوباره تكرار كنید</label>
+                                                <label for="password2"></label>
                                             </div>
-                                            <small className="text-danger text-right">{isError.password2}</small>
+                                            {/* <small className="text-danger text-right">{isError.password2}</small> */}
 
 
 
