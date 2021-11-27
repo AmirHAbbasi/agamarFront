@@ -1,15 +1,16 @@
 import React from 'react'
-import Loading from './Loading'
-import { useGlobalContext } from '../context'
-import { Divider, /*Pagination*/ } from 'antd';
-import BookCard from './BookCard';
+import { useGlobalContext } from '../../context'
+import { Divider } from 'antd';
+import BookCard from '../BookCard/BookCard';
+import Loader from '../Loader/Loader';
+import './BookList.css';
 
 const BookList = () => {
   const {books, loading} = useGlobalContext();
   console.log(books)
   
   if(loading){
-    return <Loading />
+    return <Loader />
   }
   if(books.length < 1){
     return (

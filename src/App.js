@@ -1,15 +1,18 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import BookList from './components/BookList'
-import Carusel from './components/Carusel'
+import BookList from './components/BookList/BookList'
+import Banner from './components/Banner/Banner'
+import { AppProvider } from './context'
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route exact path = "/">
-            <Carusel/>
-          <BookList/>
+          <Banner/>
+          <AppProvider> 
+            <BookList/>
+          </AppProvider>
         </Route>
       </Switch>
     </Router>

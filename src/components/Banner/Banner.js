@@ -2,7 +2,7 @@ import React from 'react'
 import 'antd/dist/antd.css'
 import { Carousel } from 'antd';
 
-const Carusel = () => {
+const Banner = () => {
     const contentStyle = {
         height: '400px',
         color: '#fff',
@@ -30,4 +30,4 @@ const Carusel = () => {
   )
 }
 
-export default Carusel
+export default Banner
