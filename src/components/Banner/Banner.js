@@ -1,7 +1,7 @@
 import React from 'react'
 import 'antd/dist/antd.css'
 import { Carousel } from 'antd';
-//import books_header from '../../books_header.jpg'
+import './Banner.css'
 
 const Banner = () => {
     const contentStyle = {
@@ -32,5 +32,3 @@ const Banner = () => {
 }
 
 export default Banner
-
-//<img alt={"img"} src={books_header} />

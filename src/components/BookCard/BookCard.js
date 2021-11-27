@@ -2,6 +2,7 @@ import React from 'react'
 import 'antd/dist/antd.css'
 //import { Link } from 'react-router-dom'
 import { Card } from 'antd';
+import './BookCard.css'
 
 const url = 'http://127.0.0.1:8000'
 
@@ -10,7 +11,6 @@ const BookCard = ({id, name, image, publisher, author}) => {
   return (
     <Card
       hoverable
-      //style={{ width: 300 }}
       cover={<img alt={id} src={`${url}${image}`} />}
       >
       <Meta

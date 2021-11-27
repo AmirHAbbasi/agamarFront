@@ -4,6 +4,12 @@
 Books List 
 ======
 */
+
+* {
+  font-family: 'BNazanin';
+    src: url('http://example.com/fonts/BNazanin.eot');
+}
+
 .section {
     padding: 5rem 0;
   }
