@@ -23,7 +23,7 @@ const BookList = () => {
       <div className="section"> 
         <Divider>نتایج</Divider>
       </div>
-      <div className="cocktails-center">
+      <div className="books-center">
         {books.map((item)=>{
             return <BookCard  key={item.id}{...item}/>
         })}
