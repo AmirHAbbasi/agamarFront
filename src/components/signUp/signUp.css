@@ -14,8 +14,7 @@ body {
 
 .form-group input,
 .form-group label {
-  cursor: text;
-  font-size: 1em;
+  /* font-size: 1em; */
   font-weight: 200;
   position: absolute;
   transition: all 0.15s ease;
@@ -24,9 +23,10 @@ body {
 }
 
 .form-group input {
+  cursor: text;
   border: none;
   border-radius: 20px;
-  background: rgb(213, 213, 230);
+  background: rgb(255, 204, 224);
   height: 60px;
   padding: 20px 20px 0;
   outline: none;
@@ -40,6 +40,9 @@ body {
   padding: 0 20px;
   text-transform: uppercase;
   text-align: right;
+  font-size: .7em;
+  position: absolute;
+  margin-top: -12px;
  
 }
 
@@ -49,14 +52,16 @@ body {
   position: absolute;
   margin-top: -12px;
   text-align: right;
+  font-weight: 700;
 
 }
+
 .modal-90w {
    max-width: 50% !important; 
   
 }
 .my-modal .modal-content {
-  background-color: azure;
+  background-color:rgb(247, 136, 189);
 }
 /* Form{
   background-color: navajowhite;
@@ -65,10 +70,10 @@ body {
   color: #007932;
 } */
 .card{
-  background-color: azure;
+  background-color:rgb(247, 136, 189);
 }
 .card-body{
-  background-color: azure;
+  background-color:rgb(247, 136, 189);
 }
 div.radio{
   border: none;
@@ -82,9 +87,18 @@ p.labels{
   font-size: 1.1em;
   font-weight: 400;
   /* width: 100%; */
-  text-align: center;
+  margin-right: 20px;
+  margin-bottom: -10px;
+  text-align: right;
 }
 .in50 input,
 .in50 label{
   width: 100%;
+}
+.Ok{
+  /* font-size: .7em;
+  position: absolute;
+  margin-top: -12px;
+  text-align: right; */
+  color: darkgreen;
 }
