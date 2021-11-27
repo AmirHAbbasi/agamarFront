@@ -1,6 +1,7 @@
 import React from 'react'
 import 'antd/dist/antd.css'
 import { Carousel } from 'antd';
+//import books_header from '../../books_header.jpg'
 
 const Banner = () => {
     const contentStyle = {
@@ -14,16 +15,16 @@ const Banner = () => {
       <section>
         <Carousel autoplay>
           <div>
-            <h3 style={contentStyle}>1</h3>
+            <h3 style={contentStyle}>بزرگترین مرجع اشتراک گذاری کتاب</h3>
           </div>
           <div>
-            <h3 style={contentStyle}>2</h3>
+            <h3 style={contentStyle}>فروش کتاب های شما</h3>
           </div>
           <div>
-            <h3 style={contentStyle}>3</h3>
+            <h3 style={contentStyle}>اهدای کتاب</h3>
           </div>
           <div>
-            <h3 style={contentStyle}>4</h3>
+            <h3 style={contentStyle}>اجاره کتاب با ضمانت</h3>
           </div>
     </Carousel>
     </section>
@@ -31,3 +32,5 @@ const Banner = () => {
 }
 
 export default Banner
+
+//<img alt={"img"} src={books_header} />
