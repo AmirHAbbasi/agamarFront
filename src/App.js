@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import BookList from './components/BookList/BookList'
 import Banner from './components/Banner/Banner'
-import { AppProvider } from './context'
+import { AppProvider } from './components/context'
 
 function App() {
   return (
