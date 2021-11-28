@@ -20,14 +20,22 @@ const AppProvider = ({ children }) => {
               title, 
               profile_image,
               publisher,
-              author
+              author,
+              created,
+              buy,
+              owner,
+              price
             } = item;
             return{
               id: id, 
               name: title, 
               image: profile_image,
               publisher: publisher,
-              author: author
+              author: author,
+              date: created,
+              buy:buy,
+              owner: owner,
+              price: price
             }
         })
         setBooks(newBooks)

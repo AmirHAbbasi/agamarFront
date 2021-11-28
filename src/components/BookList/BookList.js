@@ -22,8 +22,8 @@ const BookList = () => {
     )
   }
   return (
-    <section > 
-      <div > 
+    <section> 
+      <div> 
       <Divider>
           <h2>نتایج</h2>
         </Divider>

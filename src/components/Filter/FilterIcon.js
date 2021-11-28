@@ -6,13 +6,11 @@ import { DownloadOutlined, DollarCircleOutlined } from '@ant-design/icons';
 const FilterIcon = () => {
 
     return(
-        <section className="section22">
             <div className="myDiv">
-                <Button className="button" type="primary" shape="round" icon={<DollarCircleOutlined />} />
-                <Button className="button" type="primary" shape="round" icon={<DownloadOutlined />} />
-                <Button className="button" type="primary" shape="round" icon={<DownloadOutlined />} />
+                <Button size="large" className="button" type="primary" shape="round" icon={<DollarCircleOutlined />}>فروشی </Button>
+                <Button size="large" className="button" type="primary" shape="round" icon={<DownloadOutlined />}> اهدایی </Button>
+                <Button size="large" className="button" type="primary" shape="round" icon={<DownloadOutlined />}> اجاره </Button>
             </div>
-        </section>
     )
 
 }
