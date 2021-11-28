@@ -24,14 +24,13 @@ body {
   border-radius: 20px;
   background: #EAEAEA;
   height: 60px;
-  text-align: right;
   padding: 20px 20px 20px 20px;
   outline: none;
   border: none;
 }
 
 .modal-90w {
-   max-width:80% !important; 
+   max-width:60% !important; 
   
 }
 .my-modal .modal-content {
@@ -71,8 +70,8 @@ div.smallDiv{
   margin-top: -12px;
 }
 .card2 {
-  width: 100%;
-  background-image: url("./signup.png");
+  width:100%;
+  background-image: url("./login.png");
   background-repeat: no-repeat;
   background-position: center;
 }

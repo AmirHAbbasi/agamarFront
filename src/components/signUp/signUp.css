@@ -24,7 +24,6 @@ body {
   border-radius: 20px;
   background: #EAEAEA;
   height: 60px;
-  text-align: right;
   padding: 20px 20px 20px 20px;
   outline: none;
   border: none;
@@ -48,9 +47,10 @@ div.radio{
   border: none;
   border-radius: 4px;
   height: 60px;
-  padding: 20px 20px 0;
+  /* padding: 20px 20px 0; */
   outline: none;
   text-align: right;
+  /* margin-right: -20px; */
 }
 p.labels{
   font-size: 1.1em;
