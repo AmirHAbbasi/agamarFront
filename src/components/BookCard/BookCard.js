@@ -2,6 +2,7 @@ import React from 'react'
 import 'antd/dist/antd.css'
 //import { Link } from 'react-router-dom'
 import { Card } from 'antd';
+import { EditOutlined, EllipsisOutlined, HeartOutlined } from '@ant-design/icons';
 import './BookCard.css'
 
 const url = 'http://127.0.0.1:8000'
@@ -10,19 +11,26 @@ const BookCard = ({id, name, image, publisher, author}) => {
   const { Meta } = Card;
   return (
     <Card
-      hoverable
-      cover={<img alt={id} src={`${url}${image}`} />}
-      >
-      <Meta
-        title={<h3>{name}</h3>}
-        description={
-          <div>
-            <h4>{publisher}</h4>
-            <p>{author}</p>
-          </div>
-        }
+    style={{width: 300}}
+    cover={
+      <img
+        style={{height: 400}}
+        alt={id}
+        src={`${url}${image}`}
       />
-    </Card>
+    }
+    actions={[
+      <HeartOutlined key="heart" />,
+      <EditOutlined key="edit" />,
+      <EllipsisOutlined key="ellipsis" />,
+    ]}
+  >
+    <Meta
+      //avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+      title={name}
+      description={author}
+    />
+  </Card>
   )
 }
 

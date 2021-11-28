@@ -11,16 +11,9 @@ Books List
 }
 
 .section {
-    padding: 5rem 0;
-  }
-  .section-title {
-    font-size: 2rem;
-    text-transform: capitalize;
-    text-align: right;
-    margin-bottom: 3.5rem;
-    margin-top: 1rem;
-  }
-  .books-center {
+    padding: 2rem 0;
+}
+.books-center {
     width: 85vw;
     margin: 0 auto;
     max-width: 5000px;
@@ -28,10 +21,10 @@ Books List
     row-gap: 2rem;
     column-gap: 2rem;
     /* align-items: start; */
-  }
-  @media screen and (min-width: 576px) {
+}
+@media screen and (min-width: 600px) {
     .books-center {
       grid-template-columns: repeat(auto-fill, minmax(338.8px, 1fr));
-    }
   }
+}
   
