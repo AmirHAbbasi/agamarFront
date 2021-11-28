@@ -11,6 +11,7 @@ const BookCard = ({id, name, image, publisher, author}) => {
   const { Meta } = Card;
   return (
     <Card
+    hoverable
     style={{width: 300}}
     cover={
       <img
