@@ -50,15 +50,15 @@ class signUp extends React.Component {
         switch (name) {
             case "first_name":
                 isError.first_name =
-                    value.length < 1 ? "!فیلد ضروری*" : "";
+                    value.length < 1 ? "فیلد ضروری*" : "";
                 break;
             case "user_name":
                 isError.user_name =
-                    value.length < 1 ? "!فیلد ضروری*" : "";
+                    value.length < 1 ? "فیلد ضروری*" : "";
                 break;
             case "address":
                 isError.address =
-                    value.length < 1 ? "!فیلد ضروری*" : "";
+                    value.length < 1 ? "فیلد ضروری*" : "";
                 break;
             case "phone":
                 isError.phone =
@@ -69,7 +69,7 @@ class signUp extends React.Component {
             case "email":
                 isError.email = !regExp.test(value) ? "!آدرس ایمیل نامعتبر" : "";
                 if (value.length < 1) {
-                    isError.email = "!فیلد ضروری*";
+                    isError.email = "فیلد ضروری*";
                 }
                 break;
             case "password":
@@ -110,23 +110,23 @@ class signUp extends React.Component {
         }
         if (this.state.password.length < 1) {
             isFormValid = false;
-            this.state.isError.password = ".فیلد ضروری*";
+            this.state.isError.password = "فیلد ضروری*";
         }
         if (this.state.phone.length < 1) {
             isFormValid = false;
-            this.state.isError.phone = ".فیلد ضروری*";
+            this.state.isError.phone = "فیلد ضروری*";
         }
         if (this.state.email.length < 1) {
             isFormValid = false;
-            this.state.isError.email = ".فیلد ضروری*";
+            this.state.isError.email = "فیلد ضروری*";
         }
         if (this.state.user_name.length < 1) {
             isFormValid = false;
-            this.state.isError.user_name = ".فیلد ضروری*";
+            this.state.isError.user_name = "فیلد ضروری*";
         }
         if (this.state.first_name.length < 1) {
             isFormValid = false;
-            this.state.isError.first_name = ".فیلد ضروری*";
+            this.state.isError.first_name = "فیلد ضروری*";
         }
         if (this.state.bookOrPerson.length < 1) {
             isFormValid = false;
@@ -135,7 +135,7 @@ class signUp extends React.Component {
         }
         if (this.state.password2.length < 1) {
             isFormValid = false;
-            this.state.isError.password2 = ".فیلد ضروری*";
+            this.state.isError.password2 = "فیلد ضروری*";
         }
         if (isFormValid === true) {
 
@@ -265,7 +265,28 @@ class signUp extends React.Component {
                                         <form calssName="form-tag" onSubmit={() => { this.submit(); this.handleModalShowHide(); }}>
 
 
-                                            <p className="labels">نام</p>
+                                            <p className="labels">نام
+                                            {' '}
+                                                {
+                                                    (isError.first_name.length === 0 && this.state.first_name.length)
+                                                        ?
+                                                        (
+                                                            < svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                width="16"
+                                                                height="16"
+                                                                fill="currentColor"
+                                                                class="bi bi-check2"
+                                                                color="darkgreen"
+                                                                viewBox="0 0 16 16"
+                                                                stroke="currentColor"
+                                                                strokeWidth="4">
+                                                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                                            </svg>
+                                                        )
+                                                        : ''
+                                                }
+                                            </p>
                                             <div class="form-group">
                                                 <input
                                                     type="text"
@@ -273,58 +294,71 @@ class signUp extends React.Component {
                                                     name="first_name"
                                                     onChange={this.handleInputChange}
                                                 />
-                                                <label
-                                                    for="lastname"
-                                                    className={(isError.first_name.length === 0 && this.state.first_name.length > 0) ? "OK" : "text-danger"}
-                                                >
-                                                    {
-                                                        (isError.first_name.length === 0 && this.state.first_name.length)
-                                                            ?
-                                                            (
-                                                                < svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="16"
-                                                                    height="16"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-check2"
-                                                                    viewBox="0 0 16 16"
-                                                                    stroke="currentColor"
-                                                                    strokeWidth="4">
-                                                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                                                                </svg>
-                                                            )
-                                                            : isError.first_name
-                                                    }
-                                                </label>
+                                            </div>
+                                            <div className="text-right smallDiv">
+                                                <small className="text-danger">{isError.first_name}</small>
                                             </div>
 
-                                            <p className="labels">نام كاربری</p>
 
+
+                                            <p className="labels">نام كاربری
+                                            {' '}
+                                                {
+                                                    (isError.email.length === 0 && this.state.email.length)
+                                                        ?
+                                                        (
+                                                            < svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                width="16"
+                                                                height="16"
+                                                                fill="currentColor"
+                                                                class="bi bi-check2"
+                                                                color="darkgreen"
+                                                                viewBox="0 0 16 16"
+                                                                stroke="currentColor"
+                                                                strokeWidth="4">
+                                                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                                            </svg>
+                                                        )
+                                                        : ''}
+                                            </p>
                                             <div className="form-group">
-
                                                 <input
                                                     id="username"
                                                     type="text"
                                                     name="user_name"
                                                     onChange={this.handleInputChange}
                                                 />
-                                                <label for="username" className={(isError.user_name.length === 0 && this.state.user_name.length > 0) ? "OK" : "text-danger"}>{(isError.user_name.length === 0 && this.state.user_name.length) ? (
-                                                    < svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16"
-                                                        height="16"
-                                                        fill="currentColor"
-                                                        class="bi bi-check2"
-                                                        viewBox="0 0 16 16"
-                                                        stroke="currentColor"
-                                                        strokeWidth="4">
-                                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                                                    </svg>
-                                                ) : isError.user_name}</label>
                                             </div>
-                                            {/* <small className="text-danger text-right">{isError.user_name}</small> */}
+                                            <div className="text-right smallDiv">
+                                                <small className="text-danger">{isError.user_name}</small>
+                                            </div>
 
-                                            <p className="labels">ایمیل</p>
+
+
+
+                                            <p className="labels">ایمیل
+                                            {' '}
+                                                {
+                                                    (isError.email.length === 0 && this.state.email.length)
+                                                        ?
+                                                        (
+                                                            < svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                width="16"
+                                                                height="16"
+                                                                fill="currentColor"
+                                                                class="bi bi-check2"
+                                                                color="darkgreen"
+                                                                viewBox="0 0 16 16"
+                                                                stroke="currentColor"
+                                                                strokeWidth="4">
+                                                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                                            </svg>
+                                                        )
+                                                        : ''
+                                                }
+                                            </p>
                                             <div className="form-group">
                                                 <input
                                                     id="email"
@@ -332,23 +366,34 @@ class signUp extends React.Component {
                                                     name="email"
                                                     onChange={this.handleInputChange}
                                                 />
-                                                <label for="email" className={(isError.email.length === 0 && this.state.email.length > 0) ? "OK" : "text-danger"}>{(isError.email.length === 0 && this.state.email.length) ? (
-                                                    < svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16"
-                                                        height="16"
-                                                        fill="currentColor"
-                                                        class="bi bi-check2"
-                                                        viewBox="0 0 16 16"
-                                                        stroke="currentColor"
-                                                        strokeWidth="4">
-                                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                                                    </svg>
-                                                ) : isError.email}</label>
                                             </div>
-                                            {/* <small className="text-danger text-right">{isError.email}</small> */}
+                                            <div className="text-right smallDiv">
+                                                <small className="text-danger">{isError.email}</small>
+                                            </div>
 
-                                            <p className="labels">آدرس</p>
+
+                                            <p className="labels">آدرس
+                                            {' '}
+                                                {
+                                                    (isError.address.length === 0 && this.state.address.length)
+                                                        ?
+                                                        (
+                                                            < svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                width="16"
+                                                                height="16"
+                                                                fill="currentColor"
+                                                                class="bi bi-check2"
+                                                                color="darkgreen"
+                                                                viewBox="0 0 16 16"
+                                                                stroke="currentColor"
+                                                                strokeWidth="4">
+                                                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                                            </svg>
+                                                        )
+                                                        : ''
+                                                }
+                                            </p>
                                             <div className="form-group">
                                                 <input
                                                     id="address"
@@ -356,23 +401,34 @@ class signUp extends React.Component {
                                                     name="address"
                                                     onChange={this.handleInputChange}
                                                 />
-                                                <label for="address" className={(isError.address.length === 0 && this.state.address.length > 0) ? "OK" : "text-danger"}>{(isError.address.length === 0 && this.state.address.length) ? (
-                                                    < svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16"
-                                                        height="16"
-                                                        fill="currentColor"
-                                                        class="bi bi-check2"
-                                                        viewBox="0 0 16 16"
-                                                        stroke="currentColor"
-                                                        strokeWidth="4">
-                                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                                                    </svg>
-                                                ) : isError.address}</label>
-                                            </div>
-                                            {/* <small className="text-danger text-right">{isError.address}</small> */}
 
-                                            <p className="labels">شماره تماس</p>
+                                            </div>
+                                            <div className="text-right smallDiv">
+                                                <small className="text-danger">{isError.address}</small>
+                                            </div>
+
+                                            <p className="labels">شماره تماس
+                                            {' '}
+                                                {
+                                                    (isError.phone.length === 0 && this.state.phone.length)
+                                                        ?
+                                                        (
+                                                            < svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                width="16"
+                                                                height="16"
+                                                                fill="currentColor"
+                                                                class="bi bi-check2"
+                                                                color="darkgreen"
+                                                                viewBox="0 0 16 16"
+                                                                stroke="currentColor"
+                                                                strokeWidth="4">
+                                                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                                            </svg>
+                                                        )
+                                                        : ''
+                                                }
+                                            </p>
                                             <div className="form-group">
                                                 <input
                                                     id="phone"
@@ -380,23 +436,34 @@ class signUp extends React.Component {
                                                     name="phone"
                                                     onChange={this.handleInputChange}
                                                 />
-                                                <label for="phone" className={(isError.phone.length === 0 && this.state.phone.length > 0) ? "OK" : "text-danger"}>{(isError.phone.length === 0 && this.state.phone.length) ? (
-                                                    < svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16"
-                                                        height="16"
-                                                        fill="currentColor"
-                                                        class="bi bi-check2"
-                                                        viewBox="0 0 16 16"
-                                                        stroke="currentColor"
-                                                        strokeWidth="4">
-                                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                                                    </svg>
-                                                ) : isError.phone}</label>
                                             </div>
-                                            {/* <small className="text-danger text-right">{isError.phone}</small> */}
+                                            <div className="text-right smallDiv">
+                                                <small className="text-danger">{isError.phone}</small>
+                                            </div>
 
-                                            <p className="labels">رمز عبور</p>
+
+                                            <p className="labels">رمز عبور
+                                            {' '}
+                                                {
+                                                    (isError.password.length === 0 && this.state.password.length)
+                                                        ?
+                                                        (
+                                                            < svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                width="16"
+                                                                height="16"
+                                                                fill="currentColor"
+                                                                class="bi bi-check2"
+                                                                color="darkgreen"
+                                                                viewBox="0 0 16 16"
+                                                                stroke="currentColor"
+                                                                strokeWidth="4">
+                                                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                                            </svg>
+                                                        )
+                                                        : ''
+                                                }
+                                            </p>
                                             <div className="form-group">
                                                 <input
                                                     id="password"
@@ -404,22 +471,36 @@ class signUp extends React.Component {
                                                     name="password"
                                                     onChange={this.handleInputChange}
                                                 />
-                                                <label for="password" className={(isError.password.length === 0 && this.state.password.length > 0) ? "OK" : "text-danger"}>{(isError.password.length === 0 && this.state.password.length) ? (
-                                                    < svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16"
-                                                        height="16"
-                                                        fill="currentColor"
-                                                        class="bi bi-check2"
-                                                        viewBox="0 0 16 16"
-                                                        stroke="currentColor"
-                                                        strokeWidth="4">
-                                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                                                    </svg>
-                                                ) : isError.password}</label>
                                             </div>
-                                            {/* <small className="text-danger text-right">{isError.password}</small> */}
-                                            <p className="labels">تکرار رمز عبور</p>
+                                            <div className="text-right smallDiv">
+                                                <small className="text-danger">{isError.password}</small>
+                                            </div>
+
+
+
+
+                                            <p className="labels">تکرار رمز عبور
+                                            {' '}
+                                                {
+                                                    (isError.password2.length === 0 && this.state.password2.length)
+                                                        ?
+                                                        (
+                                                            < svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                width="16"
+                                                                height="16"
+                                                                fill="currentColor"
+                                                                class="bi bi-check2"
+                                                                color="darkgreen"
+                                                                viewBox="0 0 16 16"
+                                                                stroke="currentColor"
+                                                                strokeWidth="4">
+                                                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                                            </svg>
+                                                        )
+                                                        : ''
+                                                }
+                                            </p>
                                             <div className="form-group">
                                                 <input
                                                     id="password2"
@@ -427,21 +508,10 @@ class signUp extends React.Component {
                                                     name="password2"
                                                     onChange={this.handleInputChange}
                                                 />
-                                                <label for="password2" className={(isError.password2.length === 0 && this.state.password2.length > 0) ? "OK" : "text-danger"}>{(isError.password2.length === 0 && this.state.password2.length) ? (
-                                                    < svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16"
-                                                        height="16"
-                                                        fill="currentColor"
-                                                        class="bi bi-check2"
-                                                        viewBox="0 0 16 16"
-                                                        stroke="currentColor"
-                                                        strokeWidth="4">
-                                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                                                    </svg>
-                                                ) : isError.password2}</label>
                                             </div>
-                                            {/* <small className="text-danger text-right">{isError.password2}</small> */}
+                                            <div className="text-right smallDiv">
+                                                <small className="text-danger">{isError.password2}</small>
+                                            </div>
 
 
 
@@ -474,44 +544,7 @@ class signUp extends React.Component {
                                                 <label for="password2" className="text-danger">{isError.bookOrPerson}</label>
                                             </div>
                                             <br></br>
-                                            {/* <small className="text-danger text-right">{isError.bookOrPerson}</small> */}
 
-
-
-                                            {/* <div className="form-group">
-                                                        <div>
-                                                            <label>:نوع حساب كاربری خود را انتخاب كنید</label>
-                                                        </div>
-                                                        <div className="form-check form-check-inline">
-                                                            <input
-                                                                className="form-check-input"
-                                                                type="radio"
-                                                                name="bookOrPerson"
-                                                                id="inlineRadio1"
-                                                                value="library"
-                                                                checked={this.state.bookOrPerson === "library"}
-                                                                onChange={this.handleInputChange}
-                                                            />
-                                                            <label className="form-check-label" htmlFor="inlineRadio1">
-                                                                كتابفروشی
-            </label>
-                                                        </div>
-                                                        <div className="form-check form-check-inline">
-                                                            <input
-                                                                className="form-check-input"
-                                                                type="radio"
-                                                                name="bookOrPerson"
-                                                                id="inlineRadio2"
-                                                                value="person"
-                                                                checked={this.state.bookOrPerson === "person"}
-                                                                onChange={this.handleInputChange}
-                                                            />
-                                                            <label className="form-check-label" htmlFor="inlineRadio2">
-                                                                شخص حقیقی
-            </label>
-                                                        </div>{" "}
-                                                    </div>
-                                                    <small className="text-danger">{isError.bookOrPerson}</small> */}
                                             <br></br>
                                             <p className="forgot-password text-right">
                                                 قبلا ثبت نام کرده اید؟{" "}

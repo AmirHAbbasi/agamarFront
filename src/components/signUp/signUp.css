@@ -12,28 +12,26 @@ body {
   width: 100%;
 }
 
-.form-group input,
-.form-group label {
-  /* font-size: 1em; */
+.form-group input
+ {
+  font-size: 1em;
   font-weight: 200;
   position: absolute;
   transition: all 0.15s ease;
   width: 100%;
   text-align: right;
-}
-
-.form-group input {
   cursor: text;
-  border: none;
   border-radius: 20px;
   background: rgb(255, 204, 224);
   height: 60px;
-  padding: 20px 20px 0;
-  outline: none;
   text-align: right;
+  padding: 20px 20px 20px 20px;
+  outline: none;
+  border: none;
 }
 
-.form-group label {
+
+/* .form-group label {
   color: #9B9B9B;
   font-weight: 400;
   line-height: 60px;
@@ -44,9 +42,9 @@ body {
   position: absolute;
   margin-top: -12px;
  
-}
+} */
 
-.form-group input.filled ~ label,
+/* .form-group input.filled ~ label,
 .form-group input:focus ~ label {
   font-size: .7em;
   position: absolute;
@@ -54,7 +52,7 @@ body {
   text-align: right;
   font-weight: 700;
 
-}
+} */
 
 .modal-90w {
    max-width: 50% !important; 
@@ -63,12 +61,7 @@ body {
 .my-modal .modal-content {
   background-color:rgb(247, 136, 189);
 }
-/* Form{
-  background-color: navajowhite;
-} */
-/* .form-group input.filled ~ label {
-  color: #007932;
-} */
+
 .card{
   background-color:rgb(247, 136, 189);
 }
@@ -95,10 +88,22 @@ p.labels{
 .in50 label{
   width: 100%;
 }
-.Ok{
-  /* font-size: .7em;
+/* .Ok{
+  font-size: .7em;
   position: absolute;
   margin-top: -12px;
-  text-align: right; */
+  text-align: right;
   color: darkgreen;
+} */
+small{
+  margin-right: 20px;
+  /* margin-top: -200px; */
+  /* margin-bottom: 20px; */
 }
+div.smallDiv{
+  margin-top: -12px;
+}
+
+/* .text-danger{
+  background-color: rgb(255, 204, 224);
+} */
