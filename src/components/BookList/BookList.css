@@ -9,10 +9,6 @@ Books List
   font-family: 'BNazanin';
     src: url('http://example.com/fonts/BNazanin.eot');
 }
-
-.section {
-  padding: 2rem 0;
-}
 .books-center {
   width: 85vw;
   margin: 0 auto;

@@ -1,0 +1,17 @@
+.myDiv {
+    border: indianred;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    padding: 10px;
+}
+
+.button{
+    background-color: hotpink;
+    border-color: indianred;
+}
+
+.section22{
+    margin:auto;
+    width: center;
+}

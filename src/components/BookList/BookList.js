@@ -15,14 +15,18 @@ const BookList = () => {
   if(books.length < 1){
     return (
       <div className="section"> 
-        <Divider>نتیجه ای یافت نشد.</Divider>
+        <Divider>
+          <h2>نتیجه ای یافت نشد.</h2>
+        </Divider>
       </div>
     )
   }
   return (
-    <section className="section"> 
-      <div className="section"> 
-        <Divider>نتایج</Divider>
+    <section > 
+      <div > 
+      <Divider>
+          <h2>نتایج</h2>
+        </Divider>
       </div>
       <div className="books-center">
         {books.map((item)=>{

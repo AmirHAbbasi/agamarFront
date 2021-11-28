@@ -12,10 +12,10 @@ const BookCard = ({id, name, image, publisher, author}) => {
   return (
     <Card
     hoverable
-    style={{width: 300}}
+    //style={{width: 300}}
     cover={
       <img
-        style={{height: 400}}
+        style={{height: 600}}
         alt={id}
         src={`${url}${image}`}
       />
@@ -27,7 +27,7 @@ const BookCard = ({id, name, image, publisher, author}) => {
     ]}
   >
     <Meta
-      //avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+      //avatar={<Avatar src="" />}
       title={name}
       description={author}
     />
