@@ -16,7 +16,6 @@ class signUp extends React.Component {
         this.state = {
             showHide: true,
             errorLogin: "",
-            showHideError: false,
             first_name: "",
             user_name: "",
             email: "",
@@ -96,6 +95,8 @@ class signUp extends React.Component {
         });
         console.log(this.state);
     };
+
+
 
     submit = event => {
         let isFormValid = true;
@@ -206,9 +207,7 @@ class signUp extends React.Component {
         this.setState({ showHide: !this.state.showHide });
     }
 
-    handleModalShowHideError() {
-        this.setState({ showHideError: !this.state.showHideError });
-    }
+
 
 
     render() {
@@ -247,13 +246,14 @@ class signUp extends React.Component {
                             <div className="main-body"> */}
                         <div className="text-center" id="title">
                             <h4>ثبت نام</h4>
+                            <small className="text-danger text-center">{errorLogin}</small>
                         </div>
                         <div className="row">
 
-                            <div className="col-lg-6">
-                                <div className="card border-0">
-                                    <div className="card-body">
-                                        <img src="https://www.prattlibrary.org/assets/card/bookshelves-bright-colors.jpg" width="450px" height="870px" />
+                            <div className="col-lg-6 card2">
+                                <div className="card2 border-0">
+                                    <div className="card-body1">
+                                        {/* <img src="https://www.prattlibrary.org/assets/card/bookshelves-bright-colors.jpg" width="450px" height="870px" /> */}
                                         {/* <p>اینجا یک عکس قرار میگیرد</p> */}
                                     </div>
                                 </div>
@@ -293,10 +293,11 @@ class signUp extends React.Component {
                                                     id="lastname"
                                                     name="first_name"
                                                     onChange={this.handleInputChange}
+                                                    placeholder="لطفا نام شخص و یا کتابفروشی را وارد کنید"
                                                 />
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{isError.first_name}</small>
+                                                <small className="text-danger">{this.state.first_name.length > 0 ? isError.first_name : "فیلد ضروری*"}</small>
                                             </div>
 
 
@@ -304,7 +305,7 @@ class signUp extends React.Component {
                                             <p className="labels">نام كاربری
                                             {' '}
                                                 {
-                                                    (isError.email.length === 0 && this.state.email.length)
+                                                    (isError.user_name.length === 0 && this.state.user_name.length)
                                                         ?
                                                         (
                                                             < svg
@@ -326,12 +327,13 @@ class signUp extends React.Component {
                                                 <input
                                                     id="username"
                                                     type="text"
+                                                    placeholder="لطفا یک نام کاربری برای خود انتخاب کنید"
                                                     name="user_name"
                                                     onChange={this.handleInputChange}
                                                 />
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{isError.user_name}</small>
+                                                <small className="text-danger">{this.state.user_name.length > 0 ? isError.user_name : "فیلد ضروری*"}</small>
                                             </div>
 
 
@@ -363,12 +365,13 @@ class signUp extends React.Component {
                                                 <input
                                                     id="email"
                                                     type="email"
+                                                    placeholder="لطفا آدرس پست الکترونیکی خود را وارد کنید"
                                                     name="email"
                                                     onChange={this.handleInputChange}
                                                 />
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{isError.email}</small>
+                                                <small className="text-danger">{this.state.email.length > 0 ? isError.email : "فیلد ضروری*"}</small>
                                             </div>
 
 
@@ -398,13 +401,14 @@ class signUp extends React.Component {
                                                 <input
                                                     id="address"
                                                     type="text"
+                                                    placeholder="لطفا آدرس شخص و یا کتابفروشی را وارد کنید"
                                                     name="address"
                                                     onChange={this.handleInputChange}
                                                 />
 
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{isError.address}</small>
+                                                <small className="text-danger">{this.state.address.length > 0 ? isError.address : "فیلد ضروری*"}</small>
                                             </div>
 
                                             <p className="labels">شماره تماس
@@ -433,12 +437,13 @@ class signUp extends React.Component {
                                                 <input
                                                     id="phone"
                                                     type="text"
+                                                    placeholder="لطفا شماره تماس شخص و یا کتابفروشی را وارد کنید"
                                                     name="phone"
                                                     onChange={this.handleInputChange}
                                                 />
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{isError.phone}</small>
+                                                <small className="text-danger">{this.state.phone.length > 0 ? isError.phone : "فیلد ضروری*"}</small>
                                             </div>
 
 
@@ -468,12 +473,13 @@ class signUp extends React.Component {
                                                 <input
                                                     id="password"
                                                     type="password"
+                                                    placeholder="لطفا یک رمز عبور قوی برای حساب خود انتخاب کنید"
                                                     name="password"
                                                     onChange={this.handleInputChange}
                                                 />
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{isError.password}</small>
+                                                <small className="text-danger">{this.state.password.length > 0 ? isError.password : "فیلد ضروری*"}</small>
                                             </div>
 
 
@@ -504,13 +510,14 @@ class signUp extends React.Component {
                                             <div className="form-group">
                                                 <input
                                                     id="password2"
+                                                    placeholder="لطفا رمز عبور انتخابي خود را دوباره تكرار كنيد"
                                                     type="password"
                                                     name="password2"
                                                     onChange={this.handleInputChange}
                                                 />
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{isError.password2}</small>
+                                                <small className="text-danger">{this.state.password2.length > 0 ? isError.password2 : "فیلد ضروری*"}</small>
                                             </div>
 
 
@@ -541,110 +548,88 @@ class signUp extends React.Component {
                                                     onChange={this.handleInputChange}
                                                 />
                                                 <br></br>
-                                                <label for="password2" className="text-danger">{isError.bookOrPerson}</label>
+                                                <label for="password2" className="text-danger">{this.state.bookOrPerson.length > 0 ? isError.bookOrPerson : "!مشخص كردن نوع حساب كاربری الزامی می باشد"}</label>
                                             </div>
                                             <br></br>
 
                                             <br></br>
-                                            <p className="forgot-password text-right">
-                                                قبلا ثبت نام کرده اید؟{" "}
-                                                <a
-                                                    className="nav-link"
-                                                    to={"/ورود"}
-                                                    href="#"
-                                                    onClick={() => {
-                                                        this.handleModalShowHide();
-                                                    }}
-                                                >
-                                                    ورود
-                                                </a>
-                                                <small className="text-danger text-center">{errorLogin}</small>
-                                            </p>
-                                            <div class="text-right">
-                                                <Button
-                                                    type="submit"
-                                                    className="btn btn-primary"
-                                                    to={"/ورود"}
-                                                    href="#"
-                                                    onClick={() => {
-                                                        this.submit();
-                                                    }}
-                                                >
-                                                    ثبت نام
-                                                </Button>
-                                                {' '}
-                                                <Button
-                                                    to={"/"}
-                                                    href="#"
-                                                    className="btn btn-secondary"
-                                                    onClick={() => this.handleModalShowHide()}
-                                                >
-                                                    خروج
-                                                </Button>
-                                            </div>
                                         </form>
-
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-                        {/* </div>
-                        </div> */}
-                        {/* <div class="column">
-                            <p>column</p>
-                        </div>
-                        <div class="column">
-                            
-                        </div> */}
+
                     </Modal.Body>
-                    {/* <Modal.Footer>
-                        
-                    </Modal.Footer> */}
-                </Modal>
-
-
-                <Modal show={this.state.showHideError}>
-                    <div className="text-center">
-                        {/* <Modal.Header
-              <Modal.Title></Modal.Title>
-            </Modal.Header> */}
-                        <Modal.Body>
-                            <div className="align-items-right text-right">
-                                <button
-                                    type="button"
-                                    className="btn"
-                                    onClick={() => this.handleModalShowHideError()}
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        fill="currentColor"
-                                        className="bi bi-arrow-right"
-                                        viewBox="0 0 16 16"
+                    <Modal.Footer>
+                        <div>
+                            <div>
+                                <p className="forgot-password text-right">
+                                    قبلا ثبت نام کرده اید؟{" "}
+                                    <a
+                                        className="nav-link"
+                                        to={"/ورود"}
+                                        href="#"
+                                        onClick={() => {
+                                            this.handleModalShowHide();
+                                        }}
                                     >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-                                        />
-                                    </svg>
-                                    <Modal.Title></Modal.Title>
-                                </button>
+                                        ورود
+                                                </a>
+                                    {/* <small className="text-danger text-center">{errorLogin}</small> */}
+                                </p>
                             </div>
-                            <div className="text-center">
-                                <h5>شما فرم را به درستی تکمیل نکرده اید</h5>
+                            <div class="text-center">
+                                <Button
+                                    style={
+                                        { "background-color": "#811854" }
+                                    }
+                                    type="submit"
+                                    to={"/ورود"}
+                                    href="#"
+                                    onClick={() => {
+                                        this.submit();
+                                    }}
+                                    disabled={
+                                        (
+                                            this.state.address.length < 1
+                                            || this.state.password.length < 1
+                                            || this.state.phone.length < 1
+                                            || this.state.email.length < 1
+                                            || this.state.user_name.length < 1
+                                            || this.state.first_name.length < 1
+                                            || this.state.bookOrPerson.length < 1
+                                            || this.state.password2.length < 1
+
+                                            || this.state.isError.address.length > 0
+                                            || this.state.isError.password.length > 0
+                                            || this.state.isError.phone.length > 0
+                                            || this.state.isError.email.length > 0
+                                            || this.state.isError.user_name.length > 0
+                                            || this.state.isError.first_name.length > 0
+                                            || this.state.isError.bookOrPerson.length > 0
+                                            || this.state.isError.password2.length > 0
+                                        )
+                                            ?
+                                            true
+                                            :
+                                            false
+                                    }
+                                >
+                                    ثبت نام
+                                </Button>
+                                {' '}
+                                <Button
+                                    to={"/"}
+                                    href="#"
+                                    className="btn btn-secondary"
+                                    onClick={() => this.handleModalShowHide()}
+                                >
+                                    خروج
+                                </Button>
                             </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <button
-                                type="button"
-                                className="btn btn-secondary btn-lg btn-container-left btn-block"
-                                onClick={() => this.handleModalShowHideError()}
-                            >
-                                فهمیدم
-                            </button>
-                        </Modal.Footer>
-                    </div>
+                        </div>
+                    </Modal.Footer>
                 </Modal>
             </div >
         );
