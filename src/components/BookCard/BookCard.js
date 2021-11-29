@@ -7,15 +7,49 @@ import './BookCard.css'
 
 const url = 'http://127.0.0.1:8000'
 
-const BookCard = ({id, name, image, price, author}) => {
+const BookCard = ({id, name, image, price, author, type}) => {
   const { Meta } = Card;
+
+  const tyype = () => {
+    if(type===0)
+      return(
+        <section>
+            <h3 style={{color:"red"}}>فروشی</h3>
+            <h2>{price}</h2>
+          </section>
+      )
+    else{
+      if(type===1){
+        return(
+          <section>
+            <h3 style={{color:"blue"}}>اجاره</h3>
+            <h2>{price}</h2>
+          </section>
+        )
+      }
+      else{
+        return(
+          <section>
+            <h3 style={{color:"green"}}>اهدایی</h3>
+            <h2>{price}</h2>
+          </section>
+        )
+      }
+    }
+  }
+
+  const handlclick = () => {
+
+  }
+
   return (
     <Card
     hoverable
+    onClick={handlclick()}
     //style={{width: 200}}
     cover={
       <img
-        style={{height: 300}}
+        style={{height: 320}}
         alt={id}
         src={`${url}${image}`}
       />
@@ -32,7 +66,7 @@ const BookCard = ({id, name, image, price, author}) => {
       description={
         <div>
         <h2>{author}</h2>
-        <h3>{price} تومان</h3>
+        <div>{tyype()}</div>
         </div>
       }
     />

@@ -33,7 +33,7 @@ const AppProvider = ({ children }) => {
               publisher: publisher,
               author: author,
               date: created,
-              buy:buy,
+              type:buy,
               owner: owner,
               price: price
             }
