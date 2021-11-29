@@ -11,7 +11,7 @@ const BookCard = ({id, name, image, price, author, type}) => {
   const { Meta } = Card;
 
   const tyype = () => {
-    if(type===0)
+    if(type==0)
       return(
         <section>
             <h3 style={{color:"red"}}>فروشی</h3>
@@ -19,7 +19,7 @@ const BookCard = ({id, name, image, price, author, type}) => {
           </section>
       )
     else{
-      if(type===1){
+      if(type==1){
         return(
           <section>
             <h3 style={{color:"blue"}}>اجاره</h3>
