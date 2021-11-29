@@ -251,8 +251,8 @@ class signUp extends React.Component {
                             </div>
                             <div className="row">
 
-                                <div className="col-lg-6 card2">
-                                    <div className="card2 border-0">
+                                <div className="col-lg-6 card3">
+                                    <div className="card3 border-0">
                                         <div className="card-body1">
                                             {/* <img src="https://www.prattlibrary.org/assets/card/bookshelves-bright-colors.jpg" width="450px" height="870px" /> */}
                                             {/* <p>اینجا یک عکس قرار میگیرد</p> */}
@@ -581,14 +581,14 @@ class signUp extends React.Component {
                                     </p>
                                 </div>
                                 <div class="text-center">
-                                    <Link
+                                    <Button
                                         className="btn btn-primary"
                                         style={
                                             { "background-color": "#811854" }
                                         }
                                         type="submit"
-                                        to={"/ورود"}
-                                        href="#"
+                                        to={"/"}
+                                        href="ورود"
                                         onClick={() => {
                                             this.submit();
                                         }}
@@ -619,7 +619,7 @@ class signUp extends React.Component {
                                         }
                                     >
                                         ثبت نام
-                                </Link>
+                                </Button>
                                     {' '}
                                     <Link
                                         to={"/"}
