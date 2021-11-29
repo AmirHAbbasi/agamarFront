@@ -1,0 +1,26 @@
+
+/* 
+====== 
+Books List 
+======
+*/
+
+* {
+  font-family: 'BNazanin';
+    src: url('http://example.com/fonts/BNazanin.eot');
+}
+.books-center {
+  width: 85vw;
+  margin: 0 auto;
+  max-width: 5000px;
+  display: grid;
+  row-gap: 2rem;
+  column-gap: 2rem;
+  /* align-items: start; */
+}
+@media screen and (min-width: 600px) {
+  .books-center {
+    grid-template-columns: repeat(auto-fill, minmax(338.8px, 1fr));
+  }
+}
+  
