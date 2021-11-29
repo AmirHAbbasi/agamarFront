@@ -234,7 +234,7 @@ class login extends React.Component {
                                     </p>
                                 </div>
                                 <div class="text-center">
-                                    <Link
+                                    <Button
                                         className="btn btn-primary"
                                         style={
                                             { "background-color": "#811854" }
@@ -257,7 +257,7 @@ class login extends React.Component {
                                         }
                                     >
                                         ورود به سایت
-                                </Link>
+                                </Button>
                                     {' '}
                                     <Link
                                         to={"/"}
