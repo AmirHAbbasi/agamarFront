@@ -4,11 +4,14 @@ import BookList from './components/BookList/BookList'
 import Banner from './components/Banner/Banner'
 import FilterIcon from './components/Filter/FilterIcon'
 import { AppProvider } from './ReqBookList'
+import Navbarr from './components/Navbar/navbarr'
+import Footter from './components/Footer/footer2'
 import './App.css'
 
 function App() {
   return (
     <Router>
+      <Navbarr/>
       <Switch>
         <Route exact path = "/">
           <Banner/>
@@ -18,6 +21,7 @@ function App() {
           </AppProvider>
         </Route>
       </Switch>
+      <Footter/>
     </Router>
   )
 }
