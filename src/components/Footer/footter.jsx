@@ -20,9 +20,10 @@ class Footter extends React.Component {
                 <a href="http://play.google.com" target="_blank" className="fa fa-android"></a>
                 <a href="rss" target="_blank" className="fa fa-rss"></a>
            </div> 
-           <div className="active">
-            <a  href="/about" target="_blank" className="footerlink" lang="fa">درباره ما </a><br />
-            <p dir="rtl" lang="fa" className="active">تمامی حقوق متعلق به گروه آگامار می باشد. </p> 
+
+           <div className="actived">
+            <a  href="/about" target="_blank" className="footerlink" lang="fa">درباره ما </a>
+            <p dir="rtl" lang="fa">تمامی حقوق متعلق به گروه آگامار می باشد. </p> 
            </div>
 
         </div>
