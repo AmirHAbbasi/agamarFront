@@ -4,6 +4,12 @@ body {
   width: 100%;
   /* max-width: 500px; */
 }
+* {
+  font-family: 'BNazanin';
+    src: url('http://example.com/fonts/BNazanin.eot');
+
+  font-size: large;
+}
 
 .form-group {
   height: 3.7em;
