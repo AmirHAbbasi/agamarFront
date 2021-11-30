@@ -100,109 +100,67 @@ class signUp extends React.Component {
 
 
     submit = event => {
-        let isFormValid = true;
-        Object.values(this.state.isError).forEach((element) => {
-            if (element.length > 0) {
-                isFormValid = false;
-            }
-        });
-        if (this.state.address.length < 1) {
-            isFormValid = false;
-            this.state.isError.address = "فیلد ضروری*";
-        }
-        if (this.state.password.length < 1) {
-            isFormValid = false;
-            this.state.isError.password = "فیلد ضروری*";
-        }
-        if (this.state.phone.length < 1) {
-            isFormValid = false;
-            this.state.isError.phone = "فیلد ضروری*";
-        }
-        if (this.state.email.length < 1) {
-            isFormValid = false;
-            this.state.isError.email = "فیلد ضروری*";
-        }
-        if (this.state.user_name.length < 1) {
-            isFormValid = false;
-            this.state.isError.user_name = "فیلد ضروری*";
-        }
-        if (this.state.first_name.length < 1) {
-            isFormValid = false;
-            this.state.isError.first_name = "فیلد ضروری*";
-        }
-        if (this.state.bookOrPerson.length < 1) {
-            isFormValid = false;
-            this.state.isError.bookOrPerson =
-                "!مشخص كردن نوع حساب كاربری الزامی می باشد";
-        }
-        if (this.state.password2.length < 1) {
-            isFormValid = false;
-            this.state.isError.password2 = "فیلد ضروری*";
-        }
-        if (isFormValid === true) {
 
-            let is_active_person = false;
-            let is_shop = false;
-            if (this.state.bookOrPerson === "person") {
-                is_active_person = true;
-            } else if (this.state.bookOrPerson === "library") is_shop = true;
 
-            const headers = {
-                'Content-Type': 'application/json',
-            }
-            console.log(this.state);
-            const data = {
-                username: this.state.user_name,
-                name: this.state.first_name,
-                password: this.state.password,
-                email: this.state.email,
-                phone_number: this.state.phone,
-                address: this.state.address,
-                is_book_store: is_shop,
-                is_private_person: is_active_person,
+        let is_active_person = false;
+        let is_shop = false;
+        if (this.state.bookOrPerson === "person") {
+            is_active_person = true;
+        } else if (this.state.bookOrPerson === "library") is_shop = true;
+
+        const headers = {
+            'Content-Type': 'application/json',
+        }
+        console.log(this.state);
+        const data = {
+            username: this.state.user_name,
+            name: this.state.first_name,
+            password: this.state.password,
+            email: this.state.email,
+            phone_number: this.state.phone,
+            address: this.state.address,
+            is_book_store: is_shop,
+            is_private_person: is_active_person,
+        }
+
+        axios.post('http://127.0.0.1:8000/api/register', data, { headers: headers, withCredentials: true }).then(
+            res => {
+                if (res.data != null) {
+                    console.log(res.data);
+                    this.setState({
+                        loggedIn: true,
+                        returnedUsername: res.data.username
+                    })
+
+                    this.handleModalShowHide();
+                } else {
+                    console.log("failed to log in");
+                }
             }
 
-            axios.post('http://127.0.0.1:8000/api/register', data, { headers: headers, withCredentials: true }).then(
-                res => {
-                    if (res.data != null) {
-                        console.log(res.data);
-                        this.setState({
-                            loggedIn: true,
-                            returnedUsername: res.data.username
-                        })
+        ).catch(error => {
+            // console.log(error.response.data.username);
+            console.log("error is here");
+            console.error(error.response);
 
-                        this.handleModalShowHide();
-                    } else {
-                        console.log("failed to log in");
-                    }
-                }
+            if (error.response.data.username.length > 0) {
 
-            ).catch(error => {
-                // console.log(error.response.data.username);
-                console.log("error is here");
-                console.error(error.response);
+                this.setState({ errorLogin: ".نام كاربری وارد شده از قبل در سایت ثبت نام شده است" });
+            }
+            if (error.response.data.email.length > 0) {
 
-                if (error.response.data.username.length > 0) {
+                this.setState({ errorLogin: ".ایمیل وارد شده از قبل در سایت ثبت نام شده است" });
+            }
+            else {
+                this.setState({ errorLogin: ".شماره تلفن وارد شده از قبل در سایت ثبت نام شده است" });
+            }
 
-                    this.setState({ errorLogin: ".نام كاربری وارد شده از قبل در سایت ثبت نام شده است" });
-                }
-                if (error.response.data.email.length > 0) {
-
-                    this.setState({ errorLogin: ".ایمیل وارد شده از قبل در سایت ثبت نام شده است" });
-                }
-                else {
-                    this.setState({ errorLogin: ".شماره تلفن وارد شده از قبل در سایت ثبت نام شده است" });
-                }
-
-            })
+        })
 
 
 
-            console.log(this.state);
-        } else {
-            this.handleModalShowHideError();
-            console.log(this.state);
-        }
+        console.log(this.state);
+
     }
 
     handleModalShowHide() {
@@ -269,7 +227,7 @@ class signUp extends React.Component {
                                                 <p className="labels">نام
                                             {' '}
                                                     {
-                                                        (isError.first_name.length === 0 && this.state.first_name.length)
+                                                        (isError.first_name.length === 0 && this.state.first_name.length > 0)
                                                             ?
                                                             (
                                                                 < svg
@@ -306,7 +264,7 @@ class signUp extends React.Component {
                                                 <p className="labels">نام كاربری
                                             {' '}
                                                     {
-                                                        (isError.user_name.length === 0 && this.state.user_name.length)
+                                                        (isError.user_name.length === 0 && this.state.user_name.length > 0)
                                                             ?
                                                             (
                                                                 < svg
@@ -343,7 +301,7 @@ class signUp extends React.Component {
                                                 <p className="labels">ایمیل
                                             {' '}
                                                     {
-                                                        (isError.email.length === 0 && this.state.email.length)
+                                                        (isError.email.length === 0 && this.state.email.length > 0)
                                                             ?
                                                             (
                                                                 < svg
@@ -379,7 +337,7 @@ class signUp extends React.Component {
                                                 <p className="labels">آدرس
                                             {' '}
                                                     {
-                                                        (isError.address.length === 0 && this.state.address.length)
+                                                        (isError.address.length === 0 && this.state.address.length > 0)
                                                             ?
                                                             (
                                                                 < svg
@@ -415,7 +373,7 @@ class signUp extends React.Component {
                                                 <p className="labels">شماره تماس
                                             {' '}
                                                     {
-                                                        (isError.phone.length === 0 && this.state.phone.length)
+                                                        (isError.phone.length === 0 && this.state.phone.length > 0)
                                                             ?
                                                             (
                                                                 < svg
@@ -451,7 +409,7 @@ class signUp extends React.Component {
                                                 <p className="labels">رمز عبور
                                             {' '}
                                                     {
-                                                        (isError.password.length === 0 && this.state.password.length)
+                                                        (isError.password.length === 0 && this.state.password.length > 0)
                                                             ?
                                                             (
                                                                 < svg
@@ -489,7 +447,7 @@ class signUp extends React.Component {
                                                 <p className="labels">تکرار رمز عبور
                                             {' '}
                                                     {
-                                                        (isError.password2.length === 0 && this.state.password2.length)
+                                                        (isError.password2.length === 0 && this.state.password2.length > 0)
                                                             ?
                                                             (
                                                                 < svg
@@ -511,7 +469,7 @@ class signUp extends React.Component {
                                                 <div class="form-group text-left">
                                                     <input
                                                         id="password2"
-                                                        placeholder="لطفا رمز عبور انتخابي خود را دوباره تكرار كنيد"
+                                                        placeholder="لطفا رمز عبور انتخابی خود را دوباره تكرار كنید"
                                                         type="password"
                                                         name="password2"
                                                         onChange={this.handleInputChange}
@@ -582,7 +540,7 @@ class signUp extends React.Component {
                                 </div>
                                 <div class="text-center">
                                     <Button
-                                        className="btn btn-primary"
+                                        className="btn btn-primary border-0"
                                         style={
                                             { "background-color": "#811854" }
                                         }
