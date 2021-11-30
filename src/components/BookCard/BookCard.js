@@ -1,8 +1,7 @@
 import React from 'react'
 import 'antd/dist/antd.css'
-//import { Link } from 'react-router-dom'
 import { Card } from 'antd';
-import { EditOutlined, EllipsisOutlined, HeartOutlined } from '@ant-design/icons';
+import { HeartOutlined } from '@ant-design/icons';
 import './BookCard.css'
 
 const url = 'http://127.0.0.1:8000'
@@ -29,15 +28,20 @@ const BookCard = ({id, name, image, price, author, type}) => {
     }
   }
 
-  const handlclick = () => {
+  /*
+  const handlcardclick = () => {
 
   }
+
+  const handlfavoritclick = () => {
+
+  }
+  */
 
   return (
     <Card
     hoverable
-    onClick={handlclick()}
-    //style={{width: 200}}
+    //onClick={}
     cover={
       <img
         style={{height: 320}}
@@ -46,9 +50,9 @@ const BookCard = ({id, name, image, price, author, type}) => {
       />
     }
     actions={[
-      <HeartOutlined block="true" size="large" key="heart" />,
+      <HeartOutlined /*onClick={handlfavoritclick()}*/ block="true" size="large" key="heart" />,
       <div>{tyype()}</div>,
-      <h2>{price}</h2>,
+      <h2>{price} تومان</h2>,
     ]}
   >
     <Meta
@@ -61,5 +65,3 @@ const BookCard = ({id, name, image, price, author, type}) => {
 }
 
 export default BookCard
-
-//<Link to={``} className="btn btn-primary btn-details">جزئیات بیشتر</Link>
