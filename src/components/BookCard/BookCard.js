@@ -1,7 +1,8 @@
 import React from 'react'
 import 'antd/dist/antd.css'
+//import { Link } from 'react-router-dom'
 import { Card } from 'antd';
-import { HeartOutlined } from '@ant-design/icons';
+import { EditOutlined, EllipsisOutlined, HeartOutlined } from '@ant-design/icons';
 import './BookCard.css'
 
 const url = 'http://127.0.0.1:8000'
@@ -12,36 +13,40 @@ const BookCard = ({id, name, image, price, author, type}) => {
   const tyype = () => {
     if(type==0)
       return(
-        <h2 style={{color:"red"}}>فروشی</h2>
+        <section>
+            <h3 style={{color:"red"}}>فروشی</h3>
+            <h2>{price}</h2>
+          </section>
       )
     else{
       if(type==1){
         return(
-          <h2 style={{color:"blue"}}>اجاره</h2>
+          <section>
+            <h3 style={{color:"blue"}}>اجاره</h3>
+            <h2>{price}</h2>
+          </section>
         )
       }
       else{
         return(
-          <h2 style={{color:"green"}}>اهدایی</h2>
+          <section>
+            <h3 style={{color:"green"}}>اهدایی</h3>
+            <h2>{price}</h2>
+          </section>
         )
       }
     }
   }
 
-  /*
-  const handlcardclick = () => {
+  const handlclick = () => {
 
   }
-
-  const handlfavoritclick = () => {
-
-  }
-  */
 
   return (
     <Card
     hoverable
-    //onClick={}
+    onClick={handlclick()}
+    //style={{width: 200}}
     cover={
       <img
         style={{height: 320}}
@@ -50,18 +55,25 @@ const BookCard = ({id, name, image, price, author, type}) => {
       />
     }
     actions={[
-      <HeartOutlined /*onClick={handlfavoritclick()}*/ block="true" size="large" key="heart" />,
-      <div>{tyype()}</div>,
-      <h2>{price} تومان</h2>,
+      <HeartOutlined key="heart" />,
+      <EditOutlined key="edit" />,
+      <EllipsisOutlined key="ellipsis" />,
     ]}
   >
     <Meta
       //avatar={<Avatar src="" />}
-      title={<h2>{name}</h2>}
-      description={author}
+      title={<h1>{name}</h1>}
+      description={
+        <div>
+        <h2>{author}</h2>
+        <div>{tyype()}</div>
+        </div>
+      }
     />
   </Card>
   )
 }
 
 export default BookCard
+
+//<Link to={``} className="btn btn-primary btn-details">جزئیات بیشتر</Link>
