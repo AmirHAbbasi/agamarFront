@@ -13,26 +13,17 @@ const BookCard = ({id, name, image, price, author, type}) => {
   const tyype = () => {
     if(type==0)
       return(
-        <section>
-            <h3 style={{color:"red"}}>فروشی</h3>
-            <h2>{price}</h2>
-          </section>
+        <h2 style={{color:"red"}}>فروشی</h2>
       )
     else{
       if(type==1){
         return(
-          <section>
-            <h3 style={{color:"blue"}}>اجاره</h3>
-            <h2>{price}</h2>
-          </section>
+          <h2 style={{color:"blue"}}>اجاره</h2>
         )
       }
       else{
         return(
-          <section>
-            <h3 style={{color:"green"}}>اهدایی</h3>
-            <h2>{price}</h2>
-          </section>
+          <h2 style={{color:"green"}}>اهدایی</h2>
         )
       }
     }
@@ -55,20 +46,15 @@ const BookCard = ({id, name, image, price, author, type}) => {
       />
     }
     actions={[
-      <HeartOutlined key="heart" />,
-      <EditOutlined key="edit" />,
-      <EllipsisOutlined key="ellipsis" />,
+      <HeartOutlined block="true" size="large" key="heart" />,
+      <div>{tyype()}</div>,
+      <h2>{price}</h2>,
     ]}
   >
     <Meta
       //avatar={<Avatar src="" />}
-      title={<h1>{name}</h1>}
-      description={
-        <div>
-        <h2>{author}</h2>
-        <div>{tyype()}</div>
-        </div>
-      }
+      title={<h2>{name}</h2>}
+      description={author}
     />
   </Card>
   )
