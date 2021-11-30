@@ -4,6 +4,7 @@ import BookList from './components/BookList/BookList'
 import Banner from './components/Banner/Banner'
 import FilterIcon from './components/Filter/FilterIcon'
 import { AppProvider } from './ReqBookList'
+import './App.css'
 
 function App() {
   return (
