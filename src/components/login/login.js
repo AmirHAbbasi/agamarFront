@@ -97,7 +97,7 @@ class login extends React.Component {
 
     submit = event => {
 
-        console.log("اينجا");
+        console.log("اینجا");
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -124,7 +124,7 @@ class login extends React.Component {
             }
         ).catch(error => {
             console.log("error is here", error);
-            this.setState({ errorLogin: "!نام كاربري يا رمز عبور اشتباه است" });
+            this.setState({ errorLogin: "!نام كاربری یا رمز عبور اشتباه است" });
             console.error(error.response);
 
         })
@@ -235,12 +235,12 @@ class login extends React.Component {
                                 </div>
                                 <div class="text-center">
                                     <Button
-                                        className="btn btn-primary"
+                                        className="btn btn-primary border-0"
                                         style={
                                             { "background-color": "#811854" }
                                         }
                                         type="submit"
-                                        to={"/پروفايل_كاربري"}
+                                        to={"/پروفایل_كاربری"}
                                         href="#"
                                         onClick={() => {
                                             this.submit();
@@ -277,7 +277,7 @@ class login extends React.Component {
                         <Switch>
                             {/* <Route exact path="/" component={Empty} /> */}
                             <Route path="/ثبت_نام" component={signUp} />
-                            <Route path="/پروفايل_كاربري" component={profile} />
+                            <Route path="/پروفایل_كاربری" component={profile} />
                         </Switch>
                     </div>
                 </div>
