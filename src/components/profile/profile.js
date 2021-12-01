@@ -10,8 +10,9 @@ const regExp = RegExp(
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 );
 const regExpPass = RegExp(
-    /^((?=.[0-9]{1,})|(?=.[!.@#$&-_]{1,}))(?=.[a-z]{1,}).{8,}$/
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"
 );
+const regexpUser = RegExp(/^\w[\w.]{2,18}\w$/);
 
 
 export default class profileDashboard extends Component {
@@ -47,8 +48,8 @@ export default class profileDashboard extends Component {
             user_name: null,
             email: null,
             address: null,
-            isBookStore: false,
-            isPrivatePerson: true,
+            isBookStore: null,
+            isPrivatePerson: null,
             phone: null,
             // first_name: "",
             // user_name: "",
@@ -82,6 +83,7 @@ export default class profileDashboard extends Component {
         this.setState({ address: item.address });
         this.setState({ phone: item.phone_number });
         this.setState({ pImage: item.prof_image });
+        // if(this.state.pImage)
         this.setState({ access: item.access_token });
         this.setState({ isBookStore: item.isBookStore });
         this.setState({ isPrivatePerson: item.isPrivatePerson });
@@ -102,8 +104,11 @@ export default class profileDashboard extends Component {
                     value.length < 1 ? "!این فیلد نمی تواند خالی باشد" : "";
                 break;
             case "user_name":
-                isError.user_name =
-                    value.length < 1 ? "!این فیلد نمی تواند خالی باشد" : "";
+                isError.user_name = !regexpUser.test(value) ? "!نام کاربری نامعتبر" : "";
+                console.log("regUser", regexpUser.test(value));
+                if (value.length < 1) {
+                    isError.user_name = "فیلد ضروری*";
+                }
                 break;
             case "address":
                 isError.address =
@@ -122,6 +127,7 @@ export default class profileDashboard extends Component {
                 }
                 break;
             case "password":
+                console.log("checkPass", regExpPass, "check", regExpPass.test(value));
                 isError.password = !regExpPass.test(value) ? "!یک رمز عبور قوی تر انتخاب کنید" : "";
                 if (value.length < 1) {
                     isError.password = "!این فیلد نمی تواند خالی باشد";
@@ -173,26 +179,34 @@ export default class profileDashboard extends Component {
                     console.log(res.data);
                     console.log("ok!!");
                     console.log("res:", res);
-                    this.handleModalShowHideZakhire();
 
                 } else {
                     console.log("failed to update");
                 }
             }
         ).catch(error => {
-            console.log("error is here");
+            console.log("error is here", error);
             console.log("error.response.data.password", error.response.data.password);
             error.response.data.password.forEach(element => {
-                if (element === "This password is too short. It must contain at least 8 characters.")
+                if (element === "This password is too short. It must contain at least 8 characters.") {
                     this.state.isError.bPassword.push(<h5>.رمز عبور انتخابی بسیار كوتاه است، رمز عبور باید حداقل 8 كاراكتر باشد</h5>);
-                if (element === "This password is too common.")
+                    console.log("bpassword", this.state.isError.bPassword);
+                    alert(".رمز عبور انتخابی بسیار كوتاه است، رمز عبور باید حداقل 8 كاراكتر باشد");
+                }
+                if (element === "This password is too common.") {
                     this.state.isError.bPassword.push(<h5>.رمز عبور ساده و قابل حدس است</h5>);
-                if (element === "This password is entirely numeric.")
+                    console.log("bpassword", this.state.isError.bPassword);
+                    alert(".رمز عبور ساده و قابل حدس است");
+                }
+                if (element === "This password is entirely numeric.") {
                     this.state.isError.bPassword.push(<h5>.رمز عبور نباید تماما عدد باشد</h5>);
-
+                    console.log("bpassword", this.state.isError.bPassword);
+                    alert(".رمز عبور نباید تماما عدد باشد");
+                }
+                console.log("bpassword", this.state.isError.bPassword);
 
             });
-            this.handleModalShowHideError();
+
             console.error(error.response);
 
         })
@@ -221,6 +235,7 @@ export default class profileDashboard extends Component {
                 if (res.data != null) {
                     console.log(res);
                     // console.log(res.data.access);
+                    alert(".تغییرات با موفقیت ذخیره شد");
 
                 } else {
                     console.log("failed to update");
@@ -229,6 +244,7 @@ export default class profileDashboard extends Component {
         ).catch(error => {
             console.log("error is here", error);
             console.error(error.response);
+            alert(".مشکلی از سمت سرور پیش آمده است. لطفا شکیبا باشید");
 
 
         })
@@ -245,7 +261,9 @@ export default class profileDashboard extends Component {
             <div style={{ backgroundColor: "#a83264" }}>
                 <div class="container rounded bg-white mt-5 mb-5 bigPart">
                     <div class="row">
-                        <div class="col-md-4 border-right">
+
+
+                        <div class="col-md-4">
                             <div class="p-3 py-5 title">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h4>تغییر رمز عبور</h4>
@@ -260,7 +278,7 @@ export default class profileDashboard extends Component {
                                         className="form-control2"
                                         placeholder=".رمز عبور قبلی خود را وارد كنید"
                                     />
-                                    <small className="text-danger inP">{isError.bPassword}</small>
+                                    {/* <small className="text-danger inP">{isError.bPassword}</small> */}
                                 </div>
 
                                 <div class="col-md-12">
@@ -329,6 +347,10 @@ export default class profileDashboard extends Component {
                                     <small className="text-danger inP">{!(this.state.password2 === "") ? isError.password2 : "فیلد ضروری*"}</small>
                                 </div>
 
+                                {/* <div class="text-center">
+                                    <small className="text-danger text-center">{this.state.isError.bPassword}</small>
+                                </div> */}
+
                                 <div class="mt-5 text-center">
                                     <button
                                         type="submit"
@@ -355,6 +377,8 @@ export default class profileDashboard extends Component {
                                 </div>
                             </div>
                         </div>
+
+
 
 
                         <div class="col-md-5 border-right">
@@ -569,7 +593,7 @@ export default class profileDashboard extends Component {
                         </div>
 
 
-                        <div class="col-md-3 imgC">
+                        <div class="col-md-3 imgC  border-right">
                             <div class="col-12 col-sm-6 col-lg-3 imgBox">
                                 <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style={{ visible: true }, { "animationName": "fadeInUp" }}>
 
@@ -578,7 +602,7 @@ export default class profileDashboard extends Component {
 
                                         <div class="social-info">
                                             <h5>
-                                                {this.state.isBookStore === true ? "شخص حقیقی" : "كتابفروشی"}
+                                                {this.state.isBookStore === false ? "شخص حقیقی" : "كتابفروشی"}
                                             </h5>
                                         </div>
                                     </div>
@@ -603,6 +627,9 @@ export default class profileDashboard extends Component {
                             </div>
                         </div>
 
+
+
+
                     </div>
                 </div>
 
@@ -611,8 +638,7 @@ export default class profileDashboard extends Component {
 
                 <Modal backdrop="static" centered className="my-modal" show={this.state.showHideImage}>
                     <Modal.Body>
-
-
+                        <h4>...این بخش به زودی به سایت اضافه می شود</h4>
                     </Modal.Body>
                     <Modal.Footer>
                         <div>
