@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 import "./signUp.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const regExp = RegExp(
@@ -18,13 +20,13 @@ class signUp extends React.Component {
     constructor() {
         super();
         this.state = {
-            showHide: true,
+            showHide: false,
             errorLogin: "",
             first_name: "",
             user_name: "",
             email: "",
             address: "",
-            bookOrPerson: "",
+
             phone: "",
             password: "",
             password2: "",
@@ -34,11 +36,11 @@ class signUp extends React.Component {
                 user_name: "",
                 email: "",
                 address: "",
-                bookOrPerson: "",
+
                 phone: "",
                 password: "",
                 password2: "",
-                bookOrPerson: "",
+
             },
         };
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -90,10 +92,6 @@ class signUp extends React.Component {
                         ? ""
                         : "!رمز عبور به درستی تكرار نشده است";
                 break;
-            case "bookOrPerson":
-                isError.bookOrPerson =
-                    value.length < 1 ? "!مشخص كردن نوع حساب كاربری الزامی می باشد" : "";
-                break;
             default:
                 break;
         }
@@ -107,14 +105,11 @@ class signUp extends React.Component {
 
 
 
-    submit = event => {
+    async submit() {
 
 
         let is_active_person = false;
         let is_shop = false;
-        if (this.state.bookOrPerson === "person") {
-            is_active_person = true;
-        } else if (this.state.bookOrPerson === "library") is_shop = true;
 
         const headers = {
             'Content-Type': 'application/json',
@@ -127,11 +122,11 @@ class signUp extends React.Component {
             email: this.state.email,
             phone_number: this.state.phone,
             address: this.state.address,
-            is_book_store: is_shop,
+            is_book_store: true,
             is_private_person: is_active_person,
         }
 
-        axios.post('http://127.0.0.1:8000/api/register', data, { headers: headers, withCredentials: true }).then(
+        await axios.post('http://127.0.0.1:8000/api/register', data, { headers: headers, withCredentials: true }).then(
             res => {
                 if (res.data != null) {
                     console.log(res.data);
@@ -139,8 +134,8 @@ class signUp extends React.Component {
                         loggedIn: true,
                         returnedUsername: res.data.username
                     })
-
                     this.handleModalShowHide();
+                    this.props.submit();
                 } else {
                     console.log("failed to log in");
                 }
@@ -148,19 +143,51 @@ class signUp extends React.Component {
 
         ).catch(error => {
             // console.log(error.response.data.username);
-            console.log("error is here");
+            console.log("error is in signUp");
             console.error(error.response);
             if (error.response.data.username !== undefined) {
-                this.setState({ errorLogin: ".نام كاربری وارد شده از قبل در سایت ثبت نام شده است" });
+                toast.error(".نام كاربری وارد شده از قبل در سایت ثبت نام شده است", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
             if (error.response.data.email !== undefined) {
-                this.setState({ errorLogin: ".ایمیل وارد شده از قبل در سایت ثبت نام شده است" });
+                toast.error(".ایمیل وارد شده از قبل در سایت ثبت نام شده است", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
             if (error.response.data.phone_number !== undefined) {
-                this.setState({ errorLogin: ".شماره تلفن وارد شده از قبل در سایت ثبت نام شده است" });
+                toast.error(".شماره تلفن وارد شده از قبل در سایت ثبت نام شده است", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
-            if (this.state.errorLogin.length === 0) {
-                this.setState({ errorLogin: ".مشکل غیر منتطره ای در سایت پیش آمده است. لطفا شکیبا باشید" });
+            if (!this.state.errorLogin.length === 0) {
+                toast.error(".مشکل غیر منتطره ای در سایت پیش آمده است. لطفا شکیبا باشید", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
                 console.log("فقط خدا داند ارور چیست");
             }
 
@@ -217,16 +244,16 @@ class signUp extends React.Component {
                         </div>
                         <div className="row">
 
-                            <div className="col-lg-6 card3">
+                            {/* <div className="col-lg-6 card3">
                                 <div className="card3 border-0">
                                     <div className="card-body1">
-                                        {/* <img src="https://www.prattlibrary.org/assets/card/bookshelves-bright-colors.jpg" width="450px" height="870px" /> */}
-                                        {/* <p>اینجا یک عکس قرار میگیرد</p> */}
+                                        <img src="https://www.prattlibrary.org/assets/card/bookshelves-bright-colors.jpg" width="450px" height="870px" />
+                                        <p>اینجا یک عکس قرار میگیرد</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
-                            <div className="col-lg-6">
+                            <div className="col-lg-12">
                                 <div className="card border-0">
                                     <div className="card-body">
                                         <form calssName="form-tag" onSubmit={() => { this.submit(); this.handleModalShowHide(); }}>
@@ -489,35 +516,23 @@ class signUp extends React.Component {
 
 
 
-                                            <div className="radio text-right">
-                                                <div className="text-right">
-                                                    <label>:نوع حساب كاربری خود را انتخاب كنید</label>
-                                                </div>
-                                                كتابفروشی
-                                                {' '}
-                                                <input
-                                                    type="radio"
-                                                    name="bookOrPerson"
-                                                    id="inlineRadio1"
-                                                    value="library"
-                                                    onChange={this.handleInputChange}
-                                                />
-                                                {'     '}
-                                                شخص حقیقی
-                                                {' '}
-                                                <input
-                                                    type="radio"
-                                                    name="bookOrPerson"
-                                                    id="inlineRadio1"
-                                                    value="person"
-                                                    onChange={this.handleInputChange}
-                                                />
-                                                <br></br>
-                                                <label for="password2" className="text-danger">{this.state.bookOrPerson.length > 0 ? isError.bookOrPerson : "!مشخص كردن نوع حساب كاربری الزامی می باشد"}</label>
-                                            </div>
-                                            <br></br>
 
-                                            <br></br>
+                                            <div>
+                                                <p className=" text-right labels">
+                                                    قبلا ثبت نام کرده اید؟<a
+                                                        className="nav-link"
+                                                        to={"/ورود"}
+                                                        href="#"
+                                                        onClick={() => {
+                                                            this.handleModalShowHide();
+                                                        }}
+                                                    >
+                                                        ورود
+                                                    </a>
+
+
+                                                </p>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -528,22 +543,7 @@ class signUp extends React.Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <div>
-                            <div>
-                                <p className="forgot-password text-right">
-                                    قبلا ثبت نام کرده اید؟{" "}
-                                    <a
-                                        className="nav-link"
-                                        to={"/ورود"}
-                                        href="#"
-                                        onClick={() => {
-                                            this.handleModalShowHide();
-                                        }}
-                                    >
-                                        ورود
-                                            </a>
-                                    {/* <small className="text-danger text-center">{errorLogin}</small> */}
-                                </p>
-                            </div>
+
                             <div class="text-center">
                                 <Button
                                     className="btn btn-primary border-0"
@@ -564,7 +564,6 @@ class signUp extends React.Component {
                                             || this.state.email.length < 1
                                             || this.state.user_name.length < 1
                                             || this.state.first_name.length < 1
-                                            || this.state.bookOrPerson.length < 1
                                             || this.state.password2.length < 1
 
                                             || this.state.isError.address.length > 0
@@ -573,7 +572,6 @@ class signUp extends React.Component {
                                             || this.state.isError.email.length > 0
                                             || this.state.isError.user_name.length > 0
                                             || this.state.isError.first_name.length > 0
-                                            || this.state.isError.bookOrPerson.length > 0
                                             || this.state.isError.password2.length > 0
                                         )
                                             ?
