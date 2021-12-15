@@ -4,6 +4,8 @@ import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 import "./login.css";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const regExp = RegExp(
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -38,8 +40,9 @@ class login extends React.Component {
     }
 
 
-    getUserInfo(access, refresh) {
+    async getUserInfo(access, refresh) {
         console.log("getting user info");
+
         let info = {
             username: "",
             name: "",
@@ -49,16 +52,19 @@ class login extends React.Component {
             email: "",
             phone_number: "",
             address: "",
-            isBookStore: "",
             isPrivatePerson: ""
         }
-        // console.log(access);
+
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${access}`,
         }
-        axios.get('http://127.0.0.1:8000/api/userInfo', { headers: headers, withCredentials: true }).then(
+
+        await axios.get('http://127.0.0.1:8000/api/userInfo', { headers: headers, withCredentials: true }).then(
+
+
             res => {
+                console.log("4");
                 console.log("start getting user info");
                 if (res.data != null) {
                     // console.log(res.data.message);
@@ -68,8 +74,9 @@ class login extends React.Component {
                     info.email = res.data.message.email;
                     info.phone_number = res.data.message.phone_number;
                     info.address = res.data.message.address;
-                    info.isBookStore = res.data.message.is_book_store;
+                    info.isBookStore = true;
                     info.isPrivatePerson = res.data.message.is_private_person;
+
                     console.log("info:", info);
                     this.setState({
                         loggedIn: true,
@@ -85,15 +92,17 @@ class login extends React.Component {
                 }
             }
         ).catch(error => {
+
             console.log("error in get info loop", error);
             console.error(error.response);
 
         })
+        console.log("10");
         this.props.onSubmit(info);
     }
 
 
-    submit = event => {
+    async submit() {
 
         console.log("اینجا");
         const headers = {
@@ -103,7 +112,7 @@ class login extends React.Component {
             "username": this.state.user_name,
             "password": this.state.password,
         }
-        axios.post('http://127.0.0.1:8000/api/token', data, { headers: headers, withCredentials: true }).then(
+        await axios.post('http://127.0.0.1:8000/api/token', data, { headers: headers, withCredentials: true }).then(
             res => {
                 if (res.data != null) {
 
@@ -121,8 +130,18 @@ class login extends React.Component {
                 }
             }
         ).catch(error => {
-            console.log("error is here", error);
-            this.setState({ errorLogin: "!نام كاربری یا رمز عبور اشتباه است" });
+            console.log("error is login submit", error);
+
+            toast.error("نام کاربری یا رمز عبور اشتباه است!", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
             console.error(error.response);
 
         })
@@ -136,6 +155,18 @@ class login extends React.Component {
         const { errorLogin } = this.state;
         return (
             <div>
+
+                <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop
+                    closeOnClick
+                    rtl
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
                 <Modal dialogClassName="modal-90w" backdrop="static" centered className="my-modal" show={this.state.showHide}>
                     <Modal.Body>
                         <div className="align-items-right text-right header">
@@ -169,16 +200,16 @@ class login extends React.Component {
                         </div>
                         <div className="row">
 
-                            <div className="col-lg-6 card2">
+                            {/* <div className="col-lg-6 card2">
                                 <div className="card2 border-0">
                                     <div className="card-body1">
-                                        {/* <img src="https://www.prattlibrary.org/assets/card/bookshelves-bright-colors.jpg" width="450px" height="870px" /> */}
-                                        {/* <p>اینجا یک عکس قرار میگیرد</p> */}
+                                        <img src="https://www.prattlibrary.org/assets/card/bookshelves-bright-colors.jpg" width="450px" height="870px" />
+                                        <p>اینجا یک عکس قرار میگیرد</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
-                            <div className="col-lg-6">
+                            <div className="col-lg-12">
                                 <div className="card border-0">
                                     <div className="card-body">
                                         <form calssName="form-tag" onSubmit={() => { this.submit(); this.handleModalShowHide(); }}>
@@ -204,6 +235,22 @@ class login extends React.Component {
                                                     onChange={this.handleInputChange}
                                                 />
                                             </div>
+                                            <div>
+                                                <p className=" text-right labels">
+                                                    قبلا ثبت نام نکرده اید؟<a
+                                                        className="nav-link"
+                                                        to={"/ورود"}
+                                                        href="#"
+                                                        onClick={() => {
+                                                            this.handleModalShowHide();
+                                                        }}
+                                                    >
+                                                        ثبت نام
+                                                    </a>
+
+
+                                                </p>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -214,22 +261,7 @@ class login extends React.Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <div>
-                            <div>
-                                <p className="forgot-password text-right">
-                                    قبلا ثبت نام نکرده اید؟{" "}
-                                    <a
-                                        className="nav-link"
-                                        to={"/ثبت_نام"}
-                                        href="#"
-                                        onClick={() => {
-                                            this.handleModalShowHide();
-                                        }}
-                                    >
-                                        ثبت نام
-                                    </a>
 
-                                </p>
-                            </div>
                             <div class="text-center">
                                 <Button
                                     className="btn btn-primary border-0"
