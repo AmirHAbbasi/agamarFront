@@ -1,14 +1,8 @@
 import React, { Component } from "react";
-import "./profile2.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "./profile.css";
 import axios from "axios";
-import ImageChanges from "./ImageChanges";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal } from "react-bootstrap";
-import AvatarImageCropper from 'react-avatar-image-cropper';
-// import ImgCrop from 'antd-img-crop';
-// import { Upload } from 'antd';
-import { Cropper } from "react-image-cropper";
 import Avatar from 'react-avatar-edit';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -35,6 +29,8 @@ export default class profileDashboard extends Component {
         this.state = {
 
 
+            preview: null,
+            src,
             showHideImage: false,
 
             isError: {
@@ -44,32 +40,26 @@ export default class profileDashboard extends Component {
                 email: "",
                 address: "",
                 bPassword: [],
-                bookOrPerson: "",
                 phone: "",
                 password: "",
                 password2: "",
-                bookOrPerson: "",
             },
 
             totalReactPackages: null,
             // this.props.state.user_info
             pImage: "https://bootdey.com/img/Content/avatar/avatar6.png",
 
-            preview: null,
-            src,
 
             first_name: null,
             user_name: null,
             email: null,
             address: null,
-            isBookStore: null,
             isPrivatePerson: null,
             phone: null,
             // first_name: "",
             // user_name: "",
             // email: "",
             // address: "",
-            // isBookStore: false,
             // isPrivatePerson: true,
             // phone: "",
             oldPassword: "",
@@ -84,6 +74,7 @@ export default class profileDashboard extends Component {
         this.onCrop = this.onCrop.bind(this)
         this.onClose = this.onClose.bind(this)
         this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this)
+        this.onSave = this.onSave.bind(this)
     }
 
     handleModalShowHide() {
@@ -108,7 +99,6 @@ export default class profileDashboard extends Component {
         this.setState({ pImage: item.prof_image });
         // if(this.state.pImage)
         this.setState({ access: item.access_token });
-        this.setState({ isBookStore: item.isBookStore });
         this.setState({ isPrivatePerson: item.isPrivatePerson });
 
 
@@ -179,7 +169,7 @@ export default class profileDashboard extends Component {
 
 
 
-    submitPassword() {
+    async submitPassword() {
         console.log("submitPassword function");
         let item = JSON.parse(localStorage.getItem("info"))
         let access = item.access_token;
@@ -197,7 +187,7 @@ export default class profileDashboard extends Component {
             password2: this.state.password2,
         }
         console.log(data);
-        axios.patch('http://127.0.0.1:8000/api/change_password', data, { headers: headers, withCredentials: true }).then(
+        await axios.patch('http://127.0.0.1:8000/api/change_password', data, { headers: headers, withCredentials: true }).then(
             res => {
                 console.log("just after axios");
                 if (res.data != null) {
@@ -271,7 +261,7 @@ export default class profileDashboard extends Component {
 
     }
 
-    submitGeneral() {
+    async submitGeneral() {
         let item = JSON.parse(localStorage.getItem("info"))
         let access = item.access_token;
 
@@ -288,7 +278,7 @@ export default class profileDashboard extends Component {
             address: this.state.address,
         }
         // console.log(data);
-        axios.patch('http://127.0.0.1:8000/api/update-userInfo', data, { headers: headers, withCredentials: true }).then(
+        await axios.patch('http://127.0.0.1:8000/api/update-userInfo', data, { headers: headers, withCredentials: true }).then(
             res => {
                 if (res.data != null) {
                     console.log(res);
@@ -364,14 +354,14 @@ export default class profileDashboard extends Component {
         };
     }
 
-    onSave = () => {
+    async onSave() {
         let item = JSON.parse(localStorage.getItem("info"))
         let access = item.access_token;
         let formData = new FormData();
-        let preview = this.state.preview;
-        console.log("preview in onSave: ", preview);
+        // let preview = this.state.preview;
+        // console.log("preview in onSave: ", this.state.preview);
 
-        if (preview === null) {
+        if (this.state.preview === null) {
             toast.error("ابتدا باید یک فایل انتخاب کنید!", {
                 position: "top-center",
                 autoClose: 5000,
@@ -382,7 +372,7 @@ export default class profileDashboard extends Component {
                 progress: undefined,
             });
         } else {
-            fetch(preview)
+            await fetch(this.state.preview)
                 .then((res) => res.blob())
                 .then((res) => {
                     console.log("res: ", res);
@@ -395,13 +385,12 @@ export default class profileDashboard extends Component {
                     formData.append("profile_image", file);
 
                     console.log("formData after append: ", formData.has("profile_image"));
-                    axios
-                        .patch('http://127.0.0.1:8000/api/update-userInfo', formData, {
-                            headers: {
-                                'Authorization': `Bearer ${access}`,
-                                "Content-Type": "multipart/form-data",
-                            },
-                        })
+                    axios.patch('http://127.0.0.1:8000/api/update-userInfo', formData, {
+                        headers: {
+                            'Authorization': `Bearer ${access}`,
+                            "Content-Type": "multipart/form-data",
+                        },
+                    })
                         .then((response) => {
                             console.log("response: ", response);
                             item.prof_image = this.state.preview;
@@ -472,15 +461,15 @@ export default class profileDashboard extends Component {
 
                                             style={{ maxWidth: "100%" }} alt="" />
 
-                                        <div class="social-info">
+                                        {/* <div class="social-info">
                                             <h5>
                                                 {this.state.isBookStore === false ? "شخص حقیقی" : "كتابفروشی"}
                                             </h5>
-                                        </div>
+                                        </div> */}
                                     </div>
 
                                     <div class="single_advisor_details_info">
-                                        <h6>{this.state.first_name}</h6>
+                                        <p class="designation">{this.state.first_name}</p>
                                         <p class="designation">{this.state.phone}</p>
                                     </div>
                                 </div>
@@ -857,15 +846,17 @@ export default class profileDashboard extends Component {
                                 onClose={this.onClose}
                                 onBeforeFileLoad={this.onBeforeFileLoad}
                                 src={this.state.src}
+                                exportAsSquare
+                                label="انتخاب فایل"
                             />
                             <br></br>
-                            <img src={this.state.preview} alt="Preview" />
+                            <img src={this.state.preview} alt="Preview" style={{ height: "30%" }, { width: "30%" }} />
                             <br></br>
                             <br></br>
                             <div>
                                 <div class="text-center">
                                     <Button
-                                        onClick={this.onSave}
+                                        onClick={() => { this.handleModalShowHide(); this.onSave(); }}
                                         className="btn btn-primary px-4 border-0"
                                         style={
                                             { "background-color": "#811854" }
