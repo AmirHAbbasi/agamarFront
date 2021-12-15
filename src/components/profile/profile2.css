@@ -113,6 +113,7 @@ input.form-control2 {
 }
 
 .single_advisor_profile .advisor_thumb {
+  /* margin-right: -200px; */
   position: relative;
   z-index: 1;
   border-radius: 15px 15px 0 0;
@@ -129,7 +130,7 @@ input.form-control2 {
   position: absolute;
   width: 147%;
   height: 80px;
-  bottom: -45px;
+  bottom: -50px;
   left: -25%;
   content: "";
   background-color: #ffc4e1;
@@ -198,7 +199,7 @@ input.form-control2 {
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .single_advisor_profile .single_advisor_details_info h6 {
-    font-size: 14px;
+    font-size: 20px;
   }
 }
 
@@ -206,7 +207,7 @@ input.form-control2 {
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
   margin-bottom: 0;
-  font-size: 14px;
+  font-size: 20px;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .single_advisor_profile .single_advisor_details_info p {
