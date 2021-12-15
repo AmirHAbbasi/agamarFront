@@ -10,6 +10,8 @@ import AvatarImageCropper from 'react-avatar-image-cropper';
 // import { Upload } from 'antd';
 import { Cropper } from "react-image-cropper";
 import Avatar from 'react-avatar-edit';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const regExp = RegExp(
@@ -202,6 +204,15 @@ export default class profileDashboard extends Component {
                     console.log(res.data);
                     console.log("ok!!");
                     console.log("res:", res);
+                    toast.success('رمز عبور با موفقیت تغییر کرد.', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
 
                 } else {
                     console.log("failed to update");
@@ -214,17 +225,41 @@ export default class profileDashboard extends Component {
                 if (element === "This password is too short. It must contain at least 8 characters.") {
                     this.state.isError.bPassword.push(<h5>.رمز عبور انتخابی بسیار كوتاه است، رمز عبور باید حداقل 8 كاراكتر باشد</h5>);
                     console.log("bpassword", this.state.isError.bPassword);
-                    alert(".رمز عبور انتخابی بسیار كوتاه است، رمز عبور باید حداقل 8 كاراكتر باشد");
+                    toast.error(".رمز عبور انتخابی بسیار كوتاه است، رمز عبور باید حداقل 8 كاراكتر باشد", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 }
                 if (element === "This password is too common.") {
                     this.state.isError.bPassword.push(<h5>.رمز عبور ساده و قابل حدس است</h5>);
                     console.log("bpassword", this.state.isError.bPassword);
-                    alert(".رمز عبور ساده و قابل حدس است");
+                    toast.error(".رمز عبور ساده و قابل حدس است", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 }
                 if (element === "This password is entirely numeric.") {
                     this.state.isError.bPassword.push(<h5>.رمز عبور نباید تماما عدد باشد</h5>);
                     console.log("bpassword", this.state.isError.bPassword);
-                    alert(".رمز عبور نباید تماما عدد باشد");
+                    toast.error(".رمز عبور نباید تماما عدد باشد", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 }
                 console.log("bpassword", this.state.isError.bPassword);
 
@@ -273,7 +308,15 @@ export default class profileDashboard extends Component {
 
                     localStorage.setItem("info", JSON.stringify(item));
                     console.log("item", item);
-                    alert(".تغییرات با موفقیت ذخیره شد");
+                    toast.success(".تغییرات با موفقیت ذخیره شد", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
 
                 } else {
                     console.log("failed to update");
@@ -282,7 +325,16 @@ export default class profileDashboard extends Component {
         ).catch(error => {
             console.log("error is in submit general", error);
             console.error(error.response);
-            alert(".مشکلی از سمت سرور پیش آمده است. لطفا شکیبا باشید");
+            toast.error(".مشکلی از سمت سرور پیش آمده است. لطفا شکیبا باشید", {
+
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
 
 
         })
@@ -299,7 +351,15 @@ export default class profileDashboard extends Component {
 
     onBeforeFileLoad(elem) {
         if (elem.target.files[0].size > 7168000) {
-            alert("File is too big!");
+            toast.error("اندازه فایل بیش از حد بزگ است!", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             elem.target.value = "";
         };
     }
@@ -312,7 +372,15 @@ export default class profileDashboard extends Component {
         console.log("preview in onSave: ", preview);
 
         if (preview === null) {
-            alert("please choose a file");
+            toast.error("ابتدا باید یک فایل انتخاب کنید!", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         } else {
             fetch(preview)
                 .then((res) => res.blob())
@@ -341,13 +409,28 @@ export default class profileDashboard extends Component {
 
                             localStorage.setItem("info", JSON.stringify(item));
                             console.log("item", item);
-                            alert(".تغییرات با موفقیت ذخیره شد");
-                            // onClose();
+                            toast.success("تغییرات با موفقیت ذخیره شد.", {
+                                position: "top-center",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                            });
                         })
                         .catch((error) => {
                             console.log("error is in submit photo", error);
                             console.error(error.response);
-                            alert(".مشکلی از سمت سرور پیش آمده است. لطفا شکیبا باشید");
+                            toast.error('مشکلی از سمت سرور پیش آمده، لطفا شکیبا باشید!', {
+                                position: "top-center",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                            });
                         });
                     // console.log("formData after2 append: ", formData);
                 });
@@ -364,6 +447,19 @@ export default class profileDashboard extends Component {
         const { isError } = this.state;
         return (
             <div style={{ backgroundColor: "#a83264" }}>
+
+                <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop
+                    closeOnClick
+                    rtl
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
+
                 <div class="container rounded bg-white mt-5 mb-5 bigPart">
                     <div class="row">
 
