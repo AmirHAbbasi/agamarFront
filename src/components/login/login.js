@@ -16,6 +16,8 @@ class login extends React.Component {
     constructor() {
         super();
         this.state = {
+
+            buttonText: "ورود به سایت",
             showHide: false,
             errorLogin: "",
             user_name: "",
@@ -148,7 +150,9 @@ class login extends React.Component {
 
     };
 
-
+    setLoading() {
+        this.setState({ buttonText: "منتظر بمانید..." })
+    }
 
 
     render() {
@@ -272,6 +276,7 @@ class login extends React.Component {
                                     to={"/پروفایل_كاربری"}
                                     href="#"
                                     onClick={() => {
+                                        this.setLoading();
                                         this.submit();
                                     }}
                                     disabled={
@@ -285,7 +290,7 @@ class login extends React.Component {
                                             false
                                     }
                                 >
-                                    ورود به سایت
+                                    {this.state.buttonText}
                                 </Button>
                                 {' '}
                                 <Button
