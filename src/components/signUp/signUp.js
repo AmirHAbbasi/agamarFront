@@ -104,11 +104,80 @@ class signUp extends React.Component {
         console.log(this.state);
     };
 
+    // async getUserInfo(access, refresh) {
+    //     console.log("getting user info");
 
+    //     let info = {
+    //         username: "",
+    //         name: "",
+    //         prof_image: "",
+    //         access_token: access,
+    //         refresh_token: refresh,
+    //         email: "",
+    //         phone_number: "",
+    //         address: "",
+    //         isPrivatePerson: ""
+    //     }
+
+    //     const headers = {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': `Bearer ${access}`,
+    //     }
+
+    //     await axios.get('http://127.0.0.1:8000/api/userInfo', { headers: headers, withCredentials: true }).then(
+
+
+    //         res => {
+    //             console.log("4");
+    //             console.log("start getting user info");
+    //             if (res.data != null) {
+    //                 // console.log(res.data.message);
+    //                 info.username = res.data.message.username;
+    //                 info.name = res.data.message.name;
+    //                 info.prof_image = res.data.message.profile_image;
+    //                 info.email = res.data.message.email;
+    //                 info.phone_number = res.data.message.phone_number;
+    //                 info.address = res.data.message.address;
+    //                 info.isBookStore = true;
+    //                 info.isPrivatePerson = res.data.message.is_private_person;
+
+    //                 console.log("info:", info);
+    //                 this.setState({
+    //                     loggedIn: true,
+    //                     returnedUsername: res.data.username
+    //                 })
+    //                 localStorage.setItem("info", JSON.stringify(info));
+    //                 // let item = JSON.parse(localStorage.getItem("info"));
+    //                 // console.log("item:");
+    //                 // console.log(item);
+
+    //             } else {
+    //                 console.log("failed to log in");
+    //             }
+    //         }
+    //     ).catch(error => {
+
+    //         console.log("error in get info loop", error);
+    //         console.error(error.response);
+
+    //     })
+    //     console.log("10");
+    //     // this.props.onSubmit(info);
+    // }
 
     async submit() {
 
-
+        let info = {
+            username: "",
+            name: "",
+            prof_image: "",
+            access_token: "",
+            refresh_token: "",
+            email: "",
+            phone_number: "",
+            address: "",
+            isPrivatePerson: ""
+        }
         let is_active_person = false;
         let is_shop = false;
 
@@ -130,19 +199,44 @@ class signUp extends React.Component {
         await axios.post('http://127.0.0.1:8000/api/register', data, { headers: headers, withCredentials: true }).then(
             res => {
                 if (res.data != null) {
-                    console.log(res.data);
+                    console.log("res.data", res.data);
                     this.setState({
                         loggedIn: true,
                         returnedUsername: res.data.username
                     })
+                    // this.getUserInfo(res.data.access, res.data.refresh);
+
+
+                    info.username = res.data.message.username;
+                    info.name = res.data.message.name;
+                    info.prof_image = res.data.message.profile_image;
+                    info.email = res.data.message.email;
+                    info.phone_number = res.data.message.phone_number;
+                    info.address = res.data.message.address;
+                    info.isBookStore = true;
+                    info.isPrivatePerson = res.data.message.is_private_person;
+                    info.access_token = res.data.access;
+                    info.refresh_token = res.data.refresh;
+
+                    console.log("info:", info);
+                    this.setState({
+                        loggedIn: true,
+                        returnedUsername: res.data.username
+                    })
+                    localStorage.setItem("info", JSON.stringify(info));
+                    console.log("item: ", JSON.parse(localStorage.getItem("info")));
+
                     this.handleModalShowHide();
                     this.props.submit();
+                    this.props.onSubmit(info);
                 } else {
+                    this.setState({ buttonText: "ثبت نام" })
                     console.log("failed to log in");
                 }
             }
 
         ).catch(error => {
+            this.setState({ buttonText: "ثبت نام" })
             // console.log(error.response.data.username);
             console.log("error is in signUp");
             console.error(error.response);
@@ -538,6 +632,7 @@ class signUp extends React.Component {
 
                             <div class="text-center">
                                 <Button
+                                    dir="rtl"
                                     className="btn btn-primary border-0"
                                     style={
                                         { "background-color": "#811854" }
