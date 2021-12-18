@@ -435,8 +435,8 @@ export default class profileDashboard extends Component {
         let item = JSON.parse(localStorage.getItem("info"));
         const { isError } = this.state;
         return (
-            <div style={{ backgroundColor: "#a83264" }}>
-
+            <div >
+                {/* style={{ backgroundColor: "#a83264" }} */}
                 <ToastContainer
                     position="top-center"
                     autoClose={5000}
@@ -452,7 +452,7 @@ export default class profileDashboard extends Component {
                 <div class="container rounded bg-white mt-5 mb-5 bigPart">
                     <div class="row">
 
-                        <div class="col-md-3 imgC  border-right">
+                        <div class="col-md-3 imgC">
                             <div class="col-12 col-sm-6 col-lg-3 imgBox">
                                 <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style={{ visible: true }, { "animationName": "fadeInUp" }}>
 
@@ -489,9 +489,9 @@ export default class profileDashboard extends Component {
                         </div>
 
                         <div class="col-md-5 border-right">
-                            <div class="p-3 py-5">
+                            <div class="p-3 py-5 title">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4 class="text-right">تغییر اطلاعات کاربری</h4>
+                                    <h4>تغییر اطلاعات کاربری</h4>
                                 </div>
 
                                 <div class="row mt-3 title">
@@ -526,7 +526,7 @@ export default class profileDashboard extends Component {
                                             value={this.state.first_name}
                                             class="form-control1"
                                         />
-                                        <small className="text-danger inP">{!(this.state.first_name === "") ? isError.first_name : "فیلد ضروری*"}</small>
+                                        <small className="small-font text-danger inP">{!(this.state.first_name === "") ? isError.first_name : "فیلد ضروری*"}</small>
 
                                     </div>
                                     <div class="col-md-12">
@@ -560,7 +560,7 @@ export default class profileDashboard extends Component {
                                             // Value={this.state.user_name}
                                             onChange={this.handleInputChange}
                                         />
-                                        <small className="text-danger inP">{!(this.state.user_name === "") ? isError.user_name : "فیلد ضروری*"}</small>
+                                        <small className="small-font text-danger inP">{!(this.state.user_name === "") ? isError.user_name : "فیلد ضروری*"}</small>
 
                                     </div>
                                     <div class="col-md-12">
@@ -594,7 +594,7 @@ export default class profileDashboard extends Component {
                                             placeholder=".یك پست الكترونیك جدید برای خود انتخاب كنید"
                                             value={this.state.email}
                                         />
-                                        <small className="text-danger inP">{!(this.state.email === "") ? isError.email : "فیلد ضروری*"}</small>
+                                        <small className="small-font text-danger inP">{!(this.state.email === "") ? isError.email : "فیلد ضروری*"}</small>
 
                                     </div>
                                     <div class="col-md-12">
@@ -628,7 +628,7 @@ export default class profileDashboard extends Component {
                                             placeholder=".آدرس جدید را وارد كنید"
                                             value={this.state.address}
                                         />
-                                        <small className="text-danger inP">{!(this.state.address === "") ? isError.address : "فیلد ضروری*"}</small>
+                                        <small className="small-font text-danger inP">{!(this.state.address === "") ? isError.address : "فیلد ضروری*"}</small>
                                     </div>
                                     <div class="col-md-12">
                                         <label class="labels">شماره تماس
@@ -661,7 +661,7 @@ export default class profileDashboard extends Component {
                                             placeholder=".شماره تلفن همراه جدید را وارد كنید"
                                             value={this.state.phone}
                                         />
-                                        <small className="text-danger inP">{!(this.state.phone === "") ? isError.phone : "فیلد ضروری*"}</small>
+                                        <small className="small-font text-danger inP">{!(this.state.phone === "") ? isError.phone : "فیلد ضروری*"}</small>
                                     </div>
                                 </div>
 
@@ -701,7 +701,7 @@ export default class profileDashboard extends Component {
 
 
 
-                        <div class="col-md-4">
+                        <div class="col-md-4  border-right ">
                             <div class="p-3 py-5 title">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h4>تغییر رمز عبور</h4>
@@ -716,7 +716,7 @@ export default class profileDashboard extends Component {
                                         className="form-control2"
                                         placeholder=".رمز عبور قبلی خود را وارد كنید"
                                     />
-                                    {/* <small className="text-danger inP">{isError.bPassword}</small> */}
+                                    {/* <small className="small-font text-danger inP">{isError.bPassword}</small> */}
                                 </div>
 
                                 <div class="col-md-12">
@@ -749,11 +749,11 @@ export default class profileDashboard extends Component {
                                         className="form-control2"
                                         placeholder=".رمز عبور جدید خود را وارد نمایید"
                                     />
-                                    <small className="text-danger inP">{!(this.state.password === "") ? isError.password : "فیلد ضروری*"}</small>
+                                    <small className="small-font text-danger inP">{!(this.state.password === "") ? isError.password : "فیلد ضروری*"}</small>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label class="labels">رمز عبور قبلی
+                                    <label class="labels">تکرار رمز عبور
                                             {' '}
                                         {
                                             (isError.password2.length === 0 && !(this.state.password2 === ""))
@@ -782,11 +782,11 @@ export default class profileDashboard extends Component {
                                         className="form-control2"
                                         placeholder=".رمز عبور جدید خود را تكرار نمایید"
                                     />
-                                    <small className="text-danger inP">{!(this.state.password2 === "") ? isError.password2 : "فیلد ضروری*"}</small>
+                                    <small className="small-font text-danger inP">{!(this.state.password2 === "") ? isError.password2 : "فیلد ضروری*"}</small>
                                 </div>
 
                                 {/* <div class="text-center">
-                                    <small className="text-danger text-center">{this.state.isError.bPassword}</small>
+                                    <small className="small-font text-danger text-center">{this.state.isError.bPassword}</small>
                                 </div> */}
 
                                 <div class="mt-5 text-center">

@@ -32,18 +32,27 @@
   font-size: 15px;
   font-weight: 400;
   text-align: right;
-  margin-right: 20px;
+  margin-right: 25px;
+  margin-bottom: -15px;
+  margin-top: 10px;
 }
-.inP {
+/* .inP {
   margin-right: 20px;
-}
+} */
 .imgButton {
-  margin-left: 25px;
-  margin-top: -60px;
+  margin-left: -5px;
+  /* margin-top: -40px; */
 }
 .imgBox {
   margin-top: 20px;
 }
+
+.small-font {
+  font-size: 12px;
+  font-weight: bolder;
+  margin-right: 25px;
+}
+
 input.form-control1 {
   font-size: 1em;
   font-weight: 200;
@@ -52,9 +61,9 @@ input.form-control1 {
   width: 100%;
   text-align: right;
   cursor: text;
-  border-radius: 20px;
+  border-radius: 50px;
   background: #eaeaea;
-  height: 60px;
+  height: 50px;
   padding: 20px 20px 20px 20px;
   outline: none;
   border: none;
@@ -67,13 +76,15 @@ input.form-control2 {
   width: 100%;
   text-align: right;
   cursor: text;
-  border-radius: 20px;
+  border-radius: 50px;
   background: #ffc4e1;
-  height: 60px;
+  height: 50px;
   padding: 20px 20px 20px 20px;
   outline: none;
   border: none;
 }
+
+
 .title {
   text-align: right;
 }
@@ -81,7 +92,7 @@ input.form-control2 {
   margin-bottom: 20px;
   /* background-color: #FF87CA; */
 }
-.col-md-5 {
+/* .col-md-5 {
   background-color: #ffc4e1;
 }
 .col-md-3 {
@@ -89,13 +100,8 @@ input.form-control2 {
 }
 .col-md-4 {
   background-color: #eaeaea;
-}
-/* .add-experience:hover {
-  background: #BA68C8;
-  color: #fff;
-  cursor: pointer;
-  border: solid 1px #BA68C8
 } */
+
 
 /* **************************************** */
 
@@ -184,7 +190,7 @@ input.form-control2 {
   transition-duration: 500ms;
   position: absolute;
   z-index: 1;
-  margin-top: 45px;
+  margin-top: 55px;
   width: 175px;
   height: 3px;
   background-color: #811854;
@@ -209,11 +215,13 @@ input.form-control2 {
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
   margin-bottom: 0;
+  margin-bottom: 10px;
   font-size: 20px;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .single_advisor_profile .single_advisor_details_info p {
     font-size: 12px;
+  margin-bottom: 20px;
   }
 }
 
