@@ -495,19 +495,21 @@ export default class profileDashboard extends Component {
     }
     onClose() {
         this.setState({ preview: null })
-        this.setState({ src: null })
     };
 
-
+    previewFunc() {
+        if (this.state.preview === null) return (<br></br>);
+        return (<img src={this.state.preview} alt="Preview" style={{ height: "30%" }, { width: "30%" }} />);
+    }
     render() {
         let item = JSON.parse(localStorage.getItem("info"));
         const { isError } = this.state;
         return (
             <div >
                 {/* style={{ backgroundColor: "#a83264" }} */}
-                <ToastContainer
+                {/* <ToastContainer
                     position="top-center"
-                    autoClose={5000}
+                    // autoClose={5000}
                     hideProgressBar={false}
                     newestOnTop
                     closeOnClick
@@ -515,7 +517,7 @@ export default class profileDashboard extends Component {
                     pauseOnFocusLoss
                     draggable
                     pauseOnHover
-                />
+                /> */}
 
                 <div class="container rounded bg-white mt-5 mb-5 bigPart">
                     <div class="row">
@@ -554,7 +556,7 @@ export default class profileDashboard extends Component {
 
                         <div class="col-md-5 border-right">
                             <div class="p-3 py-5 title">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class=" text-center mb-3">
                                     <h4>تغییر اطلاعات کاربری</h4>
                                 </div>
 
@@ -767,7 +769,7 @@ export default class profileDashboard extends Component {
 
                         <div class="col-md-4  border-right ">
                             <div class="p-3 py-5 title">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="text-center  mb-3">
                                     <h4>تغییر رمز عبور</h4>
                                 </div>
 
@@ -895,17 +897,19 @@ export default class profileDashboard extends Component {
                         <h4>عکس مورد نظر خود را انتخاب کنید</h4>
                         <div className="text-center">
                             <Avatar
-                                width={390}
+                                width={465}
                                 height={295}
                                 onCrop={this.onCrop}
                                 onClose={this.onClose}
                                 onBeforeFileLoad={this.onBeforeFileLoad}
                                 src={this.state.src}
                                 exportAsSquare
-                                label="انتخاب فایل"
+                                label="انتخاب عکس"
+                                imageWidth={465}
                             />
                             <br></br>
-                            <img src={this.state.preview} alt="Preview" style={{ height: "30%" }, { width: "30%" }} />
+                            {/* <img src={this.state.preview} alt="Preview" style={{ height: "30%" }, { width: "30%" }} /> */}
+                            {this.previewFunc()}
                             <br></br>
                             <br></br>
                             <div>
