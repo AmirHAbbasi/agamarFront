@@ -89,6 +89,8 @@ export default class profileDashboard extends Component {
 
     componentDidMount() {
         let item = JSON.parse(localStorage.getItem("info"));
+
+
         console.log("mounted", item);
 
         this.setState({ first_name: item.name });
@@ -96,11 +98,11 @@ export default class profileDashboard extends Component {
         this.setState({ email: item.email });
         this.setState({ address: item.address });
         this.setState({ phone: item.phone_number });
-        this.setState({ pImage: item.prof_image });
+        // this.setState({ pImage: item.prof_image });
         // if(this.state.pImage)
         this.setState({ access: item.access_token });
         this.setState({ isPrivatePerson: item.isPrivatePerson });
-
+        // localStorage.setItem("info", JSON.stringify(item));
 
     }
 
@@ -116,36 +118,36 @@ export default class profileDashboard extends Component {
         switch (name) {
             case "first_name":
                 isError.first_name =
-                    value.length < 1 ? "!این فیلد نمی تواند خالی باشد" : "";
+                    value.length < 1 ? "این فیلد نمی تواند خالی باشد!" : "";
                 break;
             case "user_name":
-                isError.user_name = !regexpUser.test(value) ? "!نام کاربری نامعتبر" : "";
+                isError.user_name = !regexpUser.test(value) ? "نام کاربری نامعتبر!" : "";
                 console.log("regUser", regexpUser.test(value));
                 if (value.length < 1) {
-                    isError.user_name = "فیلد ضروری*";
+                    isError.user_name = "*فیلد ضروری";
                 }
                 break;
             case "address":
                 isError.address =
-                    value.length < 1 ? "!این فیلد نمی تواند خالی باشد" : "";
+                    value.length < 1 ? "این فیلد نمی تواند خالی باشد!" : "";
                 break;
             case "phone":
                 isError.phone =
                     value.length < 11 || value.length > 11
-                        ? "!تلفن همراه معتبر نیست"
+                        ? "تلفن همراه معتبر نیست!"
                         : "";
                 break;
             case "email":
-                isError.email = !regExp.test(value) ? "!آدرس ایمیل معتبر نیست" : "";
+                isError.email = !regExp.test(value) ? "آدرس ایمیل معتبر نیست!" : "";
                 if (value.length < 1) {
-                    isError.email = "!این فیلد نمی تواند خالی باشد";
+                    isError.email = "این فیلد نمی تواند خالی باشد!";
                 }
                 break;
             case "password":
                 console.log("checkPass", regExpPass, "check", regExpPass.test(value));
-                isError.password = !regExpPass.test(value) ? "!یک رمز عبور قوی تر انتخاب کنید" : "";
+                isError.password = !regExpPass.test(value) ? "یک رمز عبور قوی تر انتخاب کنید!" : "";
                 if (value.length < 1) {
-                    isError.password = "!این فیلد نمی تواند خالی باشد";
+                    isError.password = "این فیلد نمی تواند خالی باشد!";
                 }
                 break;
 
@@ -154,7 +156,7 @@ export default class profileDashboard extends Component {
                 isError.password2 =
                     value === this.state.password
                         ? ""
-                        : "!رمز عبور به درستی تكرار نشده است";
+                        : "رمز عبور به درستی تكرار نشده است!";
                 break;
             default:
                 break;
@@ -173,6 +175,7 @@ export default class profileDashboard extends Component {
         console.log("submitPassword function");
         let item = JSON.parse(localStorage.getItem("info"))
         let access = item.access_token;
+        let pass = JSON.parse(localStorage.getItem("password"));
 
 
 
@@ -181,83 +184,98 @@ export default class profileDashboard extends Component {
             'Authorization': `Bearer ${access}`,
         }
         console.log("start request");
-        const data = {
-            oldPassword: this.state.oldPassword,
-            password: this.state.password,
-            password2: this.state.password2,
-        }
-        console.log(data);
-        await axios.patch('http://127.0.0.1:8000/api/change_password', data, { headers: headers, withCredentials: true }).then(
-            res => {
-                console.log("just after axios");
-                if (res.data != null) {
-                    console.log(res.data);
-                    console.log("ok!!");
-                    console.log("res:", res);
-                    toast.success('رمز عبور با موفقیت تغییر کرد.', {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+        if (pass === this.state.oldPassword) {
 
-                } else {
-                    console.log("failed to update");
-                }
+
+            const data = {
+                oldPassword: this.state.oldPassword,
+                password: this.state.password,
+                password2: this.state.password2,
             }
-        ).catch(error => {
-            console.log("error is in password change", error);
-            console.log("error.response.data.password", error.response.data.password);
-            error.response.data.password.forEach(element => {
-                if (element === "This password is too short. It must contain at least 8 characters.") {
-                    this.state.isError.bPassword.push(<h5>.رمز عبور انتخابی بسیار كوتاه است، رمز عبور باید حداقل 8 كاراكتر باشد</h5>);
-                    console.log("bpassword", this.state.isError.bPassword);
-                    toast.error(".رمز عبور انتخابی بسیار كوتاه است، رمز عبور باید حداقل 8 كاراكتر باشد", {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
-                }
-                if (element === "This password is too common.") {
-                    this.state.isError.bPassword.push(<h5>.رمز عبور ساده و قابل حدس است</h5>);
-                    console.log("bpassword", this.state.isError.bPassword);
-                    toast.error(".رمز عبور ساده و قابل حدس است", {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
-                }
-                if (element === "This password is entirely numeric.") {
-                    this.state.isError.bPassword.push(<h5>.رمز عبور نباید تماما عدد باشد</h5>);
-                    console.log("bpassword", this.state.isError.bPassword);
-                    toast.error(".رمز عبور نباید تماما عدد باشد", {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
-                }
-                console.log("bpassword", this.state.isError.bPassword);
+            console.log(data);
+            await axios.patch('http://127.0.0.1:8000/api/change_password', data, { headers: headers, withCredentials: true }).then(
+                res => {
+                    console.log("just after axios");
+                    if (res.data != null) {
+                        console.log(res.data);
+                        console.log("ok!!");
+                        console.log("res:", res);
+                        toast.success('رمز عبور با موفقیت تغییر کرد.', {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
 
+                    } else {
+                        console.log("failed to update");
+                    }
+                }
+            ).catch(error => {
+                console.log("error is in password change", error);
+                console.log("error.response.data.password", error.response.data.password);
+                error.response.data.password.forEach(element => {
+                    if (element === "This password is too short. It must contain at least 8 characters.") {
+                        this.state.isError.bPassword.push(<h5>.رمز عبور انتخابی بسیار كوتاه است، رمز عبور باید حداقل 8 كاراكتر باشد</h5>);
+                        console.log("bpassword", this.state.isError.bPassword);
+                        toast.error("رمز عبور انتخابی بسیار كوتاه است، رمز عبور باید حداقل 8 كاراكتر باشد.", {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+                    if (element === "This password is too common.") {
+                        this.state.isError.bPassword.push(<h5>.رمز عبور ساده و قابل حدس است</h5>);
+                        console.log("bpassword", this.state.isError.bPassword);
+                        toast.error("رمز عبور ساده و قابل حدس است.", {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+                    if (element === "This password is entirely numeric.") {
+                        this.state.isError.bPassword.push(<h5>.رمز عبور نباید تماما عدد باشد</h5>);
+                        console.log("bpassword", this.state.isError.bPassword);
+                        toast.error("رمز عبور نباید تماما عدد باشد.", {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+                    console.log("bpassword", this.state.isError.bPassword);
+
+                });
+
+                console.error(error.response);
+
+            })
+        }
+        else {
+            toast.error("رمز عبور قبلی اشتباه است.", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
             });
-
-            console.error(error.response);
-
-        })
+        }
 
     }
 
@@ -266,23 +284,30 @@ export default class profileDashboard extends Component {
         let access = item.access_token;
 
         const headers = {
-            'Content-Type': 'application/json',
+            "Content-Type": "multipart/form-data",
+            // 'Content-Type': 'application/json',
             'Authorization': `Bearer ${access}`,
         }
 
-        const data = {
-            username: this.state.user_name,
-            name: this.state.first_name,
-            email: this.state.email,
-            phone_number: this.state.phone,
-            address: this.state.address,
-        }
+        // const data = {
+        //     username: this.state.user_name,
+        //     name: this.state.first_name,
+        //     email: this.state.email,
+        //     phone_number: this.state.phone,
+        //     address: this.state.address,
+        // }
+        let formData = new FormData();
+        formData.append("name", this.state.first_name);
+        formData.append("email", this.state.email);
+        formData.append("phone_number", this.state.phone);
+        formData.append("address", this.state.address);
+        formData.append("username", this.state.user_name);
         // console.log(data);
-        await axios.patch('http://127.0.0.1:8000/api/update-userInfo', data, { headers: headers, withCredentials: true }).then(
+        await axios.patch('http://127.0.0.1:8000/api/update-userInfo', formData, { headers: headers, withCredentials: true }).then(
             res => {
                 if (res.data != null) {
-                    console.log(res);
-                    // console.log(res.data.access);
+                    console.log("res: ", res);
+                    console.log("res.data.message: ", res.data.message);
                     item.username = this.state.user_name;
                     item.name = this.state.first_name;
                     item.email = this.state.email;
@@ -298,7 +323,7 @@ export default class profileDashboard extends Component {
 
                     localStorage.setItem("info", JSON.stringify(item));
                     console.log("item", item);
-                    toast.success(".تغییرات با موفقیت ذخیره شد", {
+                    toast.success("تغییرات با موفقیت ذخیره شد.", {
                         position: "top-center",
                         autoClose: 5000,
                         hideProgressBar: false,
@@ -315,7 +340,7 @@ export default class profileDashboard extends Component {
         ).catch(error => {
             console.log("error is in submit general", error);
             console.error(error.response);
-            toast.error(".مشکلی از سمت سرور پیش آمده است. لطفا شکیبا باشید", {
+            toast.error("مشکلی از سمت سرور پیش آمده است. لطفا شکیبا باشید.", {
 
                 position: "top-center",
                 autoClose: 5000,
@@ -355,7 +380,9 @@ export default class profileDashboard extends Component {
     }
 
     async onSave() {
+
         let item = JSON.parse(localStorage.getItem("info"))
+        console.log("item first: ", item);
         let access = item.access_token;
         let formData = new FormData();
         // let preview = this.state.preview;
@@ -392,11 +419,12 @@ export default class profileDashboard extends Component {
                         },
                     })
                         .then((response) => {
+                            this.handleModalShowHide();
                             console.log("response: ", response);
-                            item.prof_image = this.state.preview;
-                            this.setState({ pImage: this.state.preview });
+                            // item.prof_image = this.state.preview;
+                            // this.setState({ pImage: this.state.preview });
 
-                            localStorage.setItem("info", JSON.stringify(item));
+                            // localStorage.setItem("info", JSON.stringify(item));
                             console.log("item", item);
                             toast.success("تغییرات با موفقیت ذخیره شد.", {
                                 position: "top-center",
@@ -424,6 +452,46 @@ export default class profileDashboard extends Component {
                     // console.log("formData after2 append: ", formData);
                 });
         }
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${item.access_token}`,
+        }
+
+        await axios.get('http://127.0.0.1:8000/api/userInfo', { headers: headers, withCredentials: true }).then(
+
+
+            res => {
+                console.log("4");
+                console.log("start getting user info, res.data: ", res.data);
+                if (res.data != null) {
+                    // info.prof_image =;
+                    // this.setState({ pImage: "http://127.0.0.1:8000" + res.data.message.profile_image });
+                    item.prof_image = res.data.message.profile_image;
+
+
+                    console.log("item1:", item);
+                    localStorage.setItem("info", JSON.stringify(item));
+                    this.setState({
+                        loggedIn: true,
+                        returnedUsername: res.data.username
+                    })
+
+                    // let item = JSON.parse(localStorage.getItem("info"));
+                    // console.log("item:");
+                    // console.log(item);
+
+                } else {
+                    console.log("failed to log in");
+                }
+            }
+        ).catch(error => {
+
+            console.log("error in get info loop", error);
+            console.error(error.response);
+
+        })
+        console.log("10");
     }
     onClose() {
         this.setState({ preview: null })
@@ -461,16 +529,12 @@ export default class profileDashboard extends Component {
 
                                             style={{ maxWidth: "100%" }} alt="" />
 
-                                        {/* <div class="social-info">
-                                            <h5>
-                                                {this.state.isBookStore === false ? "شخص حقیقی" : "كتابفروشی"}
-                                            </h5>
-                                        </div> */}
+
                                     </div>
 
                                     <div class="single_advisor_details_info">
-                                        <p class="designation">{this.state.first_name}</p>
-                                        <p class="designation">{this.state.phone}</p>
+                                        <p class="designation">{item.name}</p>
+                                        <p class="designation">{item.phone_number}</p>
                                     </div>
                                 </div>
                             </div>
@@ -522,11 +586,11 @@ export default class profileDashboard extends Component {
                                             type="text"
                                             name="first_name"
                                             onChange={this.handleInputChange}
-                                            placeholder=".نام جدید را وارد كنید"
+                                            placeholder="نام جدید را وارد كنید."
                                             value={this.state.first_name}
                                             class="form-control1"
                                         />
-                                        <small className="small-font text-danger inP">{!(this.state.first_name === "") ? isError.first_name : "فیلد ضروری*"}</small>
+                                        <small className="small-font text-danger inP">{!(this.state.first_name === "") ? isError.first_name : "*فیلد ضروری"}</small>
 
                                     </div>
                                     <div class="col-md-12">
@@ -555,12 +619,12 @@ export default class profileDashboard extends Component {
                                             type="text"
                                             name="user_name"
                                             className="form-control1"
-                                            placeholder=".یك نام كاربری جدید برای خود انتخاب كنید"
+                                            placeholder="یك نام كاربری جدید برای خود انتخاب كنید."
                                             value={this.state.user_name}
                                             // Value={this.state.user_name}
                                             onChange={this.handleInputChange}
                                         />
-                                        <small className="small-font text-danger inP">{!(this.state.user_name === "") ? isError.user_name : "فیلد ضروری*"}</small>
+                                        <small className="small-font text-danger inP">{!(this.state.user_name === "") ? isError.user_name : "*فیلد ضروری"}</small>
 
                                     </div>
                                     <div class="col-md-12">
@@ -591,10 +655,10 @@ export default class profileDashboard extends Component {
                                             name="email"
                                             onChange={this.handleInputChange}
                                             className="form-control1"
-                                            placeholder=".یك پست الكترونیك جدید برای خود انتخاب كنید"
+                                            placeholder="یك پست الكترونیك جدید برای خود انتخاب كنید."
                                             value={this.state.email}
                                         />
-                                        <small className="small-font text-danger inP">{!(this.state.email === "") ? isError.email : "فیلد ضروری*"}</small>
+                                        <small className="small-font text-danger inP">{!(this.state.email === "") ? isError.email : "*فیلد ضروری"}</small>
 
                                     </div>
                                     <div class="col-md-12">
@@ -625,10 +689,10 @@ export default class profileDashboard extends Component {
                                             name="address"
                                             onChange={this.handleInputChange}
                                             className="form-control1"
-                                            placeholder=".آدرس جدید را وارد كنید"
+                                            placeholder="آدرس جدید را وارد كنید."
                                             value={this.state.address}
                                         />
-                                        <small className="small-font text-danger inP">{!(this.state.address === "") ? isError.address : "فیلد ضروری*"}</small>
+                                        <small className="small-font text-danger inP">{!(this.state.address === "") ? isError.address : "*فیلد ضروری"}</small>
                                     </div>
                                     <div class="col-md-12">
                                         <label class="labels">شماره تماس
@@ -658,10 +722,10 @@ export default class profileDashboard extends Component {
                                             name="phone"
                                             onChange={this.handleInputChange}
                                             className="form-control1"
-                                            placeholder=".شماره تلفن همراه جدید را وارد كنید"
+                                            placeholder="شماره تلفن همراه جدید را وارد كنید."
                                             value={this.state.phone}
                                         />
-                                        <small className="small-font text-danger inP">{!(this.state.phone === "") ? isError.phone : "فیلد ضروری*"}</small>
+                                        <small className="small-font text-danger inP">{!(this.state.phone === "") ? isError.phone : "*فیلد ضروری"}</small>
                                     </div>
                                 </div>
 
@@ -714,7 +778,7 @@ export default class profileDashboard extends Component {
                                         name="oldPassword"
                                         onChange={this.handleInputChange}
                                         className="form-control2"
-                                        placeholder=".رمز عبور قبلی خود را وارد كنید"
+                                        placeholder="رمز عبور قبلی خود را وارد كنید."
                                     />
                                     {/* <small className="small-font text-danger inP">{isError.bPassword}</small> */}
                                 </div>
@@ -747,9 +811,9 @@ export default class profileDashboard extends Component {
                                         name="password"
                                         onChange={this.handleInputChange}
                                         className="form-control2"
-                                        placeholder=".رمز عبور جدید خود را وارد نمایید"
+                                        placeholder="رمز عبور جدید خود را وارد نمایید."
                                     />
-                                    <small className="small-font text-danger inP">{!(this.state.password === "") ? isError.password : "فیلد ضروری*"}</small>
+                                    <small className="small-font text-danger inP">{!(this.state.password === "") ? isError.password : "*فیلد ضروری"}</small>
                                 </div>
 
                                 <div class="col-md-12">
@@ -780,9 +844,9 @@ export default class profileDashboard extends Component {
                                         name="password2"
                                         onChange={this.handleInputChange}
                                         className="form-control2"
-                                        placeholder=".رمز عبور جدید خود را تكرار نمایید"
+                                        placeholder="رمز عبور جدید خود را تكرار نمایید."
                                     />
-                                    <small className="small-font text-danger inP">{!(this.state.password2 === "") ? isError.password2 : "فیلد ضروری*"}</small>
+                                    <small className="small-font text-danger inP">{!(this.state.password2 === "") ? isError.password2 : "*فیلد ضروری"}</small>
                                 </div>
 
                                 {/* <div class="text-center">
@@ -813,16 +877,7 @@ export default class profileDashboard extends Component {
                                         تغییر رمز عبور
                                     </button>
 
-                                    {/* <ImgCrop>
-                                        <Upload
-                                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                            listType="picture-card"
-                                            fileList={this.state.fileList}
-                                            onChange={this.onChange}
-                                        // onPreview={onPreview}
-                                        >
-                                            {this.state.fileList.length < 1 && '+ Upload'}</Upload>
-                                    </ImgCrop> */}
+
                                 </div>
                             </div>
                         </div>
@@ -856,7 +911,7 @@ export default class profileDashboard extends Component {
                             <div>
                                 <div class="text-center">
                                     <Button
-                                        onClick={() => { this.handleModalShowHide(); this.onSave(); }}
+                                        onClick={() => this.onSave()}
                                         className="btn btn-primary px-4 border-0"
                                         style={
                                             { "background-color": "#811854" }
