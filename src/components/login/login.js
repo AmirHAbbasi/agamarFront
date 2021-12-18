@@ -85,6 +85,7 @@ class login extends React.Component {
                         returnedUsername: res.data.username
                     })
                     localStorage.setItem("info", JSON.stringify(info));
+                    localStorage.setItem("password", JSON.stringify(this.state.password));
                     // let item = JSON.parse(localStorage.getItem("info"));
                     // console.log("item:");
                     // console.log(item);
@@ -128,10 +129,12 @@ class login extends React.Component {
                     this.handleModalShowHide();
 
                 } else {
+                    this.setState({ buttonText: "ورود" })
                     console.log("failed to log in");
                 }
             }
         ).catch(error => {
+            this.setState({ buttonText: "ورود" })
             console.log("error is login submit", error);
 
             toast.error("نام کاربری یا رمز عبور اشتباه است!", {
@@ -258,6 +261,7 @@ class login extends React.Component {
 
                             <div class="text-center">
                                 <Button
+                                    dir="rtl"
                                     className="btn btn-primary border-0"
                                     style={
                                         { "background-color": "#811854" }
