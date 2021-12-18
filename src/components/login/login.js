@@ -200,7 +200,7 @@ class login extends React.Component {
                             <div className="main-body"> */}
                         <div className="text-center" id="title">
                             <h4>ورود به حساب کاربری</h4>
-                            <small className="text-danger text-center">{errorLogin}</small>
+                            {/* <small className="small-font text-danger text-center">{errorLogin}</small> */}
                         </div>
                         <div className="row">
 
@@ -218,7 +218,7 @@ class login extends React.Component {
                                     <div className="card-body">
                                         <form calssName="form-tag" onSubmit={() => { this.submit(); this.handleModalShowHide(); }}>
 
-                                            <p className="labels">نام كاربری</p>
+                                            <p className="labels" dir="rtl">نام كاربری</p>
                                             <div class="form-group text-left">
                                                 <input
                                                     id="username"
@@ -229,7 +229,7 @@ class login extends React.Component {
                                                 />
                                             </div>
 
-                                            <p className="labels">رمز عبور</p>
+                                            <p className="labels" dir="rtl">رمز عبور</p>
                                             <div class="form-group text-left">
                                                 <input
                                                     id="password"
@@ -239,22 +239,12 @@ class login extends React.Component {
                                                     onChange={this.handleInputChange}
                                                 />
                                             </div>
-                                            <div>
-                                                <p className=" text-right labels">
-                                                    قبلا ثبت نام نکرده اید؟<a
-                                                        className="nav-link"
-                                                        to={"/ورود"}
-                                                        href="#"
-                                                        onClick={() => {
-                                                            this.handleModalShowHide();
-                                                        }}
-                                                    >
-                                                        ثبت نام
-                                                    </a>
-
-
-                                                </p>
-                                            </div>
+                                            <div class="text-right fs-6 labels"> قبلا ثبت نام نکرده اید؟ <a
+                                                to={"/ورود"}
+                                                href="#"
+                                                onClick={() => {
+                                                    this.handleModalShowHide();
+                                                }}> ثبت نام </a></div>
                                         </form>
                                     </div>
                                 </div>
