@@ -205,7 +205,9 @@ class signUp extends React.Component {
     }
 
 
-
+    setLoading() {
+        this.setState({ buttonText: "منتظر بمانید..." })
+    }
 
     render() {
         const { isError } = this.state;
@@ -241,7 +243,7 @@ class signUp extends React.Component {
                             <div className="main-body"> */}
                         <div className="text-center" id="title">
                             <h4>ثبت نام</h4>
-                            <small className="text-danger text-center">{errorLogin}</small>
+                            {/* <small className="small-font text-danger text-center">{errorLogin}</small> */}
                         </div>
                         <div className="row">
 
@@ -260,7 +262,7 @@ class signUp extends React.Component {
                                         <form calssName="form-tag" onSubmit={() => { this.submit(); this.handleModalShowHide(); }}>
 
 
-                                            <p className="labels">نام
+                                            <p className="labels" dir="rtl">نام
                                             {' '}
                                                 {
                                                     (isError.first_name.length === 0 && this.state.first_name.length > 0)
@@ -292,12 +294,12 @@ class signUp extends React.Component {
                                                 />
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{this.state.first_name.length > 0 ? isError.first_name : "فیلد ضروری*"}</small>
+                                                <small className="small-font text-danger">{this.state.first_name.length > 0 ? isError.first_name : "فیلد ضروری*"}</small>
                                             </div>
 
 
 
-                                            <p className="labels">نام كاربری
+                                            <p className="labels" dir="rtl">نام كاربری
                                             {' '}
                                                 {
                                                     (isError.user_name.length === 0 && this.state.user_name.length > 0)
@@ -328,13 +330,13 @@ class signUp extends React.Component {
                                                 />
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{this.state.user_name.length > 0 ? isError.user_name : "فیلد ضروری*"}</small>
+                                                <small className="small-font text-danger">{this.state.user_name.length > 0 ? isError.user_name : "فیلد ضروری*"}</small>
                                             </div>
 
 
 
 
-                                            <p className="labels">ایمیل
+                                            <p className="labels" dir="rtl">ایمیل
                                             {' '}
                                                 {
                                                     (isError.email.length === 0 && this.state.email.length > 0)
@@ -366,11 +368,11 @@ class signUp extends React.Component {
                                                 />
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{this.state.email.length > 0 ? isError.email : "فیلد ضروری*"}</small>
+                                                <small className="small-font text-danger">{this.state.email.length > 0 ? isError.email : "فیلد ضروری*"}</small>
                                             </div>
 
 
-                                            <p className="labels">آدرس
+                                            <p className="labels" dir="rtl">آدرس
                                             {' '}
                                                 {
                                                     (isError.address.length === 0 && this.state.address.length > 0)
@@ -403,10 +405,10 @@ class signUp extends React.Component {
 
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{this.state.address.length > 0 ? isError.address : "فیلد ضروری*"}</small>
+                                                <small className="small-font text-danger">{this.state.address.length > 0 ? isError.address : "فیلد ضروری*"}</small>
                                             </div>
 
-                                            <p className="labels">شماره تماس
+                                            <p className="labels" dir="rtl">شماره تماس
                                             {' '}
                                                 {
                                                     (isError.phone.length === 0 && this.state.phone.length > 0)
@@ -438,11 +440,11 @@ class signUp extends React.Component {
                                                 />
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{this.state.phone.length > 0 ? isError.phone : "فیلد ضروری*"}</small>
+                                                <small className="small-font text-danger">{this.state.phone.length > 0 ? isError.phone : "فیلد ضروری*"}</small>
                                             </div>
 
 
-                                            <p className="labels">رمز عبور
+                                            <p className="labels" dir="rtl">رمز عبور
                                             {' '}
                                                 {
                                                     (isError.password.length === 0 && this.state.password.length > 0)
@@ -474,13 +476,13 @@ class signUp extends React.Component {
                                                 />
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{this.state.password.length > 0 ? isError.password : "فیلد ضروری*"}</small>
+                                                <small className="small-font text-danger">{this.state.password.length > 0 ? isError.password : "فیلد ضروری*"}</small>
                                             </div>
 
 
 
 
-                                            <p className="labels">تکرار رمز عبور
+                                            <p className="labels" dir="rtl">تکرار رمز عبور
                                             {' '}
                                                 {
                                                     (isError.password2.length === 0 && this.state.password2.length > 0)
@@ -512,26 +514,17 @@ class signUp extends React.Component {
                                                 />
                                             </div>
                                             <div className="text-right smallDiv">
-                                                <small className="text-danger">{this.state.password2.length > 0 ? isError.password2 : "فیلد ضروری*"}</small>
+                                                <small className="small-font text-danger">{this.state.password2.length > 0 ? isError.password2 : "فیلد ضروری*"}</small>
                                             </div>
 
 
 
-
-                                            <div style={{ display: "flex" }, { justifyContent: "space-between" }}>
-                                                <p className=" text-center labels">
-                                                    قبلا ثبت نام کرده اید؟</p>
-                                                <a
-                                                    className="nav-link"
-                                                    to={"/ورود"}
-                                                    href="#"
-                                                    onClick={() => {
-                                                        this.handleModalShowHide();
-                                                    }}
-                                                >
-                                                    ورود
-                                                    </a>
-                                            </div>
+                                            <div class="text-right fs-6 labels"> قبلا ثبت نام کرده اید؟ <a
+                                                to={"/ورود"}
+                                                href="#"
+                                                onClick={() => {
+                                                    this.handleModalShowHide();
+                                                }}> ورود </a></div>
                                         </form>
                                     </div>
                                 </div>
