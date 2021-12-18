@@ -20,6 +20,7 @@ class signUp extends React.Component {
     constructor() {
         super();
         this.state = {
+            buttonText: "ثبت نام",
             showHide: false,
             errorLogin: "",
             first_name: "",
@@ -517,21 +518,19 @@ class signUp extends React.Component {
 
 
 
-                                            <div>
-                                                <p className=" text-right labels">
-                                                    قبلا ثبت نام کرده اید؟<a
-                                                        className="nav-link"
-                                                        to={"/ورود"}
-                                                        href="#"
-                                                        onClick={() => {
-                                                            this.handleModalShowHide();
-                                                        }}
-                                                    >
-                                                        ورود
+                                            <div style={{ display: "flex" }, { justifyContent: "space-between" }}>
+                                                <p className=" text-center labels">
+                                                    قبلا ثبت نام کرده اید؟</p>
+                                                <a
+                                                    className="nav-link"
+                                                    to={"/ورود"}
+                                                    href="#"
+                                                    onClick={() => {
+                                                        this.handleModalShowHide();
+                                                    }}
+                                                >
+                                                    ورود
                                                     </a>
-
-
-                                                </p>
                                             </div>
                                         </form>
                                     </div>
@@ -554,6 +553,8 @@ class signUp extends React.Component {
                                     // to={"/"}
                                     // href="ورود"
                                     onClick={() => {
+
+                                        this.setLoading();
                                         this.submit();
                                     }}
                                     disabled={
@@ -580,7 +581,7 @@ class signUp extends React.Component {
                                             false
                                     }
                                 >
-                                    ثبت نام
+                                    {this.state.buttonText}
                                 </Button>
                                 {' '}
                                 <Button
