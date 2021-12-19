@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 import "./signUp.css";
@@ -104,66 +103,7 @@ class signUp extends React.Component {
         console.log(this.state);
     };
 
-    // async getUserInfo(access, refresh) {
-    //     console.log("getting user info");
 
-    //     let info = {
-    //         username: "",
-    //         name: "",
-    //         prof_image: "",
-    //         access_token: access,
-    //         refresh_token: refresh,
-    //         email: "",
-    //         phone_number: "",
-    //         address: "",
-    //         isPrivatePerson: ""
-    //     }
-
-    //     const headers = {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': `Bearer ${access}`,
-    //     }
-
-    //     await axios.get('http://127.0.0.1:8000/api/userInfo', { headers: headers, withCredentials: true }).then(
-
-
-    //         res => {
-    //             console.log("4");
-    //             console.log("start getting user info");
-    //             if (res.data != null) {
-    //                 // console.log(res.data.message);
-    //                 info.username = res.data.message.username;
-    //                 info.name = res.data.message.name;
-    //                 info.prof_image = res.data.message.profile_image;
-    //                 info.email = res.data.message.email;
-    //                 info.phone_number = res.data.message.phone_number;
-    //                 info.address = res.data.message.address;
-    //                 info.isBookStore = true;
-    //                 info.isPrivatePerson = res.data.message.is_private_person;
-
-    //                 console.log("info:", info);
-    //                 this.setState({
-    //                     loggedIn: true,
-    //                     returnedUsername: res.data.username
-    //                 })
-    //                 localStorage.setItem("info", JSON.stringify(info));
-    //                 // let item = JSON.parse(localStorage.getItem("info"));
-    //                 // console.log("item:");
-    //                 // console.log(item);
-
-    //             } else {
-    //                 console.log("failed to log in");
-    //             }
-    //         }
-    //     ).catch(error => {
-
-    //         console.log("error in get info loop", error);
-    //         console.error(error.response);
-
-    //     })
-    //     console.log("10");
-    //     // this.props.onSubmit(info);
-    // }
 
     async submit() {
 
@@ -616,6 +556,7 @@ class signUp extends React.Component {
                                             <div class="text-right fs-6 labels"> قبلا ثبت نام کرده اید؟ <a
                                                 to={"/ورود"}
                                                 href="#"
+                                                style={{ color: "rgb(243, 67, 164)" }}
                                                 onClick={() => {
                                                     this.handleModalShowHide();
                                                 }}> ورود </a></div>
@@ -635,7 +576,7 @@ class signUp extends React.Component {
                                     dir="rtl"
                                     className="btn btn-primary border-0"
                                     style={
-                                        { "background-color": "#811854" }
+                                        { "background-color": "rgba(255, 90, 169)" }
                                     }
                                     type="submit"
                                     // to={"/"}
@@ -675,7 +616,7 @@ class signUp extends React.Component {
                                 <Button
                                     to={"/"}
                                     href="#"
-                                    className="btn btn-secondary"
+                                    className="btn btn-secondary border-0"
                                     onClick={() => this.handleModalShowHide()}
                                 >
                                     خروج

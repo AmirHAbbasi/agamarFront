@@ -14,7 +14,7 @@
   text-align: right;
   cursor: text;
   border-radius: 50px;
-  background: #eaeaea;
+  background: #ffe2ed;
   height: 50px;
   padding: 20px 20px 20px 20px;
   outline: none;
@@ -25,14 +25,14 @@
   max-width: 30% !important;
 }
 .my-modal .modal-content {
-  background-color: #ffc4e1;
+  background-color:rgb(252, 252, 252);
 }
 
 .card {
-  background-color: #ffc4e1;
+  background-color: rgb(252, 252, 252);
 }
 .card-body {
-  background-color: #ffc4e1;
+  background-color: rgb(252, 252, 252);
 }
 div.radio {
   border: none;
@@ -73,4 +73,11 @@ div.smallDiv {
   background-image: url("http://127.0.0.1:3000/signup.png");
   background-repeat: no-repeat;
   background-position: center;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #ffe2ed inset !important;
 }
