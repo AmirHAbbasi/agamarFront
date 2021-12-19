@@ -9,6 +9,13 @@
   border: none;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #ffe2ed inset !important;
+}
+
 .profile-button:hover {
   background: #682773;
 }
@@ -63,7 +70,7 @@ input.form-control1 {
   text-align: right;
   cursor: text;
   border-radius: 50px;
-  background: #eaeaea;
+  background: #ffe2ed;
   height: 50px;
   padding: 20px 20px 20px 20px;
   outline: none;
@@ -78,7 +85,7 @@ input.form-control2 {
   text-align: right;
   cursor: text;
   border-radius: 50px;
-  background: #ffc4e1;
+  background: #ffe2ed;
   height: 50px;
   padding: 20px 20px 20px 20px;
   outline: none;

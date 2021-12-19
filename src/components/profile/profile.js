@@ -545,7 +545,7 @@ export default class profileDashboard extends Component {
                                     type="submit"
                                     className="btn btn-primary px-4 border-0 imgButton"
                                     style={
-                                        { "background-color": "#811854" }
+                                        { "background-color": "rgba(255, 90, 169)" }
                                     }
                                     onClick={() => this.handleModalShowHide()}
                                 >
@@ -736,7 +736,7 @@ export default class profileDashboard extends Component {
                                         type="submit"
                                         className="btn btn-primary px-4 border-0"
                                         style={
-                                            { "background-color": "#811854" }
+                                            { "background-color": "rgba(255, 90, 169)" }
                                         }
                                         onClick={() => this.submitGeneral()}
                                         disabled={
@@ -859,7 +859,7 @@ export default class profileDashboard extends Component {
                                     <button
                                         type="submit"
                                         style={
-                                            { "background-color": "#811854" }}
+                                            { "background-color": "rgba(255, 90, 169)" }}
                                         className="btn btn-primary px-4 border-0"
                                         onClick={() => this.submitPassword()}
                                         disabled={
@@ -894,6 +894,29 @@ export default class profileDashboard extends Component {
 
                 <Modal backdrop="static" centered className="my-modal" show={this.state.showHideImage}>
                     <Modal.Body className="text-center">
+                        <div className="align-items-right text-right header">
+                            <button
+                                to={"/"}
+                                href="#"
+                                className="btn"
+                                onClick={() => this.handleModalShowHide()}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    className="bi bi-arrow-right"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                                    />
+                                </svg>
+                                <Modal.Title></Modal.Title>
+                            </button>
+                        </div>
                         <h4>عکس مورد نظر خود را انتخاب کنید</h4>
                         <div className="text-center">
                             <Avatar
@@ -918,7 +941,7 @@ export default class profileDashboard extends Component {
                                         onClick={() => this.onSave()}
                                         className="btn btn-primary px-4 border-0"
                                         style={
-                                            { "background-color": "#811854" }
+                                            { "background-color": "rgba(255, 90, 169)" }
                                         }
                                     >
                                         ذخیره
