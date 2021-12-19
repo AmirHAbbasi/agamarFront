@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 import "./login.css";
@@ -199,22 +198,13 @@ class login extends React.Component {
                                 <Modal.Title></Modal.Title>
                             </button>
                         </div>
-                        {/* <div className="container">
-                            <div className="main-body"> */}
                         <div className="text-center" id="title">
                             <h4>ورود به حساب کاربری</h4>
                             {/* <small className="small-font text-danger text-center">{errorLogin}</small> */}
                         </div>
                         <div className="row">
 
-                            {/* <div className="col-lg-6 card2">
-                                <div className="card2 border-0">
-                                    <div className="card-body1">
-                                        <img src="https://www.prattlibrary.org/assets/card/bookshelves-bright-colors.jpg" width="450px" height="870px" />
-                                        <p>اینجا یک عکس قرار میگیرد</p>
-                                    </div>
-                                </div>
-                            </div> */}
+
 
                             <div className="col-lg-12">
                                 <div className="card border-0">
@@ -245,6 +235,7 @@ class login extends React.Component {
                                             <div class="text-right fs-6 labels"> قبلا ثبت نام نکرده اید؟ <a
                                                 to={"/ورود"}
                                                 href="#"
+                                                style={{ color: "rgb(243, 67, 164)" }}
                                                 onClick={() => {
                                                     this.handleModalShowHide();
                                                 }}> ثبت نام </a></div>
@@ -264,7 +255,7 @@ class login extends React.Component {
                                     dir="rtl"
                                     className="btn btn-primary border-0"
                                     style={
-                                        { "background-color": "#811854" }
+                                        { "background-color": "rgba(255, 90, 169)" }
                                     }
                                     type="submit"
                                     to={"/پروفایل_كاربری"}
@@ -290,7 +281,7 @@ class login extends React.Component {
                                 <Button
                                     to={"/"}
                                     href="#"
-                                    className="btn btn-secondary"
+                                    className="btn btn-secondary border-0"
                                     onClick={() => this.handleModalShowHide()}
                                 >
                                     خروج
