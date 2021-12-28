@@ -4,12 +4,15 @@ import { Button, /*Radio*/ } from 'antd';
 
 const FilterIcon = () => {
 
-    return(
+    return (
         <div className="myDiv">
-            <Button size="large" className="button" type="primary" shape="round">همه</Button>
-            <Button size="large" className="button" type="primary" shape="round">فروشی </Button>
-            <Button size="large" className="button" type="primary" shape="round">اجاره</Button>
-            <Button size="large" className="button" type="primary" shape="round">اهدایی</Button>
+            <Button size="large" className="button" type="primary" style={{ borderRadius: "5px" }}>همه</Button>
+            {' '}
+            <Button size="large" className="button" type="primary" style={{ borderRadius: "5px" }}>فروشی </Button>
+            {' '}
+            <Button size="large" className="button" type="primary" style={{ borderRadius: "5px" }}>اجاره</Button>
+            {' '}
+            <Button size="large" className="button" type="primary" style={{ borderRadius: "5px" }}>اهدایی</Button>
         </div>
     )
 
