@@ -1,8 +1,9 @@
 .footer {
-  background-image: url("http://127.0.0.1:3000/nav-bg.png");
+  /* background-image: url("http://127.0.0.1:3000/nav-bg.png"); */
   background-repeat: no-repeat;
   background-position: bottom;
-  background-color: white;
+  /* background-color: white; */
+  background:linear-gradient(180deg, pink, white 40%) no-repeat;
 }
 
 .socialmediacontainer {

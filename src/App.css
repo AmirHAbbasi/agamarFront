@@ -1,7 +1,11 @@
 body {
-  background-color: rgb(255, 230, 230);
+  /* background-color: rgb(255, 230, 230); */
   padding: 1%;
   text-align: center;
+
+  /* background-image: url("http://127.0.0.1:3000/bg.jpg"); */
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 html:lang(en) body {
@@ -32,3 +36,4 @@ html:lang(fa) body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(243, 59, 89);
 }
+

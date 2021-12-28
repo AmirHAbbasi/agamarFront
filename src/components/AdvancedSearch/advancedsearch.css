@@ -9,6 +9,7 @@
 
 .autocompletedrpdwn {
   text-align: right;
+  border-radius: 50px;
 }
 
 .advanced-search-btn {
@@ -50,7 +51,8 @@
 }
 
 .antd-text-field {
-  background-color: rgba(255, 90, 169);
+  /* background-color: rgba(255, 90, 169); */
+  border-radius: 50px;
 }
 
 .ant-modal-header {
@@ -58,7 +60,7 @@
 }
 
 .ant-modal-content {
-  background-image: url("http://127.0.0.1:3000/nav-bg.png");
+  /* background-image: url("http://127.0.0.1:3000/nav-bg.png"); */
 }
 
 .ant-modal-header {
@@ -70,11 +72,12 @@
 }
 
 .ant-input {
-  color: red;
-  background-color: pink;
+  /* color: red; */
+  border-radius: 50px;
+  background-color: #ffe2ed;
 }
 .ant-input::placeholder {
-  color: white;
+  color: black;
 }
 
 /* Chrome, Safari, Edge, Opera */
