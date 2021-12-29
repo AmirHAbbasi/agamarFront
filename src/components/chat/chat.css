@@ -1,0 +1,189 @@
+.headerRow{
+    border-bottom: #ffe2ed;
+    height: 60px;
+    /* background-color: aliceblue; */
+}
+
+.messageRow{
+    /* height: 564px; */
+    /* background-color: antiquewhite; */
+}
+.inputRow{
+    /* height: 50px; */
+    background-color: #ffe2ed;
+    position: absolute; bottom: 0;
+    /* margin-bottom: -38px; */
+}
+
+
+.form-group6 {
+    width: 10%;
+    background-color: aquamarine;
+}
+  
+  .form-group5 input {
+    font-size: 1em;
+    font-weight: 200;
+    /* position: absolute; */
+    transition: all 0.15s ease;
+    /* margin-right: 100px; */
+    width: 315px;
+    text-align: right;
+    cursor: text;
+    /* border-radius: 20px; */
+    background: #ffe2ed;
+    height: 20px;
+    padding: 20px 20px 20px 20px;
+    outline: none;
+    border: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.btnCss{
+    background-color: #ffe2ed;
+    border-radius: 0px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+
+  
+  .Messages-list {
+    /* background-color: #ffe2ed; */
+    padding: 20px 0;
+    max-width: 370px;
+    width: 100%;
+    margin: 0 auto;
+    list-style: none;
+    padding-left: 0;
+    flex-grow: 1;
+    overflow: auto;
+  }
+  
+  .Messages-message {
+    direction: rtl;
+    display: flex;
+    margin-top: 10px;
+    /* background-color: #d3ced0; */
+  }
+  
+  .Messages-message.currentMember {
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+    text-align: right;
+    /* background-color: aliceblue; */
+  }
+  
+  .Message-content {
+    display: inline-block;
+    /* display: ; */
+    /* background-color: bisque ; */
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 10px;
+  }
+  
+  .currentMember > .Message-content {
+    align-items: flex-start;
+    
+  }
+  
+  .Messages-message > .avatar {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 10px -10px;
+  }
+  
+  .Message-content > .username {
+    display: block;
+    color: gray;
+    font-size: 14px;
+    padding-bottom: 4px;
+    /* margin-top: -20px; */
+    text-align: right;
+    /* margin-right: -13px; */
+    
+  }
+
+  .currentMember > .Message-content > .username {
+    align-items: flex-start;
+    display: block;
+    color: gray;
+    font-size: 14px;
+    padding-bottom: 4px;
+    /* margin-top: -20px; */
+    text-align: left;
+    /* margin-left: -15px; */
+  }
+  
+  .Message-content > .text {
+    padding: 10px;
+    max-width: 400px;
+    margin: 0;
+    border-radius: 12px;
+    background-color: rgb(217, 218, 219);
+    color: black;
+    display: inline-block;
+    
+  }
+  
+  .currentMember > .Message-content .text {
+    background-color: #ffe2ed;
+    
+    
+  }
+  
+  /* form {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto 40px;
+  }
+  
+  input {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid orangered;
+    flex-grow: 1;
+  }
+  
+  button {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: orangered;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-left: 10px;
+  } */
+
+  .header{
+      text-align: left;
+      border-bottom: #ffe2ed;
+  }
+
+  .avatar2 {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    display: inline-block;
+    /* margin: 0 10px -10px; */
+  }
+
+  .avatarCol{
+      /* background-color: #ffe2ed; */
+      width: 10%;
+  }
+  .col1000{
+      margin-left: -240px;
+
+  }

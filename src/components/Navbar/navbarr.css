@@ -1,5 +1,6 @@
 .navdropdown {
   text-align: right;
+  /* margin-right: 100px; */
 }
 
 .logout-sign {
@@ -42,6 +43,7 @@
 .dropdown-menu {
   background-color: pink;
   left: auto;
+  /* margin-right: 100px; */
 }
 
 .profImage {
@@ -56,7 +58,7 @@
 
 .nav-drop-desc {
   color: pink;
-
+/* margin-right: 100px; */
   font-weight: bold;
 }
 

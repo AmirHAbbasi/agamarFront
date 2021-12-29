@@ -2,10 +2,17 @@ import React from 'react'
 
 import Login from "./components/login/login";
 import Profile from "./components/profile/profile";
+<<<<<<< HEAD
 import SignUp from "./components/signUp/signUp";
 import Chat from "./components/Chat/chat";
 import AddBook from "./components/AddBook/AddBook";
 import { SolutionOutlined } from '@ant-design/icons';
+=======
+import AddBook from "./components/AddBook/AddBook";
+import SignUp from "./components/signUp/signUp";
+
+
+>>>>>>> chat
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import BookList from './components/BookList/BookList'
 import Banner from './components/Banner/Banner'
@@ -15,24 +22,32 @@ import Navbarr from './components/Navbar/navbarr'
 import Footter from './components/Footer/footer2'
 import Antdmodal from "./components/AdvancedSearch/antdmodal";
 
+<<<<<<< HEAD
 import emailVerified from "./components/emailVerified/emailVerified";
+=======
+>>>>>>> chat
 
 
 
 import './App.css'
 
 class App extends React.Component {
+<<<<<<< HEAD
   state = {
     results: [],
     results_reload: false,
     filter: 5
   }
+=======
+
+>>>>>>> chat
   constructor(props) {
     super(props);
     this.serverAddress = 'http://127.0.0.1:8000';  // Hossein Rahimi, Mehrabi : change all requests
     this.navbar = React.createRef();
     this.LoginModal = React.createRef();    // Mehrabi
     this.regModal = React.createRef();     // Mehrabi
+<<<<<<< HEAD
     this.bookCards = React.createRef();
     // this.chatDrawer = React.createRef();   // Hossein Rahimi
     this.searchresultviewer = React.createRef();
@@ -96,6 +111,31 @@ class App extends React.Component {
     // this.setState({username: []  });       change this.state.username
     // this.submitLoginRegister(); at the end if login submitted, call this.submitLoginRegister function
   }
+=======
+    this.bookCards = React.createRef();    // Hossein Rahimi
+    this.categories = ["علمی", "داستانی", "درسی", "انگلیسی"]
+  }
+
+
+
+
+  showResult = (results) => {
+
+    const bl = this.bookCards.current.props.children[0].props.children[3].props.children;
+    console.log(bl);
+    bl.showResults(results);
+    // Show Results : Hossein Rahimi
+    // results : backend response
+
+  }
+
+  handleRegister = () => {
+    this.regModal.current.handleModalShowHide();
+    // Show sign up modal   :   Mehrabi
+    // this.setState({username: []  });       change this.state.username
+    // this.submitLoginRegister(); at the end if login submitted, call this.submitLoginRegister function
+  }
+>>>>>>> chat
   handleLogin = () => {
     this.LoginModal.current.handleModalShowHide();
 
@@ -115,6 +155,7 @@ class App extends React.Component {
   }
 
   submitt = () => {
+<<<<<<< HEAD
     this.LoginModal.current.handleModalShowHide();
   }
 
@@ -143,10 +184,15 @@ class App extends React.Component {
 
 
 
+=======
+    // this.LoginModal.current.handleModalShowHide();
+  }
+>>>>>>> chat
   render() {
 
     return (
       <Router>
+<<<<<<< HEAD
         <Navbarr onAddBook={() => { this.handleAddBook() }} onChat={(usr) => { this.OpenChatWith(usr) }} serverAddress={this.serverAddress} ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin} />
 
         <Login serverAddress={this.serverAdress} ref={this.LoginModal} onSubmit={(user_info) => { this.submitLoginRegister(user_info) }} />
@@ -214,11 +260,35 @@ class App extends React.Component {
             <li> دکمه تاید کوچکتر شود</li>
             <li> رنگ جیغ نذار برای بکگراندش</li>
 
+=======
+        <Navbarr serverAddress={this.serverAddress} ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin} />
+        <br /><br /><br /><br />
+        <Login dir="rtl" serverAddress={this.serverAdress} ref={this.LoginModal} onSubmit={(user_info) => { this.submitLoginRegister(user_info) }} />
+        <SignUp dir="rtl" serverAddress={this.serverAdress} submit={this.submitt} ref={this.regModal} onSubmit={(user_info) => { this.submitLoginRegister(user_info) }} />
+
+        <Switch ref={this.bookCards}>
+          <Route exact path="/">
+            <Banner />
+            <Antdmodal serverAddress={this.serverAddress} onResult={(e) => { this.showResult(e) }} vis={false} categories={this.categories} />
+            <FilterIcon />
+            <AppProvider>
+              <BookList serverAddress={this.serverAddress} ref={this.bookCards} />
+            </AppProvider>
+          </Route>
+          <Route exact path="/profile">
+            <Profile dir="rtl" />
+          </Route>
+          <Route exact path="/addbook">
+            <AddBook dir="rtl" />
+>>>>>>> chat
           </Route>
         </Switch>
         <br /><br /><br /><br />
         <Footter />
+<<<<<<< HEAD
         {/*<SolutionOutlined style={{position:"fixed",right:"5%",bottom:"5%",width:"50vw", zIndex:"500000000000"}} />*/}
+=======
+>>>>>>> chat
       </Router>
 
     );

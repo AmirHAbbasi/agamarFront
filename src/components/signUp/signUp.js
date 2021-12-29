@@ -168,6 +168,15 @@ class signUp extends React.Component {
 
                     this.handleModalShowHide();
                     this.props.submit();
+                    toast.success("ایمیل خود را چک کنید.", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                     // this.props.onSubmit(info);
                 } else {
                     this.setState({ buttonText: "ثبت نام" })
