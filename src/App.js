@@ -118,7 +118,7 @@ class App extends React.Component {
 
   return (  
             <Router>
-              <Navbarr serverAddress={this.serverAddress} ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin}/>
+              <Navbarr onChat={(usr)=>{this.OpenChatWith(usr)}} serverAddress={this.serverAddress} ref={this.navbar} handleRegister={this.handleRegister} handleLogin={this.handleLogin}/>
               
               <Login serverAddress={this.serverAdress} ref={this.LoginModal} onSubmit={(user_info) =>{this.submitLoginRegister(user_info)}} />
               <SignUp submit={this.submitt} ref={this.regModal} />
