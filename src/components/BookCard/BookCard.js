@@ -1,13 +1,21 @@
 import React from 'react'
 import 'antd/dist/antd.css'
 import { Card } from 'antd';
-import { HeartOutlined } from '@ant-design/icons';
+import { HeartOutlined, getTwoToneColor, setTwoToneColor } from '@ant-design/icons';
+import PublicProfile from "../publicprofile/publicprofile"
 import './BookCard.css'
 
 const url = 'http://127.0.0.1:8000'
 
-const BookCard = ({id, name, image, price, author, type}) => {
+setTwoToneColor('#eb2f96');
+getTwoToneColor(); // #eb2f96
+
+
+const BookCard = ({id, name, image, price, author, type, owner, onChat}) => {
   const { Meta } = Card;
+  
+  
+
 
   const tyype = () => {
     if(type==0)
@@ -28,6 +36,12 @@ const BookCard = ({id, name, image, price, author, type}) => {
     }
   }
 
+  const titleGenerator= (text) => {
+    var a = <h4 style={{overflowX: 'hide',overflowY: 'hidden'}}>{text.name}</h4>
+    console.log(a)
+    return a
+  }
+
   /*
   const handlcardclick = () => {
 
@@ -41,25 +55,31 @@ const BookCard = ({id, name, image, price, author, type}) => {
   return (
     <Card
     hoverable
+    style={{maxWidth:"80vw", cursor:"auto"}}
     //onClick={}
     cover={
       <img
-        style={{height: 320}}
+        style={{height: '350px'}}
         alt={id}
         src={`${url}${image}`}
+        
       />
     }
     actions={[
-      <HeartOutlined /*onClick={handlfavoritclick()}*/ block="true" size="large" key="heart" />,
+      <HeartOutlined /*onClick={handlfavoritclick()}*/ id="fuckone" className='mt-2' twoToneColor="rgb(1,1,1)" fill="red" block="true" size="large" key="heart" />,
       <div>{tyype()}</div>,
-      <h2>{price} تومان</h2>,
+      <h5 hidden={type==2} className='mt-2' style={{cursor:"auto"}}>{price} تومان</h5>,
     ]}
   >
     <Meta
       //avatar={<Avatar src="" />}
-      title={<h2>{name}</h2>}
-      description={author}
+      title={titleGenerator({name})}
+      description={<p>{author}<br /><a>{author}</a></p>}
     />
+    
+    <PublicProfile username={owner} onChat={(username)=>{ onChat(username) }}/>
+
+    
   </Card>
   )
 }

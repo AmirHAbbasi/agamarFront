@@ -8,10 +8,8 @@
 }
 
 .navbar {
-  background-image: url("http://127.0.0.1:3000/nav-bg.png");
   background-repeat: no-repeat;
-
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .navbar-homepage-ref {
@@ -34,12 +32,11 @@
 
 .nav-icons {
   transition: 1s;
-  color: rgb(243, 59, 89);
+  color: black;
   /* filter: grayscale(100%); */
 }
 .nav-icons:hover {
   cursor: pointer;
-  opacity: 0.5;
 }
 
 .dropdown-menu {
@@ -59,25 +56,25 @@
 
 .nav-drop-desc {
   color: pink;
-  background-color: rgba(255, 255, 255, 0.4);
+
   font-weight: bold;
 }
 
 .nav-btn {
   background-color: pink;
-  border-color: rgba(255, 90, 169);
+  border-color: transparent;
   border-width: 1px;
   cursor: pointer;
   transition: 0.1s;
   color: black;
   border-radius: 5%;
-  padding: 10px;
+  padding: 5px;
 }
 .nav-btn:hover {
   background-color: transparent;
   border-color: rgba(255, 90, 169);
   color: rgb(255, 90, 169);
-  border-radius: 20%;
+  border-radius: 0%;
   background-color: white;
 }
 .nav-btn:disabled {

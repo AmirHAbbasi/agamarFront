@@ -1,18 +1,33 @@
+
+
 import React from "react";
+import { Select } from 'antd';
 import './FilterIcon.css'
-import { Button, /*Radio*/ } from 'antd';
+
+const { Option } = Select;
+
+
 
 const FilterIcon = () => {
+  
+  
 
-    return(
-        <div className="myDiv">
-            <Button size="large" className="button" type="primary" shape="round">همه</Button>
-            <Button size="large" className="button" type="primary" shape="round">فروشی </Button>
-            <Button size="large" className="button" type="primary" shape="round">اجاره</Button>
-            <Button size="large" className="button" type="primary" shape="round">اهدایی</Button>
-        </div>
-    )
+  const handleProvinceChange = value => {
+    
+  };
 
-}
+
+  return (
+    <>
+      <Select defaultValue={"همه"} style={{ width: 120 ,marginTop:"15vh"}} onChange={handleProvinceChange}>      
+          <Option key={0}>همه</Option>
+          <Option key={1}>فروشی</Option>
+          <Option key={2}>اجاره</Option>
+          <Option key={3}>اهدایی</Option>
+      </Select>
+      
+    </>
+  );
+};
 
 export default FilterIcon;

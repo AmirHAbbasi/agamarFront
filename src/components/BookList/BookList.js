@@ -5,10 +5,13 @@ import BookCard from '../BookCard/BookCard';
 import Loader from '../Loader/Loader';
 import './BookList.css';
 
-const BookList = () => {
-  const {books, loading} = useGlobalContext();
-  console.log(books)
+const BookList = ({onChat}) => {
   
+  const {books, loading} = useGlobalContext();
+  
+  console.log("#######RES######")  
+  console.log(books)  
+  console.log("#######RES######")  
   if(loading){
     return <Loader />
   }
@@ -30,7 +33,7 @@ const BookList = () => {
       </div>
       <div className="books-center">
         {books.map((item)=>{
-            return <BookCard  key={item.id}{...item}/>
+            return <BookCard  key={item.id}{...item} onChat={(username)=>{ onChat(username) }}/>
         })}
       </div>
     </section>
