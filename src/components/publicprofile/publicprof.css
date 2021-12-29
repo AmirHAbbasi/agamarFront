@@ -1,0 +1,19 @@
+.profImage {
+  border-radius: 50%;
+  transition: border-color 0.5s;
+  border-style: solid;
+  border-color: transparent;
+  display: inline-flex;
+}
+
+.ant-card-cover {
+  display: inline-flex;
+}
+
+#cards {
+  background-color: transparent;
+  border: 0;
+}
+.ant-card-actions {
+  background-color: inherit;
+}

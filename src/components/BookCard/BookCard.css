@@ -1,0 +1,23 @@
+* {
+  font-family: "B Nazanin";
+}
+
+.ant-list-item:hover {
+  box-shadow: 0 0 4px #eee;
+}
+
+#fuckone > svg {
+  color: red;
+  transition: color 0.2s;
+}
+
+#fuckone > svg:hover {
+  color: pink;
+}
+#fuckone > svg > path:hover {
+  color: pink;
+}
+
+.ant-card-meta-description {
+  font-size: large;
+}
