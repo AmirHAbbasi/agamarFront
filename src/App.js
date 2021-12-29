@@ -31,40 +31,24 @@ class App extends React.Component {
       this.regModal = React.createRef();     // Mehrabi
       this.bookCards = React.createRef();    // Hossein Rahimi
       this.searchresultviewer = React.createRef();
-
       this.alaki = React.createRef();
-
-
+      this.chatComponent = React.createRef();
       this.categories = ["علمی","داستانی","درسی","انگلیسی"]
     }
 
   state = {
-    results : [{
-      "id": 10,
-      "title": "تاریخ مختصر مرگ",
-      "profile_image": "/media/media/profiles/books-default.png",
-      "author": "سعید عقیقی رضا غیاث",
-      "publisher": "چشمه",
-      "descripsion": "سینما ایران تهیه کنندگان و کارگردانان",
-      "created": "2021-11-15T15:01:36.125989Z",
-      "buy": "0",
-      "owner": 3,
-      "price": 110000
-  }],
+    results : [],
   results_reload:false
   }
 
 
   showResult = (results) =>{ 
-    console.log("%5555555555555555555")    
-    console.log(results)
-    this.setState({results_reload:true})
-    this.setState({results:results})
     
-    console.log("?????????????????????")
-    console.log(this.bookCards)
+    this.setState({results_reload:true})
+    this.setState({results:results})   
+    
     this.alaki.current.scrollIntoView({ behavior: 'smooth' })
-    console.log("?????????????????????")
+    
     //const bl = this.bookCards.current.props.children[0].props.children[3].props.children;
     //console.log(bl);
     //bl.showResults(results);
@@ -92,7 +76,7 @@ class App extends React.Component {
       }
       */
       this.user_info = user_info;    
-      console.log(this.navbar)  
+       
       this.navbar.current.toggleNavBar(user_info);
       
   }
@@ -109,6 +93,10 @@ class App extends React.Component {
     window.removeEventListener('scroll', this.listenToScroll)
   }
   
+  OpenChatWith = (username)=>{    
+    this.chatComponent.current.OpenChatWith(username)
+  }
+    
   listenToScroll = () => {
     const winScroll =
       document.body.scrollTop || document.documentElement.scrollTop
@@ -147,7 +135,7 @@ class App extends React.Component {
                   <div ref={this.alaki}></div>
                   <FilterIcon/>                  
                   <AppProvider ref={this.searchresultviewer}> 
-                  <BookList serverAddress={this.serverAddress} ref={this.bookCards} results={this.state.results} reload={this.state.results_reload}/>
+                  <BookList onChat={(username)=>{this.OpenChatWith(username)}} serverAddress={this.serverAddress} ref={this.bookCards} results={this.state.results} reload={this.state.results_reload}/>
                   </AppProvider>
                   
                 </Route>
@@ -171,9 +159,7 @@ class App extends React.Component {
                   <li> تکست فیلد بیاد تو اسلاید شو</li>
                   <li> نام کاربر بیاد تو دراپ داون</li>
 
-
                   <hr></hr>
-
 
 
                   کارهای انجام نشده :
