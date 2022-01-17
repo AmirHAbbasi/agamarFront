@@ -32,7 +32,7 @@ class Banner extends React.Component {
 
 renderBanners = () => {
   const lis = ["jashnvareh",""];
-  var i=0;
+  var i=1;
   return lis.map(banner=>{i+=1;return <a href={"/events/"+banner} target="_blank">
                             <h3 style={{
                                      
@@ -46,7 +46,8 @@ renderBanners = () => {
                                      
                                      backgroundSize: 'cover',
                                      backgroundPositionX : "center",
-                                     backgroundImage:"url('http://127.0.0.1:3000/BannerImags/"+i+".jpg')"
+                                     backgroundImage:"url('http://127.0.0.1:3000/BannerImags/"+i+".jpg')",
+                                     
                             }} >
                               
                             </h3>
@@ -73,11 +74,11 @@ renderBanners = () => {
 render(){
   return (
     <>
-      <Carousel style={this.bannerFrame} className="banner-frame" autoplay>
+      <Carousel style={this.bannerFrame} className="banner-frame">
         {this.renderBanners()}
         
       </Carousel>
-        <Antdmodal serverAddress={this.props.serverAddress} onResult={(e) => {this.props.onResult(e)}}  vis={false} categories={this.props.categories} />
+        <Antdmodal serverAddress={this.props.serverAddress} onResult={(e) => {this.props.onResult(e)}}  vis={1} categories={this.props.categories} />
     </>
   )
 }

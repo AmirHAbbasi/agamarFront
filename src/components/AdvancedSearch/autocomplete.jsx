@@ -1,11 +1,14 @@
 import React from 'react';
-import { AutoComplete } from 'antd';
+import { Input, AutoComplete } from 'antd';
 import axios from 'axios';
 
 
 
 class Complete extends React.Component {
-
+  constructor(props) {
+    super(props);
+    this.ac = React.createRef();
+  }
   state = {
     options : []
   };
@@ -23,27 +26,23 @@ class Complete extends React.Component {
 
     const ref = this;
     
-    axios.get(this.props.serverAddress+"api/book-find/"+text+"/")
+    axios.get(this.props.serverAddress+"/api/book-find/"+text+"/")
     .then(function (response) {
       console.log(response)
       var ops = response.data.map(o=>{return {value:o.title, label:
         (
           <div
+          id="ds"
+          dir="rtl"
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
+              display: 'flex',              
               /*backgroundColor:"rgba(255, 90, 169,0.1)",*/
-              color:"rgb(255, 90, 169)"
+              color:"rgb(255, 90, 169)",
+              textAlign:"right"
             }}
           >
-            <span dir="rtl" style={{maxWidth:'50%',
-                         textAlign:"left",
-                         }} >
-              <a>
-                {o.author}
-              </a>
-            </span>
-            <span style={{maxWidth:'50%', textAlign:"right"}}><a dir="rtl">{o.title}</a></span>
+            
+            <a dir="rtl">{o.title}</a>
           </div>
         )
       }})
@@ -78,21 +77,35 @@ class Complete extends React.Component {
   render() { 
     
   
-    return <>
+    return  <>
             <AutoComplete dropdownClassName="autocompletedrpdwn"
+            
               dir="rtl"
               options={this.state.options}
               style={{
-                width: "70%", color:'rgba(255, 90, 169)'
-              }}  
+                width: "50%", color:'rgba(255, 90, 169)'
+              }} 
+              
               backgroundColor= "lightblue"
               onChange={(e) => {this.updateAut(e);this.props.onChange(e);}}
+              enterButton
               
-              placeholder="از میان بیش از 1 میلیون کتاب جستجو کنید!"
             >
               
+              <Input.Search            
+              style={{
+                color:'rgba(255, 90, 169)'
+              }} 
+              onSearch={()=>{this.props.onSearch()}}
+              
+               size="large" placeholder="از میان بیش از 1 میلیون کتاب جستجو کنید!" 
+               enterButton
+               
+               />
+
             </AutoComplete>
-          </>;
+</>
+          ;
   }
 }
  

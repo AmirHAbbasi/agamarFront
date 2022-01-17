@@ -1,19 +1,18 @@
 .myDiv {
-    border: indianred;
-    margin: auto;
-    width: 50%;
-    text-align: center;
-    padding: 10px;
+  border: indianred;
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  padding: 10px;
 }
 
-.button{
-    background-color: rgb(255, 204, 224);
-    border-color: indianred;
-    color: indianred;
-    
+.button {
+  background-color: rgb(255, 204, 224);
+  border-color: indianred;
+  color: indianred;
 }
 
-.section22{
-    margin:auto;
-    width: center;
+.section22 {
+  margin: auto;
+  width: center;
 }

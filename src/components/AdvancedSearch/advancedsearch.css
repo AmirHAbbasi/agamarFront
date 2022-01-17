@@ -1,6 +1,6 @@
 .advancedsearchmodal {
   text-align: right;
-  color: rgb(255, 255, 255);
+  color: black;
 }
 
 .ant-picker-dropdown {
@@ -8,7 +8,7 @@
 }
 
 .autocompletedrpdwn {
-  text-align: right;
+  text-align: center;
 }
 
 .advanced-search-btn {
@@ -18,13 +18,14 @@
   cursor: pointer;
   transition: 0.1s;
   color: rgba(255, 90, 169);
-  padding: 1%;
+  border-radius: 5%;
+  padding: 2vh;
 }
 .advanced-search-btn:hover {
   background-color: transparent;
   border-color: rgba(255, 90, 169);
   color: rgb(255, 90, 169);
-  border-radius: 20%;
+  border-radius: 0%;
   background-color: white;
 }
 .advanced-search-btn:disabled {
@@ -58,7 +59,7 @@
 }
 
 .ant-modal-content {
-  background-image: url("http://127.0.0.1:3000/nav-bg.png");
+  /*background-image: url("http://127.0.0.1:3000/nav-bg.png");*/
 }
 
 .ant-modal-header {
@@ -70,11 +71,10 @@
 }
 
 .ant-input {
-  color: red;
-  background-color: pink;
+  background-color: rgb(250, 192, 203);
 }
 .ant-input::placeholder {
-  color: white;
+  color: rgba(255, 90, 169);
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -87,4 +87,21 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.textfieldclass {
+  margin-top: -30vh;
+  z-index: 5000;
+}
+.ant-select-item-option {
+  overflow-y: hidden;
+}
+
+.ant-input-search-button {
+  background-color: rgb(233, 21, 56);
+  border-color: pink;
+}
+
+.ant-input-search-button:hover {
+  background-color: pink;
 }

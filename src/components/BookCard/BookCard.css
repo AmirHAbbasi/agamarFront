@@ -9,6 +9,8 @@
 #fuckone > svg {
   color: red;
   transition: color 0.2s;
+  border: 1vw;
+  border-color: yellow;
 }
 
 #fuckone > svg:hover {
@@ -20,4 +22,11 @@
 
 .ant-card-meta-description {
   font-size: large;
+}
+
+.ant-card-cover {
+  width: 100%;
+}
+
+.ant-card-actions {
 }

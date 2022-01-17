@@ -9,9 +9,7 @@ const BookList = ({onChat}) => {
   
   const {books, loading} = useGlobalContext();
   
-  console.log("#######RES######")  
-  console.log(books)  
-  console.log("#######RES######")  
+  
   if(loading){
     return <Loader />
   }

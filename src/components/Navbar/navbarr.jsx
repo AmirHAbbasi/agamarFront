@@ -132,7 +132,7 @@ class Navbarr extends React.Component {
     else {
       return <div>
       
-      <button className="mr-3 mt-2 nav-btn" href="/registerads" variant="warning" >ثبت آگهی</button>
+      <button className="mr-3 mt-2 nav-btn" onClick={()=>{this.props.onAddBook()}} variant="warning" >ثبت آگهی</button>
       
       </div>
     }
