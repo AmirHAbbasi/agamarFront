@@ -17,3 +17,20 @@
 .ant-card-actions {
   background-color: inherit;
 }
+
+.username-publicprof {
+  cursor: pointer;
+  color: rgb(247, 74, 103);
+}
+
+.username-publicprof:hover {
+  color: black;
+}
+
+.ant-card-head-title {
+  display: contents;
+}
+
+.anticon:hover {
+  fill: pink;
+}
