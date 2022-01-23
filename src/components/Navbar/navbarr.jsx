@@ -14,6 +14,8 @@ import './navbarr.css';
 class Navbarr extends React.Component {
   constructor(props) {
     super(props);
+    window.addEventListener('resize', ()=>{this.setState({reload:1})});    // dropdown will come at < 992px
+    this.nav_coll = React.createRef();
     var data = JSON.parse(localStorage.getItem("info"));
     //this.setState({ guest: 0, name: data.name, token: data.token, prof_image: this.props.serverAddress+data.prof_image });
     if(data){
@@ -26,6 +28,7 @@ class Navbarr extends React.Component {
       token: data.token,
       prof_image: this.props.serverAddress+data.prof_image,
       scrll:0,
+      reload:0,
     }}
     else{
       this.state={
@@ -37,6 +40,7 @@ class Navbarr extends React.Component {
         token: "g",
         prof_image: "",
         scrll:0,
+        reload:0,
       }
     }
   }
@@ -64,7 +68,102 @@ class Navbarr extends React.Component {
      this.setState({darkmode : (this.state.darkmode+1)%2});
   };
   */
+  updateSize = () =>{
+    ////////////////////////////////////////////   
+    console.log("//////////////////")
+    console.log()
+    console.log("//////////////////")
+    if(window.innerWidth>991){return <>
+            <Nav style={{ marginLeft: "auto" }} dir="rtl">
+            <Nav
+              
+              hidden={this.state.guest}
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: '100px' }}
+              
+            >
 
+              <NavDropdown dir="rtl" className="NavDropdownProf mr-4" title={
+                <>
+                {this.getProfImg()}
+                
+                </>
+                
+                
+              } >
+
+                <p style={{textAlign:"right", padding: "0 1.5rem"}}>{this.state.name}</p>
+                <NavDropdown.Item className="navdropdown" href="/profile" >
+                
+                  <div class="nav-icons">
+                    <a class="nav-icons-desc ml-2">مشاهده پروفایل</a>
+                  </div>
+                </NavDropdown.Item>
+                <NavDropdown.Item className="navdropdown" onClick={()=>{this.props.onChat("0")}}>
+                  <div class="nav-icons">
+                    <a class="nav-icons-desc ml-2">مشاهده پیامها</a>
+                  </div>
+                </NavDropdown.Item>
+                
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={this.handleLogout} className="navdropdown">
+                  <div class="nav-icons">
+                    <a class="nav-icons-desc ml-2">خروج</a>
+                  </div>
+                </NavDropdown.Item>
+
+              </NavDropdown>
+
+            </Nav>
+              {this.getNavBar()}
+            </Nav>
+    </>
+    }
+    else{ return <>
+      <Nav style={{ marginLeft: "auto" }} dir="rtl">
+      <Nav        
+        
+        className="me-auto my-2 my-lg-0"
+        style={{ maxHeight: '100px' }}        
+      >
+
+        <div style={{backgroundColor:"white"}} className="mb-3">
+        <NavDropdown.Item style={{textAlign:"right"}} disabled>
+        <img hidden={this.state.guest} src={this.state.prof_image} width="30" height="30" className="profImage mt-2" />
+          <a hidden={this.state.guest} style={{textAlign:"right"}} className="mr-2 mt-2">{this.state.name}</a>
+          </NavDropdown.Item> 
+         
+          <NavDropdown.Item hidden={this.state.guest} className="navdropdown" href="/profile" >
+          
+            <div class="nav-icons">
+              <a class="nav-icons-desc ml-2">مشاهده پروفایل</a>
+            </div>
+          </NavDropdown.Item>
+          <NavDropdown.Item hidden={this.state.guest} className="navdropdown" onClick={()=>{this.props.onChat("0")}}>
+            <div class="nav-icons">
+              <a class="nav-icons-desc ml-2">مشاهده پیامها</a>
+            </div>
+          </NavDropdown.Item>
+          
+          <NavDropdown.Divider hidden={this.state.guest} />
+          <NavDropdown.Item hidden={this.state.guest} onClick={this.handleLogout} className="navdropdown">
+            <div class="nav-icons">
+              <a class="nav-icons-desc ml-2">خروج</a>
+            </div>
+          </NavDropdown.Item>
+
+          <div className="mt-2 mb-2">
+            {this.getNavBar()}
+          </div>
+        </div>
+
+      </Nav>
+      
+      </Nav>
+    </>
+    
+    }    
+  }
 
   handleLogout = () => {
     this.setState({ guest: 1, token: "Guest", prof_image: "/default_user_image.png" });
@@ -145,64 +244,20 @@ class Navbarr extends React.Component {
 
   render() {
     return (
-      <Navbar style={{backgroundColor:"rgba(255,230,230,"+this.state.scrll+")"}} fixed="top" expand="lg" dir="ltr">
+      <Navbar style={{backgroundColor:"rgba(255,255,255,"+this.state.scrll+")"}} fixed="top" expand="lg" dir="ltr">
         <Container fluid>
           <Navbar.Brand className="navbar-homepage-ref" href="/" />
           
           <Navbar.Toggle style={{
                 backgroundColor:'pink', borderWidth:'0'
               }}  
-           aria-controls="navbarScroll" />
+           aria-controls="navbarScroll"  ref={this.nav_coll} />
 
 
 
-          <Navbar.Collapse id="navbarScroll">
+          <Navbar.Collapse reload={this.state.reload}  id="navbarScroll">           
 
-            <Nav style={{ marginLeft: "auto" }} dir="rtl">
-            <Nav
-              
-              hidden={this.state.guest}
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: '100px' }}
-              
-            >
-
-              <NavDropdown dir="rtl" className="NavDropdownProf mr-4" title={
-                <>
-                {this.getProfImg()}
-                
-                </>
-                
-                
-              } >
-
-                <p style={{textAlign:"right", padding: "0 1.5rem"}}>{this.state.name}</p>
-                <NavDropdown.Item className="navdropdown" href="/profile" >
-                
-                  <div class="nav-icons">
-                    <a class="nav-icons-desc ml-2">مشاهده پروفایل</a>
-                  </div>
-                </NavDropdown.Item>
-                <NavDropdown.Item className="navdropdown" onClick={()=>{this.props.onChat("0")}}>
-                  <div class="nav-icons">
-                    <a class="nav-icons-desc ml-2">مشاهده پیامها</a>
-                  </div>
-                </NavDropdown.Item>
-                
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={this.handleLogout} className="navdropdown">
-                  <div class="nav-icons">
-                    <a class="nav-icons-desc ml-2">خروج</a>
-                  </div>
-                </NavDropdown.Item>
-
-              </NavDropdown>
-
-            </Nav>
-              {this.getNavBar()}
-            </Nav>
-
-            
+            {this.updateSize()}
             
 
           </Navbar.Collapse>

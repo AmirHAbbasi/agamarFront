@@ -71,10 +71,10 @@
 }
 
 .ant-input {
-  background-color: rgb(250, 192, 203);
 }
 .ant-input::placeholder {
   color: rgba(255, 90, 169);
+  font-size: 1em;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -100,8 +100,12 @@ input[type="number"] {
 .ant-input-search-button {
   background-color: rgb(233, 21, 56);
   border-color: pink;
+  outline: none !important;
 }
 
 .ant-input-search-button:hover {
   background-color: pink;
+}
+
+.anticon-search {
 }

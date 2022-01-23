@@ -22,3 +22,22 @@
 .ant-slider-tooltip {
   z-index: 1500 !important;
 }
+
+.ant-slider-track {
+  background-color: pink;
+}
+
+.ant-slider-handle {
+  background-color: pink;
+  border-color: pink;
+}
+.ant-slider-handle:hover {
+  border-color: red !important;
+}
+.ant-slider-handle::selection {
+  border-color: yellow;
+}
+
+.ant-slider-handle::shadow {
+  border-color: yellow;
+}

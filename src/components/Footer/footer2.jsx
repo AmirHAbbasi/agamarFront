@@ -18,17 +18,16 @@ class Footter extends React.Component {
                     <div className="socialmediacontainer ">
                             <a href="http://facebook.com" target="_blank" className="fa fa-facebook"></a>
                             <a href="http://twitter.com" target="_blank" className="fa fa-twitter"></a>
-                            <a href="http://google.com" target="_blank" className="fa fa-google"></a>
-                            <a href="http://linkedin.com" target="_blank" className="fa fa-linkedin"></a>
-                            <a href="http://youtube.com" target="_blank" className="fa fa-youtube"></a>
+                          
                             <a href="http://instagram.com" target="_blank" className="fa fa-instagram"></a>
-                            <a href="http://play.google.com" target="_blank" className="fa fa-android"></a>
+                            
                             <a href="rss" target="_blank" className="fa fa-rss"></a>
                     </div> 
 
                     <div style={{ marginLeft: "auto" }} className="actived">
-                        <a  href="/about" target="_blank" className="footerlink" lang="fa">درباره ما </a>
-                        <p dir="rtl" lang="fa">تمامی حقوق متعلق به گروه آگامار می باشد. </p> 
+                        
+                        <p dir="rtl" style={{fontSize:"1rem"}} className="mb-1 pr-5">ارتباط با ما : info@agamar.com</p>
+                        <p dir="rtl" style={{fontSize:"1rem"}} className="mt-n1 pr-5" lang="fa">تمامی حقوق متعلق به گروه آگامار می باشد. </p> 
                     </div>
             
             </Navbar>

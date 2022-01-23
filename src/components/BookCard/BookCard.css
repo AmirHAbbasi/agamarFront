@@ -28,5 +28,19 @@
   width: 100%;
 }
 
-.ant-card-actions {
+.bookcardicon:hover {
+  opacity: 0.5;
+}
+
+.ant-tooltip-open > svg {
+  fill: red;
+}
+
+.basketicon {
+  fill: rgb(245, 69, 98);
+  cursor: pointer;
+}
+
+.basketicon:hover {
+  fill: pink;
 }

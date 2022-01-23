@@ -1,15 +1,57 @@
-import React from 'react'
+import {useState, React} from 'react'
 import { useGlobalContext } from '../../ReqBookList'
 import { Divider } from 'antd';
 import BookCard from '../BookCard/BookCard';
 import Loader from '../Loader/Loader';
+//import buyModal from '../buyModal/buyModal'
 import './BookList.css';
+import axios from 'axios';
 
-const BookList = ({onChat}) => {
+
+
+
+const BookList = ({onChat, serverAddress}) => {
   
   const {books, loading} = useGlobalContext();
+
+  const [modalshow, setModalshow] = useState(true);
+  const [book_information, setBookInfo] = useState({});
   
+  const openBuyModal = (book_info) =>{
+    setModalshow(true)
+    setBookInfo(book_info)    
+  }
   
+
+  var fav_books = []
+  var data = JSON.parse(localStorage.getItem("info"));
+  if(data){
+    console.log("data.access")
+    console.log(data.access_token)
+    console.log("data.access")
+  axios.post(serverAddress+"/api/favourites/", {
+      /*
+      'Access-Control-Allow-Origin':'http://127.0.0.1:3000',
+      'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept',
+      'Access-Control-Allow-Methods' : 'GET, POST, PATCH, PUT, DELETE, OPTIONS',   
+      */ 
+      'Authorization' : 'Bearer '+data.access_token,
+  })
+  .then(function (response) {
+
+  console.log(response)
+  //console.log(response.data);
+
+  })
+
+  .catch(function (error) {
+  console.log("error:"+error);
+  });
+  }
+
+
+
+
   if(loading){
     return <Loader />
   }
@@ -23,6 +65,7 @@ const BookList = ({onChat}) => {
     )
   }
   return (
+    <>
     <section> 
       <div> 
       <Divider>
@@ -31,10 +74,14 @@ const BookList = ({onChat}) => {
       </div>
       <div className="books-center">
         {books.map((item)=>{
-            return <BookCard  key={item.id}{...item} onChat={(username)=>{ onChat(username) }}/>
+            return <BookCard onBuy={(book_info)=>{openBuyModal(book_info)}} key={item.id}{...item} onChat={(username)=>{ onChat(username) }}/>
         })}
-      </div>
+      </div> 
+
+      
     </section>
+    
+    </>
   )
 }
 

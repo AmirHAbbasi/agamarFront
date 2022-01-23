@@ -33,7 +33,7 @@ class PriceRanger extends React.Component {
   state = {
     disabled: false,
     min_price:0,
-    max_price:100000,
+    max_price:500000,
   };
   
 

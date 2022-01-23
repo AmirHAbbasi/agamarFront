@@ -32,7 +32,8 @@ class Banner extends React.Component {
 
 renderBanners = () => {
   const lis = ["jashnvareh",""];
-  var i=1;
+  var i=Math.floor(Math.random()*10)%6;
+  i = 1
   return lis.map(banner=>{i+=1;return <a href={"/events/"+banner} target="_blank">
                             <h3 style={{
                                      
@@ -78,7 +79,7 @@ render(){
         {this.renderBanners()}
         
       </Carousel>
-        <Antdmodal serverAddress={this.props.serverAddress} onResult={(e) => {this.props.onResult(e)}}  vis={1} categories={this.props.categories} />
+        <Antdmodal serverAddress={this.props.serverAddress} onResult={(e) => {this.props.onResult(e)}}  vis={0} categories={this.props.categories} />
     </>
   )
 }
