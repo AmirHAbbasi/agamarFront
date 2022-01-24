@@ -173,7 +173,7 @@ class login extends React.Component {
                     draggable
                     pauseOnHover
                 />
-                <Modal dialogClassName="modal-90w" backdrop="static" centered className="my-modal" show={this.state.showHide}>
+                <Modal dialogClassName="modal-90w" backdrop="static" className="my-modal" show={this.state.showHide}>
                     <Modal.Body>
                         <div className="align-items-right text-right header">
                             <button

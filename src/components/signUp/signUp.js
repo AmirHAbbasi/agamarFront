@@ -107,17 +107,17 @@ class signUp extends React.Component {
 
     async submit() {
 
-        let info = {
-            username: "",
-            name: "",
-            prof_image: "",
-            access_token: "",
-            refresh_token: "",
-            email: "",
-            phone_number: "",
-            address: "",
-            isPrivatePerson: ""
-        }
+        // let info = {
+        //     username: "",
+        //     name: "",
+        //     prof_image: "",
+        //     access_token: "",
+        //     refresh_token: "",
+        //     email: "",
+        //     phone_number: "",
+        //     address: "",
+        //     isPrivatePerson: ""
+        // }
         let is_active_person = false;
         let is_shop = false;
 
@@ -147,28 +147,37 @@ class signUp extends React.Component {
                     // this.getUserInfo(res.data.access, res.data.refresh);
 
 
-                    info.username = res.data.message.username;
-                    info.name = res.data.message.name;
-                    info.prof_image = res.data.message.profile_image;
-                    info.email = res.data.message.email;
-                    info.phone_number = res.data.message.phone_number;
-                    info.address = res.data.message.address;
-                    info.isBookStore = true;
-                    info.isPrivatePerson = res.data.message.is_private_person;
-                    info.access_token = res.data.access;
-                    info.refresh_token = res.data.refresh;
+                    // info.username = res.data.message.username;
+                    // info.name = res.data.message.name;
+                    // info.prof_image = res.data.message.profile_image;
+                    // info.email = res.data.message.email;
+                    // info.phone_number = res.data.message.phone_number;
+                    // info.address = res.data.message.address;
+                    // info.isBookStore = true;
+                    // info.isPrivatePerson = res.data.message.is_private_person;
+                    // info.access_token = res.data.access;
+                    // info.refresh_token = res.data.refresh;
 
-                    console.log("info:", info);
+                    // console.log("info:", info);
                     this.setState({
                         loggedIn: true,
                         returnedUsername: res.data.username
                     })
-                    localStorage.setItem("info", JSON.stringify(info));
-                    console.log("item: ", JSON.parse(localStorage.getItem("info")));
+                    // localStorage.setItem("info", JSON.stringify(info));
+                    // console.log("item: ", JSON.parse(localStorage.getItem("info")));
 
                     this.handleModalShowHide();
                     this.props.submit();
-                    this.props.onSubmit(info);
+                    toast.success("ایمیل خود را چک کنید.", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    // this.props.onSubmit(info);
                 } else {
                     this.setState({ buttonText: "ثبت نام" })
                     console.log("failed to log in");
@@ -555,10 +564,11 @@ class signUp extends React.Component {
 
                                             <div class="text-right fs-6 labels"> قبلا ثبت نام کرده اید؟ <a
                                                 to={"/ورود"}
-                                                href="#"
+
                                                 style={{ color: "rgb(243, 67, 164)" }}
                                                 onClick={() => {
                                                     this.handleModalShowHide();
+                                                    this.props.openLogin()
                                                 }}> ورود </a></div>
                                         </form>
                                     </div>
