@@ -1,0 +1,46 @@
+* {
+  font-family: "B Nazanin";
+}
+
+.ant-list-item:hover {
+  box-shadow: 0 0 4px #eee;
+}
+
+#fuckone > svg {
+  color: red;
+  transition: color 0.2s;
+  border: 1vw;
+  border-color: yellow;
+}
+
+#fuckone > svg:hover {
+  color: pink;
+}
+#fuckone > svg > path:hover {
+  color: pink;
+}
+
+.ant-card-meta-description {
+  font-size: large;
+}
+
+.ant-card-cover {
+  width: 100%;
+}
+
+.bookcardicon:hover {
+  opacity: 0.5;
+}
+
+.ant-tooltip-open > svg {
+  fill: red;
+}
+
+.basketicon {
+  fill: rgb(245, 69, 98);
+  cursor: pointer;
+}
+
+.basketicon:hover {
+  fill: pink;
+}

@@ -1,0 +1,43 @@
+.ant-tooltip-inner {
+  color: white;
+  background-color: rgb(241, 200, 207);
+  z-index: 15000000 !important;
+}
+
+.ant-tooltip-arrow-content {
+  color: yellow;
+  background-color: rgb(241, 200, 207);
+  z-index: 1500 !important;
+}
+
+.ant-tooltip-arrow {
+  z-index: 1500 !important;
+}
+
+.ant-tooltip-content {
+  z-index: 1500 !important;
+  direction: rtl;
+}
+
+.ant-slider-tooltip {
+  z-index: 1500 !important;
+}
+
+.ant-slider-track {
+  background-color: pink;
+}
+
+.ant-slider-handle {
+  background-color: pink;
+  border-color: pink;
+}
+.ant-slider-handle:hover {
+  border-color: red !important;
+}
+.ant-slider-handle::selection {
+  border-color: yellow;
+}
+
+.ant-slider-handle::shadow {
+  border-color: yellow;
+}
