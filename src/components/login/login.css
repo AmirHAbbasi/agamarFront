@@ -1,0 +1,83 @@
+.form-group {
+  height: 3.7em;
+  margin: 1em 0;
+  position: relative;
+  width: 100%;
+}
+
+.form-group input {
+  font-size: 1em;
+  font-weight: 200;
+  position: absolute;
+  transition: all 0.15s ease;
+  width: 100%;
+  text-align: right;
+  cursor: text;
+  border-radius: 20px;
+  background: #ffe2ed;
+  height: 50px;
+  padding: 20px 20px 20px 20px;
+  outline: none;
+  border: none;
+}
+
+.modal-90w {
+  max-width: 30% !important;
+}
+.my-modal .modal-content {
+  background-color: rgb(252, 252, 252);
+}
+
+.card {
+  background-color: rgb(252, 252, 252);
+}
+.card-body {
+  background-color: rgb(252, 252, 252);
+}
+div.radio {
+  border: none;
+  border-radius: 4px;
+  height: 60px;
+  padding: 20px 20px 0;
+  outline: none;
+  text-align: right;
+}
+p.labels {
+  font-size: 1.1em;
+  font-weight: 400;
+  margin-right: 20px;
+  margin-bottom: -10px;
+  text-align: right;
+  margin-top: 10px;
+}
+.in50 input,
+.in50 label {
+  width: 100%;
+}
+
+/* small {
+  margin-right: 20px;
+}*/
+div.smallDiv {
+  margin-top: -15px;
+} 
+.card2 {
+  width: 100%;
+  background-image: url("http://127.0.0.1:3000/login.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.small-font {
+  font-size: 12px;
+  font-weight: bolder;
+  margin-top: 20px;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #ffe2ed inset !important;
+}
