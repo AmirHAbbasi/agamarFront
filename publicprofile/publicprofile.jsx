@@ -2,10 +2,12 @@ import {React,useState,useRef} from 'react'
 import axios from 'axios';
 import 'antd/dist/antd.css'
 import { Card, Tooltip, Avatar } from 'antd';
-import { WechatOutlined } from '@ant-design/icons';
+import { WechatOutlined, FormOutlined } from '@ant-design/icons';
 import './publicprof.css'
 
 const url = 'http://127.0.0.1:8000/api/public-profile/'
+
+
 
 
 const openChat=(thiss,username)=>{
@@ -24,6 +26,16 @@ const PublicProfile = ({username, onChat}) => {
   //console.log("resp")
   //console.log(resp)
   //console.log("resp")
+  const getChatIcon = () =>{
+    var data = JSON.parse(localStorage.getItem("info"));
+    if(data && username==data.username){
+      return <Tooltip title="edit profile"><FormOutlined twoToneColor="red" onClick={()=>{window.open("/profile");}}/></Tooltip>
+      
+    }
+    else{
+    return <Tooltip title="chat"><WechatOutlined twoToneColor="red" onClick={()=>{openChat(thiss,username)}}/></Tooltip>}
+    }
+
   const fetch = () =>{
     if(bool){
     axios.get(`${url}${username}`).then(function(response){
@@ -42,31 +54,35 @@ const PublicProfile = ({username, onChat}) => {
     else{return <p style={{textAlign: "right"}}>شخص حقیقی</p>}
   }
 
-  console.log(`128.0.0.1:8000${resp.profile_image}`)
+  
 
   return (
-    <Tooltip trigger="click" zIndex={500} title={
+    <Tooltip trigger="click" zIndex={500} id="a00sa"
+     title={
+      
                     <Card
                     dir="ltr"
                     id="cards"
                     loading={false}
-                      title={<><Avatar src={`http://127.0.0.1:8000${resp.profile_image}`} style={{backgroundColor: '#fde3cf'}}>{resp.name}</Avatar>
-                                 <a style={{cursor:"text"}} className='ml-2'>{resp.name}</a>                               
-                                 
+                      title={<><Avatar src={`http://127.0.0.1:8000${resp.profile_image}`} style={{backgroundColor: '#fde3cf'}} >{resp.name}</Avatar>
+                                 <a style={{cursor:"text", display: 'inline-grid'}} className='ml-2'><a style={{display: "inline-grid"}}>{resp.name}</a>
+                                                             
+                                 <small className="publicprof-username" style={{cursor:"text"}}>@{username}</small> </a>
                             </>
                             }                      
                       style={{ width: 240 }}
                       
                       actions={[
-                        <Tooltip title="chat"><WechatOutlined  onClick={()=>{openChat(thiss,username)}}/></Tooltip>,
+                        getChatIcon(),
                       ]}
                     >
-                      <Meta title={<a>@{username}</a>} description={resp.email} />
-                      <p className="mt-2">{resp.address}</p>
-                      {desc()}
+                      <a>{resp.email}</a>
+                      <p dir="rtl" style={{textAlign:"right"}} className="mt-2 mb-0">آدرس:</p>
+                      <p className="mt-0">{resp.address}</p>
+                      
                     </Card>              
     }>
-    <span style={{cursor:"pointer"}}>{username}</span>
+    <span className='username-publicprof'>{username}</span>
     </Tooltip>
 
     
